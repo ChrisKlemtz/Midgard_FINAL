@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import axios from "axios";
 import GalleryCard from "./GalleryCard";
+import { staggerContainer, staggerItem, viewportConfig } from "../utils/animations";
 
 export default function Gallery() {
   const [images, setImages] = useState([]);
@@ -56,17 +58,23 @@ export default function Gallery() {
       </div>
 
       {/* Gallery Grid */}
-      <div
+      <motion.div
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
           gap: 20,
         }}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportConfig}
+        variants={staggerContainer}
       >
         {filtered.map((img) => (
-          <GalleryCard key={img._id} image={img} onClick={setSelectedImage} />
+          <motion.div key={img._id} variants={staggerItem}>
+            <GalleryCard image={img} onClick={setSelectedImage} />
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
       {filtered.length === 0 && (
         <div

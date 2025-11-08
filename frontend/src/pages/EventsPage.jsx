@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import axios from "axios";
+import { fadeInUp, staggerContainer, staggerItem, viewportConfig } from "../utils/animations";
 
 export default function EventsPage() {
   const [events, setEvents] = useState([]);
@@ -40,7 +42,12 @@ export default function EventsPage() {
 
   return (
     <section className="container" style={{ padding: "100px 20px" }}>
-      <div style={{ textAlign: "center", marginBottom: 60 }}>
+      <motion.div
+        style={{ textAlign: "center", marginBottom: 60 }}
+        initial="hidden"
+        animate="visible"
+        variants={fadeInUp}
+      >
         <h1 style={{ fontSize: 48, marginBottom: 20 }}>Events & Termine</h1>
         <p
           style={{
@@ -53,22 +60,32 @@ export default function EventsPage() {
           Besuche uns auf Conventions, Guest Spots und besonderen Events. Hier
           findest du alle kommenden und vergangenen Termine.
         </p>
-      </div>
+      </motion.div>
 
       {upcomingEvents.length > 0 && (
         <div style={{ marginBottom: 60 }}>
-          <h2 style={{ fontSize: 36, marginBottom: 30, textAlign: "center" }}>
+          <motion.h2
+            style={{ fontSize: 36, marginBottom: 30, textAlign: "center" }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
+            variants={fadeInUp}
+          >
             Kommende Events
-          </h2>
-          <div
+          </motion.h2>
+          <motion.div
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
               gap: 30,
             }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
+            variants={staggerContainer}
           >
             {upcomingEvents.map((event) => (
-              <div
+              <motion.div
                 key={event._id}
                 style={{
                   background: "#1b1816",
@@ -77,6 +94,7 @@ export default function EventsPage() {
                   transition: "transform 0.3s ease, box-shadow 0.3s ease",
                   cursor: "pointer",
                 }}
+                variants={staggerItem}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = "translateY(-5px)";
                   e.currentTarget.style.boxShadow =
@@ -135,9 +153,9 @@ export default function EventsPage() {
                     </p>
                   )}
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       )}
 
@@ -162,25 +180,33 @@ export default function EventsPage() {
 
       {pastEvents.length > 0 && (
         <div>
-          <h2
+          <motion.h2
             style={{
               fontSize: 36,
               marginBottom: 30,
               textAlign: "center",
               color: "#999",
             }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
+            variants={fadeInUp}
           >
             Vergangene Events
-          </h2>
-          <div
+          </motion.h2>
+          <motion.div
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
               gap: 20,
             }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
+            variants={staggerContainer}
           >
             {pastEvents.map((event) => (
-              <div
+              <motion.div
                 key={event._id}
                 style={{
                   background: "#1b1816",
@@ -188,6 +214,7 @@ export default function EventsPage() {
                   overflow: "hidden",
                   opacity: 0.7,
                 }}
+                variants={staggerItem}
               >
                 {event.imageUrl && (
                   <img
@@ -212,9 +239,9 @@ export default function EventsPage() {
                     {new Date(event.date).toLocaleDateString("de-DE")}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       )}
     </section>

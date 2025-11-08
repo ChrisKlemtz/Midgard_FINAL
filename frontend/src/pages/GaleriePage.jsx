@@ -1,5 +1,7 @@
 import React from "react";
+import { motion } from "framer-motion";
 import Gallery from "../components/Gallery";
+import { fadeInUp, viewportConfig } from "../utils/animations";
 
 export default function GaleriePage() {
   return (
@@ -12,7 +14,12 @@ export default function GaleriePage() {
           textAlign: "center",
         }}
       >
-        <div className="container">
+        <motion.div
+          className="container"
+          initial="hidden"
+          animate="visible"
+          variants={fadeInUp}
+        >
           <h1 style={{ fontSize: 48, marginBottom: 20 }}>Tattoo Galerie</h1>
           <p
             style={{
@@ -26,7 +33,7 @@ export default function GaleriePage() {
             Tattoo ist ein einzigartiges Kunstwerk, geschaffen mit Leidenschaft
             und Präzision.
           </p>
-        </div>
+        </motion.div>
       </section>
 
       {/* Gallery Section */}
@@ -42,7 +49,13 @@ export default function GaleriePage() {
           textAlign: "center",
         }}
       >
-        <div className="container">
+        <motion.div
+          className="container"
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+          variants={fadeInUp}
+        >
           <h2 style={{ fontSize: 32, marginBottom: 15 }}>
             Gefällt dir, was du siehst?
           </h2>
@@ -73,7 +86,7 @@ export default function GaleriePage() {
           >
             Jetzt Termin anfragen
           </button>
-        </div>
+        </motion.div>
       </section>
     </main>
   );

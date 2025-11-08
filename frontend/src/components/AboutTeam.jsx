@@ -1,4 +1,6 @@
 import React from "react";
+import { motion } from "framer-motion";
+import { fadeInUp, staggerContainer, staggerItem, viewportConfig } from "../utils/animations";
 
 export default function AboutTeam() {
   const team = [
@@ -39,7 +41,13 @@ export default function AboutTeam() {
   return (
     <section style={{ padding: "80px 20px", background: "#0d0c0a" }}>
       <div className="container">
-        <div style={{ textAlign: "center", marginBottom: 60 }}>
+        <motion.div
+          style={{ textAlign: "center", marginBottom: 60 }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+          variants={fadeInUp}
+        >
           <h2 style={{ fontSize: 42, marginBottom: 20 }}>Unser Team</h2>
           <p
             style={{
@@ -53,9 +61,9 @@ export default function AboutTeam() {
             Lerne die kreativen Köpfe und Hände hinter Midgard Tattoo kennen.
             Jeder von uns bringt seine eigene Vision und Leidenschaft mit.
           </p>
-        </div>
+        </motion.div>
 
-        <div
+        <motion.div
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
@@ -63,9 +71,13 @@ export default function AboutTeam() {
             maxWidth: 1200,
             margin: "0 auto",
           }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+          variants={staggerContainer}
         >
           {team.map((member, index) => (
-            <div
+            <motion.div
               key={index}
               style={{
                 background: "#1b1816",
@@ -74,6 +86,7 @@ export default function AboutTeam() {
                 transition: "transform 0.3s ease, box-shadow 0.3s ease",
                 cursor: "pointer",
               }}
+              variants={staggerItem}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = "translateY(-10px)";
                 e.currentTarget.style.boxShadow =
@@ -192,12 +205,12 @@ export default function AboutTeam() {
                   </span>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Piercing Service Info */}
-        <div
+        <motion.div
           style={{
             marginTop: 60,
             padding: 40,
@@ -207,6 +220,10 @@ export default function AboutTeam() {
             maxWidth: 800,
             margin: "60px auto 0",
           }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+          variants={fadeInUp}
         >
           <h3 style={{ fontSize: 24, marginBottom: 15 }}>
             💎 Piercing-Service
@@ -216,7 +233,7 @@ export default function AboutTeam() {
             Piercern zusammen, die höchste Hygienestandards einhalten.
             Kontaktiere uns für einen individuellen Termin.
           </p>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

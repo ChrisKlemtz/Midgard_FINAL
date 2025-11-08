@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import axios from "axios";
+import { fadeInUp, staggerContainer, staggerItem, viewportConfig } from "../utils/animations";
 
 export default function Offers() {
   const [offers, setOffers] = useState([]);
@@ -91,7 +93,13 @@ export default function Offers() {
   return (
     <section style={{ padding: "80px 20px" }}>
       <div className="container">
-        <div style={{ textAlign: "center", marginBottom: 60 }}>
+        <motion.div
+          style={{ textAlign: "center", marginBottom: 60 }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+          variants={fadeInUp}
+        >
           <h2 style={{ fontSize: 42, marginBottom: 20 }}>Unsere Leistungen</h2>
           <p
             style={{
@@ -106,7 +114,7 @@ export default function Offers() {
             wir bieten dir ein komplettes Portfolio an Tattoo- und
             Piercing-Services.
           </p>
-        </div>
+        </motion.div>
 
         {/* Category Filter */}
         {categories.length > 1 && (
@@ -155,7 +163,7 @@ export default function Offers() {
         )}
 
         {/* Offers Grid */}
-        <div
+        <motion.div
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
@@ -163,9 +171,13 @@ export default function Offers() {
             maxWidth: 1200,
             margin: "0 auto",
           }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+          variants={staggerContainer}
         >
           {displayOffers.map((offer) => (
-            <div
+            <motion.div
               key={offer._id}
               style={{
                 background: "#1b1816",
@@ -176,6 +188,7 @@ export default function Offers() {
                 position: "relative",
                 overflow: "hidden",
               }}
+              variants={staggerItem}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = "translateY(-8px)";
                 e.currentTarget.style.boxShadow =
@@ -288,12 +301,12 @@ export default function Offers() {
                   Anfragen
                 </button>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Info Box */}
-        <div
+        <motion.div
           style={{
             marginTop: 60,
             padding: 40,
@@ -313,7 +326,7 @@ export default function Offers() {
           <p style={{ fontSize: 14, opacity: 0.9 }}>
             ⏱️ Mindestpreis: 60€ | Stundensatz: ab 100€
           </p>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

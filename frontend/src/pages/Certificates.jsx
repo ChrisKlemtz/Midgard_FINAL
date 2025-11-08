@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import axios from "axios";
+import { fadeInUp, staggerContainer, staggerItem, viewportConfig } from "../utils/animations";
 
 export default function Certificates() {
   const [certificates, setCertificates] = useState([]);
@@ -48,7 +50,12 @@ export default function Certificates() {
 
   return (
     <section className="container" style={{ padding: "100px 20px" }}>
-      <div style={{ textAlign: "center", marginBottom: 60 }}>
+      <motion.div
+        style={{ textAlign: "center", marginBottom: 60 }}
+        initial="hidden"
+        animate="visible"
+        variants={fadeInUp}
+      >
         <h1 style={{ fontSize: 48, marginBottom: 20 }}>
           Zertifikate & Hygiene
         </h1>
@@ -65,10 +72,10 @@ export default function Certificates() {
           findest du unsere Hygiene-Zertifikate, Ausbildungsnachweise und
           Qualifikationen.
         </p>
-      </div>
+      </motion.div>
 
       {/* Hygiene-Info Banner */}
-      <div
+      <motion.div
         style={{
           background: "linear-gradient(135deg, #c8a05d 0%, #8b6f3e 100%)",
           padding: 40,
@@ -76,6 +83,10 @@ export default function Certificates() {
           marginBottom: 50,
           textAlign: "center",
         }}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportConfig}
+        variants={fadeInUp}
       >
         <h2 style={{ fontSize: 28, marginBottom: 15 }}>
           🛡️ Höchste Hygienestandards
@@ -92,7 +103,7 @@ export default function Certificates() {
           Alle Instrumente werden sterilisiert und Einwegmaterialien verwendet.
           Regelmäßige Schulungen und Kontrollen garantieren deine Sicherheit.
         </p>
-      </div>
+      </motion.div>
 
       {/* Category Filter */}
       <div
@@ -138,15 +149,19 @@ export default function Certificates() {
 
       {/* Certificates Grid */}
       {filteredCertificates.length > 0 ? (
-        <div
+        <motion.div
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
             gap: 30,
           }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+          variants={staggerContainer}
         >
           {filteredCertificates.map((cert) => (
-            <div
+            <motion.div
               key={cert._id}
               style={{
                 background: "#1b1816",
@@ -155,6 +170,7 @@ export default function Certificates() {
                 transition: "transform 0.3s ease, box-shadow 0.3s ease",
                 cursor: "pointer",
               }}
+              variants={staggerItem}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = "translateY(-5px)";
                 e.currentTarget.style.boxShadow =
@@ -221,9 +237,9 @@ export default function Certificates() {
                   </div>
                 )}
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       ) : (
         <div
           style={{
@@ -244,23 +260,34 @@ export default function Certificates() {
 
       {/* Additional Info Section */}
       <div style={{ marginTop: 80 }}>
-        <h2 style={{ fontSize: 36, marginBottom: 30, textAlign: "center" }}>
+        <motion.h2
+          style={{ fontSize: 36, marginBottom: 30, textAlign: "center" }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+          variants={fadeInUp}
+        >
           Unsere Hygienestandards
-        </h2>
-        <div
+        </motion.h2>
+        <motion.div
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
             gap: 30,
           }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+          variants={staggerContainer}
         >
-          <div
+          <motion.div
             style={{
               background: "#1b1816",
               padding: 30,
               borderRadius: 12,
               textAlign: "center",
             }}
+            variants={staggerItem}
           >
             <div style={{ fontSize: 48, marginBottom: 15 }}>🧼</div>
             <h3 style={{ fontSize: 20, marginBottom: 10 }}>Sterilisation</h3>
@@ -268,42 +295,45 @@ export default function Certificates() {
               Alle wiederverwendbaren Instrumente werden im Autoklaven
               sterilisiert
             </p>
-          </div>
-          <div
+          </motion.div>
+          <motion.div
             style={{
               background: "#1b1816",
               padding: 30,
               borderRadius: 12,
               textAlign: "center",
             }}
+            variants={staggerItem}
           >
             <div style={{ fontSize: 48, marginBottom: 15 }}>🧤</div>
             <h3 style={{ fontSize: 20, marginBottom: 10 }}>Einwegmaterial</h3>
             <p style={{ color: "#ccc", lineHeight: 1.6 }}>
               Nadeln, Handschuhe und Tücher werden nur einmal verwendet
             </p>
-          </div>
-          <div
+          </motion.div>
+          <motion.div
             style={{
               background: "#1b1816",
               padding: 30,
               borderRadius: 12,
               textAlign: "center",
             }}
+            variants={staggerItem}
           >
             <div style={{ fontSize: 48, marginBottom: 15 }}>✅</div>
             <h3 style={{ fontSize: 20, marginBottom: 10 }}>Zertifiziert</h3>
             <p style={{ color: "#ccc", lineHeight: 1.6 }}>
               Regelmäßige Schulungen und behördliche Kontrollen
             </p>
-          </div>
-          <div
+          </motion.div>
+          <motion.div
             style={{
               background: "#1b1816",
               padding: 30,
               borderRadius: 12,
               textAlign: "center",
             }}
+            variants={staggerItem}
           >
             <div style={{ fontSize: 48, marginBottom: 15 }}>🏥</div>
             <h3 style={{ fontSize: 20, marginBottom: 10 }}>
@@ -312,8 +342,8 @@ export default function Certificates() {
             <p style={{ color: "#ccc", lineHeight: 1.6 }}>
               Wir arbeiten nach medizinischen Hygienerichtlinien
             </p>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

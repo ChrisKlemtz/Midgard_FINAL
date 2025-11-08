@@ -1,6 +1,8 @@
 import React from "react";
+import { motion } from "framer-motion";
 import AboutTeam from "../components/AboutTeam";
 import FAQAccordion from "../components/FAQAccordion";
+import { fadeInUp, fadeInLeft, fadeInRight, staggerContainer, staggerItem, viewportConfig } from "../utils/animations";
 
 export default function About() {
   return (
@@ -13,7 +15,12 @@ export default function About() {
           textAlign: "center",
         }}
       >
-        <div className="container">
+        <motion.div
+          className="container"
+          initial="hidden"
+          animate="visible"
+          variants={fadeInUp}
+        >
           <h1 style={{ fontSize: 52, marginBottom: 20 }}>
             Über Midgard Tattoo
           </h1>
@@ -30,7 +37,7 @@ export default function About() {
             Tattoo-Kultur trifft. Unser Studio steht für höchste Qualität,
             Kreativität und Hygiene.
           </p>
-        </div>
+        </motion.div>
       </section>
 
       {/* Story Section */}
@@ -44,7 +51,12 @@ export default function About() {
             margin: "0 auto",
           }}
         >
-          <div>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
+            variants={fadeInLeft}
+          >
             <h2 style={{ fontSize: 36, marginBottom: 20, color: "#c8a05d" }}>
               Unsere Geschichte
             </h2>
@@ -67,9 +79,14 @@ export default function About() {
               verschiedenen Welten. Genau diese Verbindung schaffen wir:
               zwischen deiner Vision und ihrer perfekten Umsetzung auf der Haut.
             </p>
-          </div>
+          </motion.div>
 
-          <div>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
+            variants={fadeInRight}
+          >
             <h2 style={{ fontSize: 36, marginBottom: 20, color: "#c8a05d" }}>
               Unsere Philosophie
             </h2>
@@ -92,17 +109,21 @@ export default function About() {
               zertifiziert. Deine Gesundheit ist uns genauso wichtig wie deine
               Zufriedenheit.
             </p>
-          </div>
+          </motion.div>
         </div>
 
         {/* Values */}
-        <div
+        <motion.div
           style={{
             marginTop: 80,
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
             gap: 30,
           }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+          variants={staggerContainer}
         >
           {[
             {
@@ -126,7 +147,7 @@ export default function About() {
               text: "Leidenschaft für die Kunst des Tätowierens",
             },
           ].map((value, i) => (
-            <div
+            <motion.div
               key={i}
               style={{
                 background: "#1b1816",
@@ -135,6 +156,7 @@ export default function About() {
                 textAlign: "center",
                 transition: "transform 0.3s ease",
               }}
+              variants={staggerItem}
               onMouseEnter={(e) =>
                 (e.currentTarget.style.transform = "translateY(-5px)")
               }
@@ -149,9 +171,9 @@ export default function About() {
               <p style={{ color: "#ccc", fontSize: 14, lineHeight: 1.6 }}>
                 {value.text}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </section>
 
       {/* Team Section */}
@@ -170,7 +192,13 @@ export default function About() {
           textAlign: "center",
         }}
       >
-        <div className="container">
+        <motion.div
+          className="container"
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+          variants={fadeInUp}
+        >
           <h2 style={{ fontSize: 36, marginBottom: 15 }}>
             Bereit für dein Tattoo?
           </h2>
@@ -202,7 +230,7 @@ export default function About() {
           >
             Jetzt Termin anfragen
           </button>
-        </div>
+        </motion.div>
       </section>
     </main>
   );

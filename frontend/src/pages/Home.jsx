@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import Gallery from "../components/Gallery";
 import Offers from "../components/Offers";
 import FAQAccordion from "../components/FAQAccordion";
+import { fadeInUp, fadeInLeft, fadeInRight, staggerContainer, staggerItem, viewportConfig } from "../utils/animations";
 
 export default function Home() {
   return (
@@ -20,18 +22,25 @@ export default function Home() {
           position: "relative",
         }}
       >
-        <div className="container" style={{ textAlign: "center", zIndex: 2 }}>
-          <h1
+        <motion.div
+          className="container"
+          style={{ textAlign: "center", zIndex: 2 }}
+          initial="hidden"
+          animate="visible"
+          variants={fadeInUp}
+        >
+          <motion.h1
             className="title"
             style={{
               fontSize: "clamp(40px, 8vw, 72px)",
               marginBottom: 20,
               textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
             }}
+            variants={fadeInUp}
           >
             Midgard Tattoo Studio
-          </h1>
-          <p
+          </motion.h1>
+          <motion.p
             className="subtitle"
             style={{
               fontSize: "clamp(18px, 3vw, 24px)",
@@ -39,16 +48,18 @@ export default function Home() {
               color: "#c8a05d",
               fontWeight: 600,
             }}
+            variants={fadeInUp}
           >
             Nordisch. Edel. Hygienisch. — Dein Tattoo-Erlebnis.
-          </p>
-          <div
+          </motion.p>
+          <motion.div
             style={{
               display: "flex",
               gap: 15,
               justifyContent: "center",
               flexWrap: "wrap",
             }}
+            variants={fadeInUp}
           >
             <a
               className="btn"
@@ -71,8 +82,8 @@ export default function Home() {
             >
               🎨 Galerie ansehen
             </Link>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* Features Section */}
@@ -83,12 +94,16 @@ export default function Home() {
         }}
       >
         <div className="container">
-          <div
+          <motion.div
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
               gap: 40,
             }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
+            variants={staggerContainer}
           >
             {[
               {
@@ -112,7 +127,7 @@ export default function Home() {
                 text: "Kostenlose Erstberatung für dein perfektes Tattoo-Projekt",
               },
             ].map((feature, i) => (
-              <div
+              <motion.div
                 key={i}
                 style={{
                   background: "#1b1816",
@@ -121,6 +136,7 @@ export default function Home() {
                   textAlign: "center",
                   transition: "transform 0.3s ease, box-shadow 0.3s ease",
                 }}
+                variants={staggerItem}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = "translateY(-10px)";
                   e.currentTarget.style.boxShadow =
@@ -142,15 +158,21 @@ export default function Home() {
                 <p style={{ color: "#ccc", lineHeight: 1.6, fontSize: 15 }}>
                   {feature.text}
                 </p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Gallery Preview */}
       <section className="container" style={{ padding: "80px 20px" }}>
-        <div style={{ textAlign: "center", marginBottom: 50 }}>
+        <motion.div
+          style={{ textAlign: "center", marginBottom: 50 }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+          variants={fadeInUp}
+        >
           <h2 style={{ fontSize: 42, marginBottom: 15 }}>Unsere Arbeiten</h2>
           <p
             style={{
@@ -162,13 +184,19 @@ export default function Home() {
           >
             Entdecke eine Auswahl unserer neuesten Tattoo-Kunstwerke
           </p>
-        </div>
+        </motion.div>
         <Gallery />
-        <div style={{ marginTop: 40, textAlign: "center" }}>
+        <motion.div
+          style={{ marginTop: 40, textAlign: "center" }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+          variants={fadeInUp}
+        >
           <Link to="/galerie" className="btn" style={{ padding: "12px 30px" }}>
             Komplette Galerie ansehen →
           </Link>
-        </div>
+        </motion.div>
       </section>
 
       {/* Offers Section */}
@@ -177,7 +205,13 @@ export default function Home() {
       {/* Style Section */}
       <section style={{ padding: "80px 20px", background: "#0d0c0a" }}>
         <div className="container">
-          <div style={{ textAlign: "center", marginBottom: 50 }}>
+          <motion.div
+            style={{ textAlign: "center", marginBottom: 50 }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
+            variants={fadeInUp}
+          >
             <h2 style={{ fontSize: 42, marginBottom: 15 }}>
               Unsere Stilrichtungen
             </h2>
@@ -192,9 +226,9 @@ export default function Home() {
               Von traditionell bis modern – wir beherrschen verschiedene
               Tattoo-Stile
             </p>
-          </div>
+          </motion.div>
 
-          <div
+          <motion.div
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
@@ -202,6 +236,10 @@ export default function Home() {
               maxWidth: 1000,
               margin: "0 auto",
             }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
+            variants={staggerContainer}
           >
             {[
               "Traditional",
@@ -213,7 +251,7 @@ export default function Home() {
               "Portraits",
               "Cover-ups",
             ].map((style, i) => (
-              <div
+              <motion.div
                 key={i}
                 style={{
                   background: "#1b1816",
@@ -224,6 +262,7 @@ export default function Home() {
                   transition: "all 0.3s ease",
                   cursor: "pointer",
                 }}
+                variants={staggerItem}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor = "#c8a05d";
                   e.currentTarget.style.transform = "scale(1.05)";
@@ -234,9 +273,9 @@ export default function Home() {
                 }}
               >
                 <h3 style={{ fontSize: 16, color: "#fff" }}>{style}</h3>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -253,7 +292,13 @@ export default function Home() {
           textAlign: "center",
         }}
       >
-        <div className="container">
+        <motion.div
+          className="container"
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+          variants={fadeInUp}
+        >
           <h2 style={{ fontSize: 42, marginBottom: 20 }}>
             Bereit für dein Traumtattoo?
           </h2>
@@ -304,7 +349,7 @@ export default function Home() {
               Mehr über uns
             </Link>
           </div>
-        </div>
+        </motion.div>
       </section>
     </main>
   );
