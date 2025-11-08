@@ -1,35 +1,36 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import GaleriePage from "./pages/GaleriePage";
+import About from "./pages/About";
+import EventsPage from "./pages/EventsPage";
+import Certificates from "./pages/Certificates";
+import Impressum from "./pages/Impressum";
+import ContactModal from "./components/ContactModal";
+import CookieBanner from "./components/CookieBanner";
+import AdminDashboard from "./components/AdminDashboard";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [contactOpen, setContactOpen] = useState(false);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="app">
+      <Header onOpenContact={() => setContactOpen(true)} />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/galerie" element={<GaleriePage />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/events" element={<EventsPage />} />
+        <Route path="/certificates" element={<Certificates />} />
+        <Route path="/impressum" element={<Impressum />} />
+        <Route path="/admin" element={<AdminDashboard />} />
+      </Routes>
 
-export default App
+      <Footer />
+      <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
+      <CookieBanner />
+    </div>
+  );
+}

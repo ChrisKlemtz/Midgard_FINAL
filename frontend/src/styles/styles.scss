@@ -1,0 +1,98 @@
+// Farben
+$anthrazit: #181510;
+$darkgray: #323232ff;
+$accent-gradient-start: #E9DBBD;
+$accent-gradient-mid: #CBB682;
+$accent-gradient-end: #785F37;
+$gold-gradient: linear-gradient(90deg, $accent-gradient-start, $accent-gradient-mid, $accent-gradient-end);
+
+* { box-sizing: border-box; }
+html,body,#root { height: 100%; }
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: $anthrazit;
+  color: #eee;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+
+.app {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+/* Header */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding: 1rem 2rem;
+  background: transparent;
+  transition: background 200ms ease, box-shadow 200ms ease;
+  &.scrolled {
+    background: rgba(24,21,16,0.95);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+  }
+}
+.logo { font-family: "Playfair Display", serif; font-size:1.25rem; letter-spacing:0.06em; }
+
+/* Buttons */
+.btn {
+  border-radius: 12px;
+  padding: 0.6rem 1rem;
+  font-weight:600;
+  border: none;
+  cursor:pointer;
+  background: $gold-gradient;
+  background-size: 200% 100%;
+  transition: background-position 300ms ease, transform 150ms ease;
+}
+.btn:hover { transform: translateY(-2px); background-position: 100% 0; }
+
+/* Layout containers */
+.container {
+  width: min(1200px, 96%);
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+/* Hero */
+.hero {
+  padding: 6rem 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.5), rgba(0,0,0,0.7));
+  text-align:center;
+  .title { font-family: "Playfair Display", serif; font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 1rem;}
+  .subtitle { max-width: 900px; margin: 0 auto; color: #cfc6b0; }
+}
+
+/* Gallery grid */
+.gallery-grid {
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap:16px;
+}
+.card {
+  background: rgba(255,255,255,0.04);
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Footer */
+.footer {
+  margin-top: auto;
+  padding: 2rem 0;
+  text-align:center;
+  background: linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.6));
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header { padding: 0.75rem 1rem; }
+}
