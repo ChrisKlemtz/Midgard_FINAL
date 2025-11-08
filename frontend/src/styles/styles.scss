@@ -92,7 +92,212 @@ a { color: inherit; text-decoration: none; }
   background: linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.6));
 }
 
-/* Responsive */
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+/* Desktop Navigation - versteckt auf Mobile */
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Hamburger Button - nur auf Mobile/Tablet sichtbar */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 22px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 60;
+
+  span {
+    width: 100%;
+    height: 3px;
+    background: #fff;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    transform-origin: center;
+  }
+
+  &.open {
+    span:nth-child(1) {
+      transform: translateY(9.5px) rotate(45deg);
+    }
+    span:nth-child(2) {
+      opacity: 0;
+    }
+    span:nth-child(3) {
+      transform: translateY(-9.5px) rotate(-45deg);
+    }
+  }
+}
+
+/* Mobile Navigation */
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 280px;
+  height: 100vh;
+  background: rgba(24, 21, 16, 0.98);
+  backdrop-filter: blur(10px);
+  padding: 80px 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  z-index: 55;
+  transition: right 0.3s ease;
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.5);
+
+  &.open {
+    right: 0;
+  }
+
+  a {
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: color 0.2s ease, padding-left 0.2s ease;
+
+    &:hover {
+      color: #c8a05d;
+      padding-left: 0.5rem;
+    }
+  }
+
+  .btn {
+    margin-top: 1rem;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Mobile Navigation Overlay */
+.mobile-nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 50;
+  backdrop-filter: blur(2px);
+}
+
+/* ========================================
+   MEDIA QUERIES
+   ======================================== */
+
+/* Tablet und kleiner (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .desktop-nav {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .container {
+    width: min(1200px, 92%);
+  }
+
+  .header {
+    padding: 1rem 1.5rem;
+  }
+}
+
+/* Mobile (max-width: 768px) */
 @media (max-width: 768px) {
-  .header { padding: 0.75rem 1rem; }
+  .header {
+    padding: 0.75rem 1rem;
+  }
+
+  .logo {
+    font-size: 1.1rem;
+  }
+
+  .container {
+    width: min(1200px, 90%);
+    padding: 1.5rem 0;
+  }
+
+  .hero {
+    padding: 4rem 0;
+
+    .title {
+      font-size: clamp(1.75rem, 8vw, 3rem);
+    }
+
+    .subtitle {
+      font-size: 1rem;
+    }
+  }
+
+  /* Gallery Grid responsive */
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+  }
+
+  /* Button spacing */
+  .btn {
+    padding: 0.5rem 0.875rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Small Mobile (max-width: 480px) */
+@media (max-width: 480px) {
+  .header {
+    padding: 0.625rem 0.875rem;
+  }
+
+  .logo {
+    font-size: 1rem;
+  }
+
+  .container {
+    width: min(1200px, 88%);
+    padding: 1rem 0;
+  }
+
+  .hero {
+    padding: 3rem 0;
+
+    .title {
+      font-size: clamp(1.5rem, 10vw, 2.5rem);
+      margin-bottom: 0.75rem;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+    }
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+  }
+
+  .btn {
+    padding: 0.45rem 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  .mobile-nav {
+    width: 100%;
+    right: -100%;
+
+    &.open {
+      right: 0;
+    }
+  }
 }

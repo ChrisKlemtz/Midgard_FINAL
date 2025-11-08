@@ -35,21 +35,142 @@ export default function ContactModal({ open, onClose }) {
   }
 
   return (
-    <div style={{
-      position: "fixed", inset:0, background:"rgba(0,0,0,0.6)",
-      display:"flex", justifyContent:"center", alignItems:"center", zIndex:200
-    }}>
-      <form onSubmit={handleSubmit} style={{background:"#151210", padding:20, borderRadius:12, width: "min(600px, 95%)"}}>
-        <h3>Kontakt / Termin anfragen</h3>
-        <label>Name</label>
-        <input value={name} onChange={e=>setName(e.target.value)} required/>
-        <label>Nachricht</label>
-        <textarea value={message} onChange={e=>setMessage(e.target.value)} required />
-        <label>Referenzbild (optional)</label>
-        <input type="file" onChange={e=>setFile(e.target.files[0])} accept="image/*"/>
-        <div style={{display:"flex", gap:8, marginTop:12}}>
-          <button type="submit" className="btn" disabled={loading}>{loading ? "Senden..." : "Senden"}</button>
-          <button type="button" onClick={onClose}>Abbrechen</button>
+    <div
+      style={{
+        position: "fixed",
+        inset: 0,
+        background: "rgba(0,0,0,0.8)",
+        backdropFilter: "blur(4px)",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        zIndex: 200,
+        padding: "16px",
+        overflow: "auto"
+      }}
+      onClick={onClose}
+    >
+      <form
+        onSubmit={handleSubmit}
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          background: "#151210",
+          padding: "24px",
+          borderRadius: 16,
+          width: "min(600px, 100%)",
+          maxHeight: "90vh",
+          overflow: "auto",
+          boxShadow: "0 20px 60px rgba(0,0,0,0.5)"
+        }}
+      >
+        <h3 style={{ marginBottom: 20, fontSize: "1.5rem" }}>
+          Kontakt / Termin anfragen
+        </h3>
+
+        <label style={{ display: "block", marginBottom: 8, fontWeight: 500 }}>
+          Name
+        </label>
+        <input
+          value={name}
+          onChange={e => setName(e.target.value)}
+          required
+          style={{
+            width: "100%",
+            padding: "12px",
+            marginBottom: 16,
+            borderRadius: 8,
+            border: "1px solid #333",
+            background: "#0d0c0a",
+            color: "#fff",
+            fontSize: "1rem"
+          }}
+        />
+
+        <label style={{ display: "block", marginBottom: 8, fontWeight: 500 }}>
+          Nachricht
+        </label>
+        <textarea
+          value={message}
+          onChange={e => setMessage(e.target.value)}
+          required
+          rows={5}
+          style={{
+            width: "100%",
+            padding: "12px",
+            marginBottom: 16,
+            borderRadius: 8,
+            border: "1px solid #333",
+            background: "#0d0c0a",
+            color: "#fff",
+            fontSize: "1rem",
+            resize: "vertical",
+            fontFamily: "inherit"
+          }}
+        />
+
+        <label style={{ display: "block", marginBottom: 8, fontWeight: 500 }}>
+          Referenzbild (optional)
+        </label>
+        <input
+          type="file"
+          onChange={e => setFile(e.target.files[0])}
+          accept="image/*"
+          style={{
+            width: "100%",
+            padding: "10px",
+            marginBottom: 20,
+            borderRadius: 8,
+            border: "1px solid #333",
+            background: "#0d0c0a",
+            color: "#ccc",
+            fontSize: "0.95rem"
+          }}
+        />
+
+        <div style={{
+          display: "flex",
+          gap: 12,
+          marginTop: 20,
+          flexDirection: window.innerWidth < 480 ? "column" : "row"
+        }}>
+          <button
+            type="submit"
+            className="btn"
+            disabled={loading}
+            style={{
+              flex: 1,
+              padding: "12px 24px",
+              fontSize: "1rem"
+            }}
+          >
+            {loading ? "Senden..." : "Senden"}
+          </button>
+          <button
+            type="button"
+            onClick={onClose}
+            style={{
+              flex: 1,
+              padding: "12px 24px",
+              borderRadius: 12,
+              border: "2px solid #c8a05d",
+              background: "transparent",
+              color: "#c8a05d",
+              cursor: "pointer",
+              fontWeight: 600,
+              fontSize: "1rem",
+              transition: "all 0.2s ease"
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "#c8a05d";
+              e.currentTarget.style.color = "#000";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "transparent";
+              e.currentTarget.style.color = "#c8a05d";
+            }}
+          >
+            Abbrechen
+          </button>
         </div>
       </form>
     </div>
