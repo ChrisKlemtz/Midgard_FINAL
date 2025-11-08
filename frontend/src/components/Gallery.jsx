@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import GalleryCard from "./GalleryCard";
 
 export default function Gallery() {
   const [images, setImages] = useState([]);
   const [filter, setFilter] = useState("Alle");
+  const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
     async function fetchImages() {
@@ -17,27 +19,149 @@ export default function Gallery() {
     fetchImages();
   }, []);
 
-  const filtered = images.filter(img => filter === "Alle" ? true : img.artist === filter);
+  const filtered = images.filter((img) =>
+    filter === "Alle" ? true : img.artist === filter
+  );
+  const artists = [
+    "Alle",
+    ...new Set(images.map((img) => img.artist).filter(Boolean)),
+  ];
 
   return (
-    <section className="container">
-      <div style={{display:"flex", gap:12, marginBottom:16}}>
-        <button onClick={() => setFilter("Alle")} className="btn">Alle</button>
-        <button onClick={() => setFilter("Maria")} className="btn">Maria</button>
-        <button onClick={() => setFilter("Robert")} className="btn">Robert</button>
-      </div>
-
-      <div className="gallery-grid">
-        {filtered.map(img => (
-          <div key={img._id} className="card">
-            <img src={img.url} alt={img.title || "Tattoo"} style={{width:"100%", display:"block"}} />
-            <div style={{padding:12}}>
-              <strong>{img.title}</strong>
-              <div style={{fontSize:12, color:"#cfc6b0"}}>{img.artist}</div>
-            </div>
-          </div>
+    <section style={{ position: "relative" }}>
+      {/* Filter Buttons */}
+      <div
+        style={{
+          display: "flex",
+          gap: 12,
+          marginBottom: 30,
+          justifyContent: "center",
+          flexWrap: "wrap",
+        }}
+      >
+        {artists.map((artist) => (
+          <button
+            key={artist}
+            onClick={() => setFilter(artist)}
+            className="btn"
+            style={{
+              background: filter === artist ? "#c8a05d" : "transparent",
+              border: `2px solid ${filter === artist ? "#c8a05d" : "#555"}`,
+              padding: "10px 24px",
+            }}
+          >
+            {artist}
+          </button>
         ))}
       </div>
+
+      {/* Gallery Grid */}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
+          gap: 20,
+        }}
+      >
+        {filtered.map((img) => (
+          <GalleryCard key={img._id} image={img} onClick={setSelectedImage} />
+        ))}
+      </div>
+
+      {filtered.length === 0 && (
+        <div
+          style={{
+            textAlign: "center",
+            padding: 60,
+            background: "#1b1816",
+            borderRadius: 12,
+          }}
+        >
+          <p style={{ color: "#999", fontSize: 18 }}>
+            Keine Bilder in dieser Kategorie gefunden.
+          </p>
+        </div>
+      )}
+
+      {/* Lightbox Modal */}
+      {selectedImage && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: "rgba(0,0,0,0.95)",
+            zIndex: 1000,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: 20,
+          }}
+          onClick={() => setSelectedImage(null)}
+        >
+          <button
+            style={{
+              position: "absolute",
+              top: 20,
+              right: 20,
+              background: "transparent",
+              border: "none",
+              color: "#fff",
+              fontSize: 40,
+              cursor: "pointer",
+              zIndex: 1001,
+            }}
+            onClick={() => setSelectedImage(null)}
+          >
+            ×
+          </button>
+          <div
+            style={{
+              maxWidth: "90vw",
+              maxHeight: "90vh",
+              position: "relative",
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={selectedImage.url}
+              alt={selectedImage.title}
+              style={{
+                maxWidth: "100%",
+                maxHeight: "90vh",
+                objectFit: "contain",
+                borderRadius: 8,
+              }}
+            />
+            {(selectedImage.title || selectedImage.artist) && (
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  background: "rgba(0,0,0,0.8)",
+                  padding: 20,
+                  borderRadius: "0 0 8px 8px",
+                }}
+              >
+                {selectedImage.title && (
+                  <h3 style={{ fontSize: 20, marginBottom: 5 }}>
+                    {selectedImage.title}
+                  </h3>
+                )}
+                {selectedImage.artist && (
+                  <p style={{ color: "#c8a05d", fontSize: 14 }}>
+                    by {selectedImage.artist}
+                  </p>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </section>
   );
 }
