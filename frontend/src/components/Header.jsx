@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import logo from "../assets/midgrad_logo.png";
 
 export default function Header({ onOpenContact }) {
   const [scrolled, setScrolled] = useState(false);
@@ -37,7 +38,9 @@ export default function Header({ onOpenContact }) {
   return (
     <header className={`header ${scrolled ? "scrolled" : ""}`}>
       <div className="logo">
-        <Link to="/">Midgard Tattoo</Link>
+        <Link to="/">
+          <img src={logo} alt="Midgard Tattoo" />
+        </Link>
       </div>
 
       {/* Desktop Navigation */}
