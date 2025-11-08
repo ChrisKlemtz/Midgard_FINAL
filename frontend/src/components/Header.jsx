@@ -42,19 +42,34 @@ export default function Header({ onOpenContact }) {
 
       {/* Desktop Navigation */}
       <nav className="desktop-nav">
-        <Link to="/" style={{ marginRight: 16 }}>
+        <Link
+          to="/"
+          className={`nav-link ${location.pathname === "/" ? "active" : ""}`}
+        >
           Home
         </Link>
-        <Link to="/galerie" style={{ marginRight: 16 }}>
+        <Link
+          to="/galerie"
+          className={`nav-link ${location.pathname === "/galerie" ? "active" : ""}`}
+        >
           Galerie
         </Link>
-        <Link to="/about" style={{ marginRight: 16 }}>
+        <Link
+          to="/about"
+          className={`nav-link ${location.pathname === "/about" ? "active" : ""}`}
+        >
           About
         </Link>
-        <Link to="/events" style={{ marginRight: 16 }}>
+        <Link
+          to="/events"
+          className={`nav-link ${location.pathname === "/events" ? "active" : ""}`}
+        >
           Events
         </Link>
-        <Link to="/certificates" style={{ marginRight: 16 }}>
+        <Link
+          to="/certificates"
+          className={`nav-link ${location.pathname === "/certificates" ? "active" : ""}`}
+        >
           Hygiene
         </Link>
         <button className="btn" onClick={onOpenContact}>
