@@ -7,10 +7,45 @@ export default function ContactModal({ open, onClose }) {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  // Spam protection
+  const [honeypot, setHoneypot] = useState("");
+  const [formOpenTime] = useState(Date.now());
+
   if (!open) return null;
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    // Spam protection: Honeypot check
+    if (honeypot) {
+      console.log("Spam detected (honeypot)");
+      return;
+    }
+
+    // Spam protection: Time-based validation (minimum 3 seconds)
+    const timeSinceOpen = Date.now() - formOpenTime;
+    if (timeSinceOpen < 3000) {
+      alert("Bitte nehmen Sie sich einen Moment Zeit zum Ausfüllen des Formulars.");
+      return;
+    }
+
+    // Spam protection: Rate limiting (1 minute between submissions)
+    const lastSubmit = localStorage.getItem('lastContactSubmit');
+    if (lastSubmit && Date.now() - parseInt(lastSubmit) < 60000) {
+      alert("Bitte warten Sie eine Minute zwischen Anfragen.");
+      return;
+    }
+
+    // Client-side validation
+    if (name.trim().length < 2) {
+      alert("Bitte geben Sie einen gültigen Namen ein.");
+      return;
+    }
+    if (message.trim().length < 10) {
+      alert("Bitte geben Sie eine aussagekräftigere Nachricht ein (mindestens 10 Zeichen).");
+      return;
+    }
+
     setLoading(true);
     try {
       const form = new FormData();
@@ -22,6 +57,9 @@ export default function ContactModal({ open, onClose }) {
       await axios.post(import.meta.env.VITE_API_URL + "/contact/send", form, {
         headers: { "Content-Type": "multipart/form-data" },
       });
+
+      // Set rate limit timestamp
+      localStorage.setItem('lastContactSubmit', Date.now().toString());
 
       alert("Nachricht gesendet. Wir melden uns.");
       setName(""); setMessage(""); setFile(null);
@@ -106,6 +144,24 @@ export default function ContactModal({ open, onClose }) {
             resize: "vertical",
             fontFamily: "inherit"
           }}
+        />
+
+        {/* Honeypot field - hidden from users, catches bots */}
+        <input
+          type="text"
+          name="website"
+          value={honeypot}
+          onChange={e => setHoneypot(e.target.value)}
+          autoComplete="off"
+          tabIndex={-1}
+          style={{
+            position: "absolute",
+            left: "-9999px",
+            width: "1px",
+            height: "1px",
+            opacity: 0
+          }}
+          aria-hidden="true"
         />
 
         <label style={{ display: "block", marginBottom: 8, fontWeight: 500 }}>

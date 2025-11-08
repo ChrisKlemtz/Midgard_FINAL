@@ -68,7 +68,7 @@ export default function Home() {
               rel="noopener noreferrer"
               style={{ padding: "15px 35px", fontSize: 16 }}
             >
-              📱 Termin via WhatsApp
+              Termin via WhatsApp
             </a>
             <Link
               to="/galerie"
@@ -80,7 +80,7 @@ export default function Home() {
                 border: "2px solid #c8a05d",
               }}
             >
-              🎨 Galerie ansehen
+              Galerie ansehen
             </Link>
           </motion.div>
         </motion.div>
