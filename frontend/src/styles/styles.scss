@@ -99,13 +99,52 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* Gallery Carousel for Mobile/Tablet */
-.gallery-carousel {
+.gallery-carousel,
+.offers-carousel {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1rem;
   padding: 2rem 0;
+}
+
+/* Stacked Carousel for Offers */
+.offers-carousel-stack {
+  position: relative;
+  width: 100%;
+  padding: 3rem 0 4rem;
+  overflow: hidden;
+}
+
+.carousel-stack-container {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  height: 550px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.carousel-card {
+  position: absolute;
+  width: 100%;
+  max-width: 340px;
+  left: 50%;
+  top: 50%;
+  transform-origin: center center;
+}
+
+.carousel-card-prev,
+.carousel-card-next {
+  pointer-events: none;
+}
+
+.carousel-card-current {
+  pointer-events: auto;
 }
 
 .carousel-container {
@@ -133,8 +172,9 @@ a { color: inherit; text-decoration: none; }
   justify-content: center;
   transition: all 0.3s ease;
   flex-shrink: 0;
-  line-height: 1;
+  line-height: 0;
   padding: 0;
+  margin: 0;
 
   &:hover {
     background: rgba(200, 160, 93, 1);
@@ -385,6 +425,15 @@ a { color: inherit; text-decoration: none; }
     max-width: 450px;
   }
 
+  .carousel-stack-container {
+    max-width: 100%;
+    height: 500px;
+  }
+
+  .carousel-card {
+    max-width: 280px;
+  }
+
   /* Button spacing */
   .btn {
     padding: 0.5rem 0.875rem;
@@ -437,6 +486,15 @@ a { color: inherit; text-decoration: none; }
 
   .carousel-dots {
     bottom: -0.5rem;
+  }
+
+  .carousel-stack-container {
+    max-width: 100%;
+    height: 480px;
+  }
+
+  .carousel-card {
+    max-width: 240px;
   }
 
   .btn {
