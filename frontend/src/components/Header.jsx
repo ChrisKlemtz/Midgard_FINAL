@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import logo from "../assets/midgrad_logo.png";
+import logo from "../assets/logo/midgard_logo_main.svg";
 
 export default function Header({ onOpenContact }) {
   const [scrolled, setScrolled] = useState(false);
