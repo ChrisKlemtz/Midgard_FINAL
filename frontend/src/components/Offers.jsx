@@ -448,7 +448,7 @@ export default function Offers() {
               className="carousel-btn carousel-btn-prev"
               onClick={prevSlide}
               aria-label="Previous"
-              style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)', zIndex: 10 }}
+              style={{ position: 'absolute', left: '0', top: '50%', transform: 'translateY(-50%)', zIndex: 10 }}
             >
               ‹
             </button>
@@ -457,7 +457,7 @@ export default function Offers() {
               className="carousel-btn carousel-btn-next"
               onClick={nextSlide}
               aria-label="Next"
-              style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', zIndex: 10 }}
+              style={{ position: 'absolute', right: '0', top: '50%', transform: 'translateY(-50%)', zIndex: 10 }}
             >
               ›
             </button>
