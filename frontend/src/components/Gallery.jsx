@@ -9,7 +9,9 @@ export default function Gallery() {
   const [filter, setFilter] = useState("Alle");
   const [selectedImage, setSelectedImage] = useState(null);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== 'undefined' ? window.innerWidth <= 1024 : false
+  );
 
   useEffect(() => {
     async function fetchImages() {

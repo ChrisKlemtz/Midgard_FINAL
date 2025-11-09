@@ -7,7 +7,9 @@ export default function Offers() {
   const [offers, setOffers] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("Alle");
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== 'undefined' ? window.innerWidth <= 1024 : false
+  );
 
   useEffect(() => {
     loadOffers();
