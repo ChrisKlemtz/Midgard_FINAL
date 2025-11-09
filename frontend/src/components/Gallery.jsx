@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
 import GalleryCard from "./GalleryCard";
 import { staggerContainer, staggerItem, viewportConfig } from "../utils/animations";
@@ -8,6 +8,8 @@ export default function Gallery() {
   const [images, setImages] = useState([]);
   const [filter, setFilter] = useState("Alle");
   const [selectedImage, setSelectedImage] = useState(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     async function fetchImages() {
@@ -19,15 +21,34 @@ export default function Gallery() {
       }
     }
     fetchImages();
+
+    // Check screen size
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 1024);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  const filtered = images.filter((img) =>
-    filter === "Alle" ? true : img.artist === filter
-  );
-  const artists = [
-    "Alle",
-    ...new Set(images.map((img) => img.artist).filter(Boolean)),
-  ];
+  // Reset slide when filter changes
+  useEffect(() => {
+    setCurrentSlide(0);
+  }, [filter]);
+
+  const filtered = images
+    .filter((img) => (filter === "Alle" ? true : img.artist === filter))
+    .slice(0, 12); // Maximal 12 Bilder (4x3)
+
+  const artists = ["Alle", "Maria", "Robert"];
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % filtered.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + filtered.length) % filtered.length);
+  };
 
   return (
     <section style={{ position: "relative" }}>
@@ -57,24 +78,75 @@ export default function Gallery() {
         ))}
       </div>
 
-      {/* Gallery Grid */}
-      <motion.div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-          gap: 20,
-        }}
-        initial="hidden"
-        whileInView="visible"
-        viewport={viewportConfig}
-        variants={staggerContainer}
-      >
-        {filtered.map((img) => (
-          <motion.div key={img._id} variants={staggerItem}>
-            <GalleryCard image={img} onClick={setSelectedImage} />
-          </motion.div>
-        ))}
-      </motion.div>
+      {/* Desktop: Gallery Grid */}
+      {!isMobile && (
+        <motion.div
+          className="gallery-grid-4x3"
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+          variants={staggerContainer}
+        >
+          {filtered.map((img) => (
+            <motion.div key={img._id} variants={staggerItem}>
+              <GalleryCard image={img} onClick={setSelectedImage} />
+            </motion.div>
+          ))}
+        </motion.div>
+      )}
+
+      {/* Mobile/Tablet: Carousel */}
+      {isMobile && filtered.length > 0 && (
+        <div className="gallery-carousel">
+          <button
+            className="carousel-btn carousel-btn-prev"
+            onClick={prevSlide}
+            aria-label="Previous"
+          >
+            ‹
+          </button>
+
+          <div className="carousel-container">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentSlide}
+                initial={{ opacity: 0, x: 100 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -100 }}
+                transition={{ duration: 0.3 }}
+                className="carousel-slide"
+              >
+                <GalleryCard
+                  image={filtered[currentSlide]}
+                  onClick={setSelectedImage}
+                />
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          <button
+            className="carousel-btn carousel-btn-next"
+            onClick={nextSlide}
+            aria-label="Next"
+          >
+            ›
+          </button>
+
+          {/* Dots Indicator */}
+          <div className="carousel-dots">
+            {filtered.map((_, index) => (
+              <button
+                key={index}
+                className={`carousel-dot ${
+                  index === currentSlide ? "active" : ""
+                }`}
+                onClick={() => setCurrentSlide(index)}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
+        </div>
+      )}
 
       {filtered.length === 0 && (
         <div
