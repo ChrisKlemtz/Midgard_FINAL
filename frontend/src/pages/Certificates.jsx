@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
 import { fadeInUp, staggerContainer, staggerItem, viewportConfig } from "../utils/animations";
+import glovesIcon from "../assets/icons/gloves-svgrepo-com.svg";
+import badgeIcon from "../assets/icons/badge_icon.svg";
+import bandageIcon from "../assets/icons/bandage-svgrepo-com.svg";
 
 export default function Certificates() {
   const [certificates, setCertificates] = useState([]);
@@ -289,24 +292,14 @@ export default function Certificates() {
             }}
             variants={staggerItem}
           >
-            <div style={{ fontSize: 48, marginBottom: 15 }}>🧼</div>
-            <h3 style={{ fontSize: 20, marginBottom: 10 }}>Sterilisation</h3>
-            <p style={{ color: "#ccc", lineHeight: 1.6 }}>
-              Alle wiederverwendbaren Instrumente werden im Autoklaven
-              sterilisiert
-            </p>
-          </motion.div>
-          <motion.div
-            style={{
-              background: "#1b1816",
-              padding: 30,
-              borderRadius: 12,
-              textAlign: "center",
-            }}
-            variants={staggerItem}
-          >
-            <div style={{ fontSize: 48, marginBottom: 15 }}>🧤</div>
-            <h3 style={{ fontSize: 20, marginBottom: 10 }}>Einwegmaterial</h3>
+            <div style={{ marginBottom: 15, display: "flex", justifyContent: "center" }}>
+              <img
+                src={glovesIcon}
+                alt="Einwegmaterialien"
+                style={{ width: 48, height: 48, filter: "invert(68%) sepia(37%) saturate(421%) hue-rotate(3deg) brightness(92%) contrast(87%)" }}
+              />
+            </div>
+            <h3 style={{ fontSize: 20, marginBottom: 10 }}>Einwegmaterialien</h3>
             <p style={{ color: "#ccc", lineHeight: 1.6 }}>
               Nadeln, Handschuhe und Tücher werden nur einmal verwendet
             </p>
@@ -320,7 +313,13 @@ export default function Certificates() {
             }}
             variants={staggerItem}
           >
-            <div style={{ fontSize: 48, marginBottom: 15 }}>✅</div>
+            <div style={{ marginBottom: 15, display: "flex", justifyContent: "center" }}>
+              <img
+                src={badgeIcon}
+                alt="Zertifiziert"
+                style={{ width: 48, height: 48, filter: "invert(68%) sepia(37%) saturate(421%) hue-rotate(3deg) brightness(92%) contrast(87%)" }}
+              />
+            </div>
             <h3 style={{ fontSize: 20, marginBottom: 10 }}>Zertifiziert</h3>
             <p style={{ color: "#ccc", lineHeight: 1.6 }}>
               Regelmäßige Schulungen und behördliche Kontrollen
@@ -335,7 +334,13 @@ export default function Certificates() {
             }}
             variants={staggerItem}
           >
-            <div style={{ fontSize: 48, marginBottom: 15 }}>🏥</div>
+            <div style={{ marginBottom: 15, display: "flex", justifyContent: "center" }}>
+              <img
+                src={bandageIcon}
+                alt="Medizinischer Standard"
+                style={{ width: 48, height: 48, filter: "invert(68%) sepia(37%) saturate(421%) hue-rotate(3deg) brightness(92%) contrast(87%)" }}
+              />
+            </div>
             <h3 style={{ fontSize: 20, marginBottom: 10 }}>
               Medizinischer Standard
             </h3>
