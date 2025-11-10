@@ -9,6 +9,7 @@ import designIcon from "../assets/icons/design_icon.svg";
 import badgeIcon from "../assets/icons/badge_icon.svg";
 import glovesIcon from "../assets/icons/gloves-svgrepo-com.svg";
 import whatsappChatIcon from "../assets/icons/whatsapp_chat_icon.svg";
+import logo from "../assets/logo/midgard_logo_main.svg";
 
 export default function Home() {
   return (
@@ -33,17 +34,24 @@ export default function Home() {
           animate="visible"
           variants={fadeInUp}
         >
-          <motion.h1
-            className="title"
-            style={{
-              fontSize: "clamp(40px, 8vw, 72px)",
-              marginBottom: 20,
-              textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
-            }}
+          <motion.div
             variants={fadeInUp}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginBottom: 20,
+            }}
           >
-            Midgard Tattoo Studio
-          </motion.h1>
+            <img
+              src={logo}
+              alt="Midgard Tattoo Studio"
+              style={{
+                width: "clamp(300px, 60vw, 600px)",
+                height: "auto",
+                filter: "drop-shadow(2px 2px 4px rgba(0,0,0,0.5))",
+              }}
+            />
+          </motion.div>
           <motion.p
             className="subtitle"
             style={{
