@@ -94,7 +94,7 @@ export default function Home() {
             </Link>
             <motion.a
               className="btn"
-              href="https://wa.me/491234567890?text=Ich%20möchte%20einen%20Termin%20anfragen"
+              href="https://wa.me/4917624752736?text=Ich%20möchte%20einen%20Termin%20anfragen"
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -373,7 +373,7 @@ export default function Home() {
           >
             <motion.a
               className="btn"
-              href="https://wa.me/491234567890?text=Ich%20möchte%20einen%20Beratungstermin"
+              href="https://wa.me/4917624752736?text=Ich%20möchte%20einen%20Beratungstermin"
               target="_blank"
               rel="noopener noreferrer"
               style={{

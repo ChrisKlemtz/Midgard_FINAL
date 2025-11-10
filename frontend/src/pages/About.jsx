@@ -234,7 +234,7 @@ export default function About() {
             whileTap={{ scale: 0.95 }}
             onClick={() =>
               window.open(
-                "https://wa.me/491234567890?text=Ich%20möchte%20einen%20Beratungstermin",
+                "https://wa.me/4917624752736?text=Ich%20möchte%20einen%20Beratungstermin",
                 "_blank"
               )
             }

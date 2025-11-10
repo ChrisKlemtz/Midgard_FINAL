@@ -224,7 +224,7 @@ export default function Offers() {
           onClick={(e) => {
             e.stopPropagation();
             window.open(
-              "https://wa.me/491234567890?text=Ich%20interessiere%20mich%20für:%20" +
+              "https://wa.me/4917624752736?text=Ich%20interessiere%20mich%20für:%20" +
                 offer.title,
               "_blank"
             );

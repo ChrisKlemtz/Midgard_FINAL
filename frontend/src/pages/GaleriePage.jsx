@@ -93,7 +93,7 @@ export default function GaleriePage() {
             transition={{ duration: 0.2 }}
             onClick={() =>
               window.open(
-                "https://wa.me/491234567890?text=Ich%20möchte%20ein%20Tattoo%20anfragen",
+                "https://wa.me/4917624752736?text=Ich%20möchte%20ein%20Tattoo%20anfragen",
                 "_blank"
               )
             }
