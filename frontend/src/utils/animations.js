@@ -84,8 +84,8 @@ export const staggerContainer = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.1
+      staggerChildren: 0.08,
+      delayChildren: 0
     }
   }
 };
@@ -94,13 +94,13 @@ export const staggerContainer = {
 export const staggerItem = {
   hidden: {
     opacity: 0,
-    y: 30
+    y: 20
   },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.6,
+      duration: 0.4,
       ease: [0.25, 0.46, 0.45, 0.94]
     }
   }
@@ -109,6 +109,6 @@ export const staggerItem = {
 // Viewport-Einstellungen für scroll-triggered Animationen
 export const viewportConfig = {
   once: true, // Animation nur einmal abspielen
-  margin: "-100px", // Animation startet 100px bevor Element sichtbar ist
-  amount: 0.3 // 30% des Elements muss sichtbar sein
+  margin: "0px", // Animation startet sofort wenn Element sichtbar wird
+  amount: 0.2 // 20% des Elements muss sichtbar sein
 };
