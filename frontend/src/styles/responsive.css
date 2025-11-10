@@ -245,15 +245,17 @@
 /* Hero Section Responsive */
 @media (max-width: 768px) {
   .hero {
-    min-height: 70vh !important;
-    padding: 60px 16px !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+    padding: 60px 16px 80px !important;
   }
 }
 
 @media (max-width: 480px) {
   .hero {
-    min-height: 60vh !important;
-    padding: 40px 12px !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+    padding: 40px 12px 80px !important;
   }
 }
 

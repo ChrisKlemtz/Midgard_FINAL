@@ -18,7 +18,7 @@ export default function Home() {
       <section
         className="hero"
         style={{
-          minHeight: "90vh",
+          height: "100vh",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -29,7 +29,15 @@ export default function Home() {
       >
         <motion.div
           className="container"
-          style={{ textAlign: "center", zIndex: 2 }}
+          style={{
+            textAlign: "center",
+            zIndex: 2,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            marginTop: "-80px",
+          }}
           initial="hidden"
           animate="visible"
           variants={fadeInUp}
@@ -79,7 +87,7 @@ export default function Home() {
               className="btn"
               style={{
                 padding: "15px 35px",
-                fontSize: 16,
+                fontSize: 18,
                 background: "transparent",
                 border: "2px solid #c8a05d",
                 width: "280px",
@@ -88,6 +96,7 @@ export default function Home() {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
+                fontWeight: 600,
               }}
             >
               Galerie ansehen
@@ -127,6 +136,64 @@ export default function Home() {
               </svg>
               Termin via WhatsApp
             </motion.a>
+          </motion.div>
+        </motion.div>
+
+        {/* Scroll Indicator */}
+        <motion.div
+          style={{
+            position: "absolute",
+            bottom: 40,
+            left: "50%",
+            transform: "translateX(-50%)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 4,
+            zIndex: 2,
+          }}
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1, duration: 0.8 }}
+        >
+          <span
+            style={{
+              color: "#c8a05d",
+              fontSize: 12,
+              fontWeight: 600,
+              letterSpacing: 2,
+              textTransform: "uppercase",
+              textAlign: "center",
+              display: "block",
+            }}
+          >
+            Scroll
+          </span>
+          <motion.div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 5L12 19M12 19L19 12M12 19L5 12"
+                stroke="#c8a05d"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
           </motion.div>
         </motion.div>
       </section>
