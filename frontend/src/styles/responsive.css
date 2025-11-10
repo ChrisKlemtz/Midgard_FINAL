@@ -334,6 +334,13 @@
     font-size: 0.95rem !important;
     padding: 12px 24px !important;
   }
+
+  /* Hero section buttons specifically */
+  .hero a.btn,
+  .hero button.btn {
+    font-size: 1rem !important;
+    padding: 14px 28px !important;
+  }
 }
 
 /* Filter Buttons Responsive */

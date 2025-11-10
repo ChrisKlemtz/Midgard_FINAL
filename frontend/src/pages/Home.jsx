@@ -83,7 +83,11 @@ export default function Home() {
                 background: "transparent",
                 border: "2px solid #c8a05d",
                 width: "280px",
+                maxWidth: "100%",
                 textAlign: "center",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
               Galerie ansehen
