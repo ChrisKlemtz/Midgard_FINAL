@@ -205,7 +205,13 @@ export default function Home() {
                   <img
                     src={feature.icon}
                     alt={feature.title}
-                    style={{ width: 48, height: 48, filter: "invert(68%) sepia(37%) saturate(421%) hue-rotate(3deg) brightness(92%) contrast(87%)" }}
+                    style={{
+                      width: 48,
+                      height: 48,
+                      filter: feature.title === "Top Hygiene"
+                        ? "invert(68%) sepia(37%) saturate(421%) hue-rotate(3deg) brightness(92%) contrast(87%) opacity(0.6)"
+                        : "invert(68%) sepia(37%) saturate(421%) hue-rotate(3deg) brightness(92%) contrast(87%)"
+                    }}
                   />
                 </div>
                 <h3
