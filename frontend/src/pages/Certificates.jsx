@@ -5,6 +5,7 @@ import { fadeInUp, staggerContainer, staggerItem, viewportConfig } from "../util
 import glovesIcon from "../assets/icons/gloves-svgrepo-com.svg";
 import badgeIcon from "../assets/icons/badge_icon.svg";
 import bandageIcon from "../assets/icons/bandage-svgrepo-com.svg";
+import cautionIcon from "../assets/icons/caution_icon.svg";
 
 export default function Certificates() {
   const [certificates, setCertificates] = useState([]);
@@ -91,9 +92,21 @@ export default function Certificates() {
         viewport={viewportConfig}
         variants={fadeInUp}
       >
-        <h2 style={{ fontSize: 28, marginBottom: 15 }}>
-          🛡️ Höchste Hygienestandards
-        </h2>
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 20, marginBottom: 15 }}>
+          <img
+            src={cautionIcon}
+            alt="Hygiene"
+            style={{ width: 48, height: 48, filter: "brightness(0) invert(1)" }}
+          />
+          <h2 style={{ fontSize: 28, margin: 0 }}>
+            Höchste Hygienestandards
+          </h2>
+          <img
+            src={cautionIcon}
+            alt="Hygiene"
+            style={{ width: 48, height: 48, filter: "brightness(0) invert(1)" }}
+          />
+        </div>
         <p
           style={{
             fontSize: 16,
@@ -124,7 +137,7 @@ export default function Certificates() {
             onClick={() => setSelectedCategory(cat)}
             style={{
               padding: "12px 24px",
-              background: selectedCategory === cat ? "#c8a05d" : "transparent",
+              background: selectedCategory === cat ? "#c8a05d" : "#1b1816",
               border: `2px solid ${
                 selectedCategory === cat ? "#c8a05d" : "#555"
               }`,

@@ -72,7 +72,7 @@ export default function GaleriePage() {
           <motion.button
             className="btn"
             style={{
-              background: "#1b1816",
+              background: "#25D366",
               color: "#ffffff",
               padding: "15px 35px",
               fontSize: 16,
@@ -82,10 +82,12 @@ export default function GaleriePage() {
               gap: "10px",
               justifyContent: "center",
               margin: "0 auto",
+              border: "none",
             }}
             whileHover={{
               scale: 1.05,
-              boxShadow: "0 8px 20px rgba(0, 0, 0, 0.5)",
+              boxShadow: "0 8px 20px rgba(37, 211, 102, 0.4)",
+              background: "#20BA5A",
             }}
             whileTap={{ scale: 0.95 }}
             transition={{ duration: 0.2 }}

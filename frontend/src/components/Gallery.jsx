@@ -70,9 +70,24 @@ export default function Gallery() {
             onClick={() => setFilter(artist)}
             className="btn"
             style={{
-              background: filter === artist ? "#c8a05d" : "transparent",
+              background: filter === artist ? "#c8a05d" : "#1b1816",
               border: `2px solid ${filter === artist ? "#c8a05d" : "#555"}`,
               padding: "10px 24px",
+              color: "#fff",
+              cursor: "pointer",
+              fontWeight: 600,
+              transition: "all 0.3s ease",
+              borderRadius: 25,
+            }}
+            onMouseEnter={(e) => {
+              if (filter !== artist) {
+                e.currentTarget.style.borderColor = "#c8a05d";
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (filter !== artist) {
+                e.currentTarget.style.borderColor = "#555";
+              }
             }}
           >
             {artist}
