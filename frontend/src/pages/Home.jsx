@@ -37,7 +37,7 @@ export default function Home() {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            marginTop: "-80px",
+            marginTop: "60px",
           }}
           initial="hidden"
           animate="visible"
