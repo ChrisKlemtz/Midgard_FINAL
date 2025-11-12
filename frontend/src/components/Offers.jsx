@@ -117,7 +117,7 @@ export default function Offers() {
     <motion.div
       key={offer._id}
       style={{
-        background: "rgb(43, 0, 10)",
+        background: "rgb(30, 0, 7)",
         borderRadius: 16,
         padding: 30,
         transition: "transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease",
@@ -132,7 +132,7 @@ export default function Offers() {
           e.currentTarget.style.transform = "translateY(-8px)";
           e.currentTarget.style.boxShadow =
             "0 15px 35px rgba(212, 175, 55, 0.3)";
-          e.currentTarget.style.background = "rgb(63, 0, 20)";
+          e.currentTarget.style.background = "rgb(43, 0, 10)";
           e.currentTarget.style.borderColor = "#d4af37";
         }
       }}
@@ -140,7 +140,7 @@ export default function Offers() {
         if (!isMobile) {
           e.currentTarget.style.transform = "translateY(0)";
           e.currentTarget.style.boxShadow = "none";
-          e.currentTarget.style.background = "rgb(43, 0, 10)";
+          e.currentTarget.style.background = "rgb(30, 0, 7)";
           e.currentTarget.style.borderColor = "rgba(212, 175, 55, 0.2)";
         }
       }}
@@ -254,7 +254,7 @@ export default function Offers() {
   );
 
   return (
-    <section style={{ padding: "80px 20px", background: "#1a1a1a" }}>
+    <section style={{ padding: "0 20px" }}>
       <div className="container">
         <motion.div
           style={{ textAlign: "center", marginBottom: 60 }}
@@ -508,6 +508,7 @@ export default function Offers() {
         <motion.div
           style={{
             marginTop: 60,
+            marginBottom: 0,
             padding: 40,
             background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
             backgroundSize: "200% 200%",

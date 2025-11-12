@@ -149,8 +149,7 @@ export default function Home() {
       {/* Features Section */}
       <section
         style={{
-          padding: "80px 20px",
-          background: "#1a1a1a",
+          padding: "0 20px",
         }}
       >
         <div className="container">
@@ -190,7 +189,7 @@ export default function Home() {
               <motion.div
                 key={i}
                 style={{
-                  background: "rgb(43, 0, 10)",
+                  background: "rgb(30, 0, 7)",
                   padding: 30,
                   borderRadius: 12,
                   textAlign: "center",
@@ -202,13 +201,13 @@ export default function Home() {
                   e.currentTarget.style.transform = "translateY(-10px)";
                   e.currentTarget.style.boxShadow =
                     "0 10px 30px rgba(212, 175, 55, 0.3)";
-                  e.currentTarget.style.background = "rgb(63, 0, 20)";
+                  e.currentTarget.style.background = "rgb(43, 0, 10)";
                   e.currentTarget.style.borderColor = "#d4af37";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = "translateY(0)";
                   e.currentTarget.style.boxShadow = "none";
-                  e.currentTarget.style.background = "rgb(43, 0, 10)";
+                  e.currentTarget.style.background = "rgb(30, 0, 7)";
                   e.currentTarget.style.borderColor = "rgba(212, 175, 55, 0.2)";
                 }}
               >
@@ -251,7 +250,7 @@ export default function Home() {
       <SectionDivider />
 
       {/* Gallery Preview */}
-      <section className="container" style={{ padding: "80px 20px", background: "#1a1a1a" }}>
+      <section className="container" style={{ padding: "0 20px" }}>
         <motion.div
           style={{ textAlign: "center", marginBottom: 50 }}
           initial="hidden"
@@ -302,7 +301,7 @@ export default function Home() {
       <SectionDivider />
 
       {/* Style Section */}
-      <section style={{ padding: "80px 20px", background: "#1a1a1a" }}>
+      <section style={{ padding: "0 20px" }}>
         <div className="container">
           <motion.div
             style={{ textAlign: "center", marginBottom: 50 }}
@@ -362,7 +361,7 @@ export default function Home() {
               <motion.div
                 key={i}
                 style={{
-                  background: "rgb(43, 0, 10)",
+                  background: "rgb(30, 0, 7)",
                   padding: 20,
                   borderRadius: 10,
                   textAlign: "center",
@@ -372,13 +371,13 @@ export default function Home() {
                 }}
                 variants={staggerItem}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "rgb(63, 0, 20)";
+                  e.currentTarget.style.background = "rgb(43, 0, 10)";
                   e.currentTarget.style.borderColor = "#d4af37";
                   e.currentTarget.style.transform = "scale(1.05)";
                   e.currentTarget.style.boxShadow = "0 8px 20px rgba(212, 175, 55, 0.3)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "rgb(43, 0, 10)";
+                  e.currentTarget.style.background = "rgb(30, 0, 7)";
                   e.currentTarget.style.borderColor = "rgba(212, 175, 55, 0.3)";
                   e.currentTarget.style.transform = "scale(1)";
                   e.currentTarget.style.boxShadow = "none";
@@ -402,7 +401,7 @@ export default function Home() {
       <SectionDivider />
 
       {/* FAQ Section */}
-      <section className="container" style={{ padding: "80px 20px", background: "#1a1a1a" }}>
+      <section className="container" style={{ padding: "0 20px" }}>
         <FAQAccordion />
       </section>
 
