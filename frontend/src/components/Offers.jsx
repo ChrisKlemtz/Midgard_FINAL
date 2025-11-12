@@ -145,20 +145,6 @@ export default function Offers() {
         }
       }}
     >
-      {/* Decorative gradient overlay */}
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          right: 0,
-          width: 100,
-          height: 100,
-          background:
-            "linear-gradient(135deg, rgba(200,160,93,0.1) 0%, transparent 100%)",
-          borderRadius: "0 16px 0 100%",
-        }}
-      />
-
       {offer.imageUrl ? (
         <img
           src={offer.imageUrl}

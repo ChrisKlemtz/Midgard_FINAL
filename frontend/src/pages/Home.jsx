@@ -24,7 +24,7 @@ export default function Home() {
           alignItems: "center",
           justifyContent: "center",
           background:
-            "linear-gradient(135deg, rgba(27,24,22,0.95) 0%, rgba(13,12,10,0.95) 100%), url('/hero-bg.jpg') center/cover",
+            "linear-gradient(rgba(13,12,10,0.95), rgba(13,12,10,0.95)), url('/hero-bg.jpg') center/cover",
           position: "relative",
         }}
       >

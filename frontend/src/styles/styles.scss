@@ -13,8 +13,16 @@ $gold-color: #c8a05d;
 $gold-dark: #d4af37;
 $gold-light: #f4e5c2;
 
-* { box-sizing: border-box; }
-html,body,#root { height: 100%; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html,body,#root {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
 body {
   margin: 0;
   font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
@@ -29,6 +37,9 @@ a { color: inherit; text-decoration: none; }
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  overflow-x: hidden;
+  width: 100%;
+  background: $anthrazit;
 }
 
 /* Header */
@@ -41,11 +52,11 @@ a { color: inherit; text-decoration: none; }
   align-items:center;
   padding: 1rem 2rem;
   background: rgba(30, 0, 7, 0.95);
-  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.2);
+  box-shadow: none;
   transition: background 200ms ease, box-shadow 200ms ease;
   &.scrolled {
     background: rgba(30, 0, 7, 0.98);
-    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+    box-shadow: none;
   }
 }
 .logo {
@@ -345,7 +356,7 @@ a { color: inherit; text-decoration: none; }
   gap: 1.5rem;
   z-index: 55;
   transition: right 0.3s ease;
-  box-shadow: -4px 0 20px rgba(212, 175, 55, 0.3);
+  box-shadow: none;
 
   &.open {
     right: 0;
@@ -371,7 +382,6 @@ a { color: inherit; text-decoration: none; }
       border-left: 3px solid $gold-dark;
       background: rgba(212, 175, 55, 0.2);
       padding-left: 1rem;
-      box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.2);
     }
   }
 
