@@ -11,6 +11,7 @@ import Impressum from "./pages/Impressum";
 import ContactModal from "./components/ContactModal";
 import CookieBanner from "./components/CookieBanner";
 import AdminDashboard from "./components/AdminDashboard";
+import "./styles/theme.css";
 
 export default function App() {
   const [contactOpen, setContactOpen] = useState(false);

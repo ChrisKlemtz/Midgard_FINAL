@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Gallery from "../components/Gallery";
 import Offers from "../components/Offers";
 import FAQAccordion from "../components/FAQAccordion";
+import SectionDivider from "../components/SectionDivider";
 import { fadeInUp, fadeInLeft, fadeInRight, staggerContainer, staggerItem, viewportConfig } from "../utils/animations";
 import designIcon from "../assets/icons/design_icon.svg";
 import badgeIcon from "../assets/icons/badge_icon.svg";
@@ -88,8 +89,9 @@ export default function Home() {
               style={{
                 padding: "15px 35px",
                 fontSize: 18,
-                background: "transparent",
-                border: "2px solid #c8a05d",
+                background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
+                backgroundSize: "200% 200%",
+                border: "none",
                 width: "280px",
                 maxWidth: "100%",
                 textAlign: "center",
@@ -97,6 +99,8 @@ export default function Home() {
                 alignItems: "center",
                 justifyContent: "center",
                 fontWeight: 600,
+                color: "#1a1a1a",
+                animation: "goldShimmer 3s linear infinite",
               }}
             >
               Galerie ansehen
@@ -140,11 +144,13 @@ export default function Home() {
         </motion.div>
       </section>
 
+      <SectionDivider />
+
       {/* Features Section */}
       <section
         style={{
           padding: "80px 20px",
-          background: "#0d0c0a",
+          background: "#1a1a1a",
         }}
       >
         <div className="container">
@@ -184,21 +190,26 @@ export default function Home() {
               <motion.div
                 key={i}
                 style={{
-                  background: "#1b1816",
+                  background: "rgb(43, 0, 10)",
                   padding: 30,
                   borderRadius: 12,
                   textAlign: "center",
-                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                  transition: "transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease",
+                  border: "1px solid rgba(212, 175, 55, 0.2)",
                 }}
                 variants={staggerItem}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = "translateY(-10px)";
                   e.currentTarget.style.boxShadow =
-                    "0 10px 30px rgba(200,160,93,0.2)";
+                    "0 10px 30px rgba(212, 175, 55, 0.3)";
+                  e.currentTarget.style.background = "rgb(63, 0, 20)";
+                  e.currentTarget.style.borderColor = "#d4af37";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = "translateY(0)";
                   e.currentTarget.style.boxShadow = "none";
+                  e.currentTarget.style.background = "rgb(43, 0, 10)";
+                  e.currentTarget.style.borderColor = "rgba(212, 175, 55, 0.2)";
                 }}
               >
                 <div style={{ display: "flex", justifyContent: "center", marginBottom: 15 }}>
@@ -215,7 +226,16 @@ export default function Home() {
                   />
                 </div>
                 <h3
-                  style={{ fontSize: 20, marginBottom: 10, color: "#c8a05d" }}
+                  style={{
+                    fontSize: 20,
+                    marginBottom: 10,
+                    background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
+                    backgroundSize: "200% 200%",
+                    WebkitBackgroundClip: "text",
+                    backgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    animation: "goldShimmer 3s linear infinite",
+                  }}
                 >
                   {feature.title}
                 </h3>
@@ -228,8 +248,10 @@ export default function Home() {
         </div>
       </section>
 
+      <SectionDivider />
+
       {/* Gallery Preview */}
-      <section className="container" style={{ padding: "80px 20px" }}>
+      <section className="container" style={{ padding: "80px 20px", background: "#1a1a1a" }}>
         <motion.div
           style={{ textAlign: "center", marginBottom: 50 }}
           initial="hidden"
@@ -237,7 +259,16 @@ export default function Home() {
           viewport={viewportConfig}
           variants={fadeInUp}
         >
-          <h2 style={{ fontSize: 42, marginBottom: 15 }}>Unsere Arbeiten</h2>
+          <h2 style={{
+            fontSize: 42,
+            marginBottom: 15,
+            background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
+            backgroundSize: "200% 200%",
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            animation: "goldShimmer 3s linear infinite",
+          }}>Unsere Arbeiten</h2>
           <p
             style={{
               fontSize: 18,
@@ -263,11 +294,15 @@ export default function Home() {
         </motion.div>
       </section>
 
+      <SectionDivider />
+
       {/* Offers Section */}
       <Offers />
 
+      <SectionDivider />
+
       {/* Style Section */}
-      <section style={{ padding: "80px 20px", background: "#0d0c0a" }}>
+      <section style={{ padding: "80px 20px", background: "#1a1a1a" }}>
         <div className="container">
           <motion.div
             style={{ textAlign: "center", marginBottom: 50 }}
@@ -276,7 +311,16 @@ export default function Home() {
             viewport={viewportConfig}
             variants={fadeInUp}
           >
-            <h2 style={{ fontSize: 42, marginBottom: 15 }}>
+            <h2 style={{
+              fontSize: 42,
+              marginBottom: 15,
+              background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
+              backgroundSize: "200% 200%",
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              animation: "goldShimmer 3s linear infinite",
+            }}>
               Unsere Stilrichtungen
             </h2>
             <p
@@ -318,40 +362,58 @@ export default function Home() {
               <motion.div
                 key={i}
                 style={{
-                  background: "#1b1816",
+                  background: "rgb(43, 0, 10)",
                   padding: 20,
                   borderRadius: 10,
                   textAlign: "center",
-                  border: "2px solid transparent",
+                  border: "2px solid rgba(212, 175, 55, 0.3)",
                   transition: "all 0.3s ease",
                   cursor: "pointer",
                 }}
                 variants={staggerItem}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = "#c8a05d";
+                  e.currentTarget.style.background = "rgb(63, 0, 20)";
+                  e.currentTarget.style.borderColor = "#d4af37";
                   e.currentTarget.style.transform = "scale(1.05)";
+                  e.currentTarget.style.boxShadow = "0 8px 20px rgba(212, 175, 55, 0.3)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "transparent";
+                  e.currentTarget.style.background = "rgb(43, 0, 10)";
+                  e.currentTarget.style.borderColor = "rgba(212, 175, 55, 0.3)";
                   e.currentTarget.style.transform = "scale(1)";
+                  e.currentTarget.style.boxShadow = "none";
                 }}
               >
-                <h3 style={{ fontSize: 16, color: "#fff" }}>{style}</h3>
+                <h3 style={{
+                  fontSize: 16,
+                  background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
+                  backgroundSize: "200% 200%",
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  animation: "goldShimmer 3s linear infinite",
+                }}>{style}</h3>
               </motion.div>
             ))}
           </motion.div>
         </div>
       </section>
 
+      <SectionDivider />
+
       {/* FAQ Section */}
-      <section className="container" style={{ padding: "80px 20px" }}>
+      <section className="container" style={{ padding: "80px 20px", background: "#1a1a1a" }}>
         <FAQAccordion />
       </section>
+
+      <SectionDivider />
 
       {/* CTA Section */}
       <section
         style={{
-          background: "linear-gradient(135deg, #c8a05d 0%, #8b6f3e 100%)",
+          background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
+          backgroundSize: "200% 200%",
+          animation: "goldShimmer 3s linear infinite",
           padding: "80px 20px",
           textAlign: "center",
         }}
@@ -363,7 +425,7 @@ export default function Home() {
           viewport={viewportConfig}
           variants={fadeInUp}
         >
-          <h2 style={{ fontSize: 42, marginBottom: 20 }}>
+          <h2 style={{ fontSize: 42, marginBottom: 20, color: "#1a1a1a", fontWeight: 700 }}>
             Bereit für dein Traumtattoo?
           </h2>
           <p
@@ -373,6 +435,8 @@ export default function Home() {
               maxWidth: 700,
               margin: "0 auto 35px",
               lineHeight: 1.7,
+              color: "#1a1a1a",
+              fontWeight: 500,
             }}
           >
             Kontaktiere uns jetzt für ein kostenloses Beratungsgespräch. Wir

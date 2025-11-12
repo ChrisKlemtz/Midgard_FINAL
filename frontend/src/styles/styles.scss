@@ -1,10 +1,17 @@
 // Farben
 $anthrazit: #1a1a1a;
 $darkgray: #505050;
-$accent-gradient-start: #E9DBBD;
-$accent-gradient-mid: #CBB682;
-$accent-gradient-end: #785F37;
-$gold-gradient: linear-gradient(90deg, $accent-gradient-start, $accent-gradient-mid, $accent-gradient-end);
+$bordeaux: rgb(43, 0, 10);
+$bordeaux-light: rgb(63, 0, 20);
+
+// Gold Gradient mit Shimmer-Effekt
+$accent-gradient-start: #f4e5c2;
+$accent-gradient-mid: #d4af37;
+$accent-gradient-end: #f4e5c2;
+$gold-gradient: linear-gradient(135deg, $accent-gradient-start 0%, $accent-gradient-mid 25%, $accent-gradient-start 50%, $accent-gradient-mid 75%, $accent-gradient-start 100%);
+$gold-color: #c8a05d;
+$gold-dark: #d4af37;
+$gold-light: #f4e5c2;
 
 * { box-sizing: border-box; }
 html,body,#root { height: 100%; }
@@ -33,11 +40,12 @@ a { color: inherit; text-decoration: none; }
   justify-content:space-between;
   align-items:center;
   padding: 1rem 2rem;
-  background: transparent;
+  background: rgba(43, 0, 10, 0.95);
+  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.2);
   transition: background 200ms ease, box-shadow 200ms ease;
   &.scrolled {
-    background: rgba(26,26,26,0.95);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+    background: rgba(43, 0, 10, 0.98);
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
   }
 }
 .logo {
@@ -60,13 +68,26 @@ a { color: inherit; text-decoration: none; }
   border-radius: 12px;
   padding: 0.6rem 1rem;
   font-weight:600;
-  border: none;
+  border: 2px solid transparent;
   cursor:pointer;
   background: $gold-gradient;
-  background-size: 200% 100%;
-  transition: background-position 300ms ease, transform 150ms ease;
+  background-size: 200% 200%;
+  color: #1a1a1a;
+  transition: all 300ms ease;
+  animation: goldShimmer 3s linear infinite;
+  position: relative;
+  overflow: hidden;
 }
-.btn:hover { transform: translateY(-2px); background-position: 100% 0; }
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+}
+
+@keyframes goldShimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
 /* Layout containers */
 .container {
@@ -217,10 +238,18 @@ a { color: inherit; text-decoration: none; }
   }
 }
 .card {
-  background: rgba(0,0,0,0.3);
+  background: $bordeaux;
   border-radius: 12px;
   overflow: hidden;
   position: relative;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  background: $bordeaux-light;
+  border-color: $gold-dark;
+  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
 }
 
 /* Footer */
@@ -246,17 +275,22 @@ a { color: inherit; text-decoration: none; }
     padding: 0.5rem 1rem;
     border-radius: 8px;
     transition: all 0.3s ease;
+    background: transparent;
+    border: 2px solid transparent;
 
     // Hover: verschwommener Schatten
     &:hover {
-      background: rgba(200, 160, 93, 0.08);
-      box-shadow: 0 0 8px 0px rgba(200, 160, 93, 0.2);
+      background: rgba(212, 175, 55, 0.1);
+      box-shadow: 0 0 12px 2px rgba(212, 175, 55, 0.3);
     }
 
-    // Active: goldener Rahmen
+    // Active: goldener Gradient-Rahmen
     &.active {
-      border: 2px solid #c8a05d;
-      background: rgba(200, 160, 93, 0.1);
+      border-image: $gold-gradient 1;
+      border-image-slice: 1;
+      background: rgba(212, 175, 55, 0.15);
+      animation: goldShimmer 3s linear infinite;
+      background-size: 200% 200%;
     }
   }
 }
@@ -303,7 +337,7 @@ a { color: inherit; text-decoration: none; }
   right: -100%;
   width: 280px;
   height: 100vh;
-  background: rgba(26, 26, 26, 0.98);
+  background: rgba(43, 0, 10, 0.98);
   backdrop-filter: blur(10px);
   padding: 80px 2rem 2rem;
   display: flex;
@@ -311,7 +345,7 @@ a { color: inherit; text-decoration: none; }
   gap: 1.5rem;
   z-index: 55;
   transition: right 0.3s ease;
-  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.5);
+  box-shadow: -4px 0 20px rgba(212, 175, 55, 0.3);
 
   &.open {
     right: 0;
@@ -321,22 +355,23 @@ a { color: inherit; text-decoration: none; }
     font-size: 1.1rem;
     font-weight: 500;
     padding: 0.75rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
     transition: all 0.2s ease;
     border-left: 3px solid transparent;
     padding-left: 0.5rem;
 
     &:hover {
-      color: #c8a05d;
+      color: $gold-light;
       padding-left: 1rem;
-      background: rgba(200, 160, 93, 0.1);
+      background: rgba(212, 175, 55, 0.15);
     }
 
     &.active {
-      color: #c8a05d;
-      border-left: 3px solid #c8a05d;
-      background: rgba(200, 160, 93, 0.15);
+      color: $gold-light;
+      border-left: 3px solid $gold-dark;
+      background: rgba(212, 175, 55, 0.2);
       padding-left: 1rem;
+      box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.2);
     }
   }
 

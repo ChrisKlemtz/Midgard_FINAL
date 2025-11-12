@@ -117,26 +117,31 @@ export default function Offers() {
     <motion.div
       key={offer._id}
       style={{
-        background: "#1b1816",
+        background: "rgb(43, 0, 10)",
         borderRadius: 16,
         padding: 30,
-        transition: "transform 0.3s ease, box-shadow 0.3s ease",
+        transition: "transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease",
         cursor: isMobile ? "default" : "pointer",
         position: "relative",
         overflow: "hidden",
+        border: "1px solid rgba(212, 175, 55, 0.2)",
       }}
       variants={staggerItem}
       onMouseEnter={(e) => {
         if (!isMobile) {
           e.currentTarget.style.transform = "translateY(-8px)";
           e.currentTarget.style.boxShadow =
-            "0 15px 35px rgba(200,160,93,0.3)";
+            "0 15px 35px rgba(212, 175, 55, 0.3)";
+          e.currentTarget.style.background = "rgb(63, 0, 20)";
+          e.currentTarget.style.borderColor = "#d4af37";
         }
       }}
       onMouseLeave={(e) => {
         if (!isMobile) {
           e.currentTarget.style.transform = "translateY(0)";
           e.currentTarget.style.boxShadow = "none";
+          e.currentTarget.style.background = "rgb(43, 0, 10)";
+          e.currentTarget.style.borderColor = "rgba(212, 175, 55, 0.2)";
         }
       }}
     >
@@ -183,19 +188,31 @@ export default function Offers() {
         style={{
           display: "inline-block",
           padding: "6px 12px",
-          background: "#c8a05d",
+          background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
+          backgroundSize: "200% 200%",
+          animation: "goldShimmer 3s linear infinite",
           borderRadius: 6,
           fontSize: 11,
           fontWeight: 700,
           textTransform: "uppercase",
           letterSpacing: 1,
           marginBottom: 15,
+          color: "#1a1a1a",
         }}
       >
         {offer.category}
       </div>
 
-      <h3 style={{ fontSize: 24, marginBottom: 12 }}>{offer.title}</h3>
+      <h3 style={{
+        fontSize: 24,
+        marginBottom: 12,
+        background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
+        backgroundSize: "200% 200%",
+        WebkitBackgroundClip: "text",
+        backgroundClip: "text",
+        WebkitTextFillColor: "transparent",
+        animation: "goldShimmer 3s linear infinite",
+      }}>{offer.title}</h3>
 
       <p
         style={{
@@ -237,7 +254,7 @@ export default function Offers() {
   );
 
   return (
-    <section style={{ padding: "80px 20px" }}>
+    <section style={{ padding: "80px 20px", background: "#1a1a1a" }}>
       <div className="container">
         <motion.div
           style={{ textAlign: "center", marginBottom: 60 }}
@@ -246,7 +263,16 @@ export default function Offers() {
           viewport={viewportConfig}
           variants={fadeInUp}
         >
-          <h2 style={{ fontSize: 42, marginBottom: 20 }}>Unsere Leistungen</h2>
+          <h2 style={{
+            fontSize: 42,
+            marginBottom: 20,
+            background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
+            backgroundSize: "200% 200%",
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            animation: "goldShimmer 3s linear infinite",
+          }}>Unsere Leistungen</h2>
           <p
             style={{
               fontSize: 18,
@@ -483,7 +509,9 @@ export default function Offers() {
           style={{
             marginTop: 60,
             padding: 40,
-            background: "linear-gradient(135deg, #c8a05d 0%, #8b6f3e 100%)",
+            background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
+            backgroundSize: "200% 200%",
+            animation: "goldShimmer 3s linear infinite",
             borderRadius: 16,
             textAlign: "center",
             maxWidth: 800,
@@ -494,13 +522,13 @@ export default function Offers() {
           viewport={viewportConfig}
           variants={fadeInUp}
         >
-          <h3 style={{ fontSize: 26, marginBottom: 15 }}>💬 Beratung & Preise</h3>
-          <p style={{ lineHeight: 1.7, fontSize: 15, marginBottom: 10 }}>
+          <h3 style={{ fontSize: 26, marginBottom: 15, color: "#1a1a1a", fontWeight: 700 }}>💬 Beratung & Preise</h3>
+          <p style={{ lineHeight: 1.7, fontSize: 15, marginBottom: 10, color: "#1a1a1a", fontWeight: 500 }}>
             Jedes Tattoo ist einzigartig - daher erstellen wir dir nach einem
             kostenlosen Beratungsgespräch ein individuelles Angebot. Der Preis
             richtet sich nach Größe, Komplexität und Zeitaufwand deines Projekts.
           </p>
-          <p style={{ fontSize: 14, opacity: 0.9, marginTop: 15 }}>
+          <p style={{ fontSize: 14, marginTop: 15, color: "#1a1a1a", fontWeight: 500 }}>
             📞 Kontaktiere uns für dein persönliches Angebot!
           </p>
         </motion.div>
