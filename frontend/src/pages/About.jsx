@@ -9,9 +9,10 @@ export default function About() {
     <main>
       {/* Hero Section */}
       <section
+        className="hero-section"
         style={{
           background: "linear-gradient(135deg, #1b1816 0%, #0d0c0a 100%)",
-          padding: "120px 20px 80px",
+          padding: "140px 20px 92px",
           textAlign: "center",
         }}
       >
@@ -20,6 +21,7 @@ export default function About() {
           initial="hidden"
           animate="visible"
           variants={fadeInUp}
+          style={{ marginTop: "30px" }}
         >
           <h1 style={{ fontSize: 52, marginBottom: 20 }}>
             Über Midgard Tattoo

@@ -73,7 +73,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main>
+    <main className="home-page">
       {/* Hero Section */}
       <section
         className="hero"
@@ -419,7 +419,11 @@ export default function Home() {
             viewport={viewportConfig}
             variants={fadeInUp}
           >
-            <Link to="/galerie" className="btn" style={{ padding: "12px 30px" }}>
+            <Link
+              to="/galerie"
+              className="btn"
+              style={{ padding: "12px 30px" }}
+            >
               Komplette Galerie ansehen →
             </Link>
           </motion.div>

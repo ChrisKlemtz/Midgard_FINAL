@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -18,10 +18,64 @@ export default function App() {
   const [contactOpen, setContactOpen] = useState(false);
   const location = useLocation();
 
-  // Scroll nach oben bei jedem Seitenwechsel
+  // Scroll-Restoration auf manuell setzen - SOFORT beim Mount
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location.pathname]);
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+  }, []);
+
+  // ULTRA-AGGRESSIVE Scroll-Lösung
+  useLayoutEffect(() => {
+    // Sofortiges Scrollen ALLER möglichen Scroll-Container
+    const scrollToTop = () => {
+      window.scrollTo(0, 0);
+      window.scroll(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      document.querySelector('html').scrollTop = 0;
+
+      // Alle möglichen scrollbaren Elemente
+      const scrollableElements = document.querySelectorAll('*');
+      scrollableElements.forEach(el => {
+        if (el.scrollTop > 0) {
+          el.scrollTop = 0;
+        }
+      });
+    };
+
+    // Sofort ausführen
+    scrollToTop();
+  }, [location.pathname, location.key]);
+
+  useEffect(() => {
+    const scrollToTop = () => {
+      window.scrollTo(0, 0);
+      window.scroll(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      document.querySelector('html').scrollTop = 0;
+    };
+
+    // Nach Rendering
+    scrollToTop();
+
+    // Im nächsten Frame
+    requestAnimationFrame(() => {
+      scrollToTop();
+    });
+
+    // Nach kurzer Verzögerung
+    const timer1 = setTimeout(scrollToTop, 0);
+    const timer2 = setTimeout(scrollToTop, 10);
+    const timer3 = setTimeout(scrollToTop, 50);
+
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+      clearTimeout(timer3);
+    };
+  }, [location.pathname, location.key]);
 
   return (
     <div className="app">

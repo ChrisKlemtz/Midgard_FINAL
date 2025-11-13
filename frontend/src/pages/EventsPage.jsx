@@ -43,7 +43,7 @@ export default function EventsPage() {
   return (
     <section className="container" style={{ padding: "100px 20px" }}>
       <motion.div
-        style={{ textAlign: "center", marginBottom: 60 }}
+        style={{ textAlign: "center", marginBottom: 60, marginTop: "50px" }}
         initial="hidden"
         animate="visible"
         variants={fadeInUp}

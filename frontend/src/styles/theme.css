@@ -139,3 +139,24 @@ body {
   border-color: var(--gold-dark);
   box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
 }
+
+/* Hero Section Layout - content centered with equal spacing */
+.hero-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+
+/* Responsive Section Divider Padding */
+@media (max-width: 1024px) {
+  .section-divider-wrapper {
+    padding: 40px 20px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-divider-wrapper {
+    padding: 30px 20px !important;
+  }
+}

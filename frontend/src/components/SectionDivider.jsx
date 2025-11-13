@@ -3,7 +3,16 @@ import { motion } from "framer-motion";
 
 export default function SectionDivider() {
   return (
-    <div style={{ padding: "100px 20px", background: "transparent", overflow: "hidden", width: "100%", maxWidth: "100vw" }}>
+    <div
+      className="section-divider-wrapper"
+      style={{
+        padding: "100px 20px",
+        background: "transparent",
+        overflow: "hidden",
+        width: "100%",
+        maxWidth: "100vw",
+      }}
+    >
       <motion.div
         style={{
           position: "relative",

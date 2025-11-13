@@ -8,9 +8,10 @@ export default function GaleriePage() {
     <main>
       {/* Hero Section */}
       <section
+        className="hero-section"
         style={{
           background: "linear-gradient(135deg, #1b1816 0%, #0d0c0a 100%)",
-          padding: "120px 20px 60px",
+          padding: "140px 20px 92px",
           textAlign: "center",
         }}
       >
@@ -19,6 +20,7 @@ export default function GaleriePage() {
           initial="hidden"
           animate="visible"
           variants={fadeInUp}
+          style={{ marginTop: "30px" }}
         >
           <h1 style={{ fontSize: 48, marginBottom: 20 }}>Tattoo Galerie</h1>
           <p
