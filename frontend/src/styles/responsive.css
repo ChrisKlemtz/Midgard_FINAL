@@ -347,7 +347,28 @@
 
 /* Filter Buttons Responsive */
 @media (max-width: 640px) {
-  div[style*="justifyContent: center"][style*="flexWrap: wrap"] button {
+  /* Zertifikate-Seite: 2-spaltiges Grid für Category Filter */
+  .category-filter {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 12px !important;
+    padding: 0 10px !important;
+  }
+
+  .category-filter button {
+    padding: 16px 12px !important;
+    border-radius: 12px !important;
+    min-height: 60px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    font-size: 14px !important;
+    line-height: 1.3 !important;
+  }
+
+  /* Fallback für andere Filter Buttons */
+  div[style*="justifyContent: center"][style*="flexWrap: wrap"]:not(.category-filter) button {
     flex: 1 1 auto;
     min-width: 100px;
   }
@@ -425,6 +446,11 @@
   [style*="margin-top: 80px"] {
     margin-top: 50px !important;
   }
+
+  /* Reduzierter Abstand für "Keine Events" Box */
+  div[style*="marginBottom: 60"][style*="textAlign: center"][style*="padding: 40"] {
+    margin-bottom: 20px !important;
+  }
 }
 
 @media (max-width: 480px) {
@@ -441,6 +467,11 @@
   [style*="marginTop: 80px"],
   [style*="margin-top: 80px"] {
     margin-top: 40px !important;
+  }
+
+  /* Noch kleinerer Abstand für "Keine Events" Box auf sehr kleinen Bildschirmen */
+  div[style*="marginBottom: 60"][style*="textAlign: center"][style*="padding: 40"] {
+    margin-bottom: 10px !important;
   }
 }
 
@@ -461,10 +492,17 @@
 }
 
 /* Footer Responsive */
+@media (max-width: 768px) {
+  .footer {
+    margin-top: 40px !important; /* Überschreibt margin-top: auto */
+  }
+}
+
 @media (max-width: 640px) {
   .footer {
     padding: 1.5rem 0 !important;
     font-size: 0.9rem;
+    margin-top: 30px !important; /* Reduzierter Abstand auf Mobile */
   }
 
   .footer p {

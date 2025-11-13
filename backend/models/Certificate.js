@@ -9,7 +9,7 @@ const CertificateSchema = new Schema({
   imageUrl: String,
   category: {
     type: String,
-    enum: ["Hygiene", "Ausbildung", "Qualifikation", "Sonstiges"],
+    enum: ["Hygiene", "Ausbildung", "Qualifikation", "Convention Preise", "Sonstiges"],
     default: "Hygiene",
   },
   active: { type: Boolean, default: true },

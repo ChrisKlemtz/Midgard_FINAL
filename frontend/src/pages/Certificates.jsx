@@ -6,15 +6,41 @@ import glovesIcon from "../assets/icons/gloves-svgrepo-com.svg";
 import badgeIcon from "../assets/icons/badge_icon.svg";
 import bandageIcon from "../assets/icons/bandage-svgrepo-com.svg";
 import cautionIcon from "../assets/icons/caution_icon.svg";
+import "../styles/hygiene-cards.css";
 
 export default function Certificates() {
   const [certificates, setCertificates] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("Alle");
+  const [expandedCard, setExpandedCard] = useState(null);
 
   useEffect(() => {
     loadCertificates();
   }, []);
+
+  // Schließe expandierte Karte beim Scrollen
+  useEffect(() => {
+    const handleScroll = () => {
+      if (expandedCard !== null) {
+        setExpandedCard(null);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [expandedCard]);
+
+  // Schließe expandierte Karte bei Klick außerhalb
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (expandedCard !== null && !e.target.closest(".hygiene-card")) {
+        setExpandedCard(null);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, [expandedCard]);
 
   async function loadCertificates() {
     try {
@@ -34,6 +60,7 @@ export default function Certificates() {
     "Hygiene",
     "Ausbildung",
     "Qualifikation",
+    "Convention Preise",
     "Sonstiges",
   ];
   const filteredCertificates =
@@ -55,13 +82,13 @@ export default function Certificates() {
   return (
     <section className="container" style={{ padding: "100px 20px" }}>
       <motion.div
-        style={{ textAlign: "center", marginBottom: 60, marginTop: "50px" }}
+        style={{ textAlign: "center", marginBottom: 30, marginTop: "50px" }}
         initial="hidden"
         animate="visible"
         variants={fadeInUp}
       >
         <h1 style={{ fontSize: 48, marginBottom: 20 }}>
-          Zertifikate & Hygiene
+          Zertifikate
         </h1>
         <p
           style={{
@@ -73,8 +100,8 @@ export default function Certificates() {
           }}
         >
           Deine Sicherheit und Gesundheit haben für uns höchste Priorität. Hier
-          findest du unsere Hygiene-Zertifikate, Ausbildungsnachweise und
-          Qualifikationen.
+          findest du unsere Hygiene-Zertifikate, Ausbildungsnachweise,
+          Qualifikationen sowie unsere Convention-Preise.
         </p>
       </motion.div>
 
@@ -125,6 +152,7 @@ export default function Certificates() {
 
       {/* Category Filter */}
       <div
+        className="category-filter"
         style={{
           display: "flex",
           justifyContent: "center",
@@ -295,6 +323,7 @@ export default function Certificates() {
           Unsere Hygienestandards
         </motion.h2>
         <motion.div
+          className="hygiene-standards-container"
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
@@ -305,71 +334,67 @@ export default function Certificates() {
           viewport={viewportConfig}
           variants={staggerContainer}
         >
-          <motion.div
-            style={{
-              background: "#1b1816",
-              padding: 30,
-              borderRadius: 12,
-              textAlign: "center",
-            }}
-            variants={staggerItem}
-          >
-            <div style={{ marginBottom: 15, display: "flex", justifyContent: "center" }}>
-              <img
-                src={glovesIcon}
-                alt="Einwegmaterialien"
-                style={{ width: 48, height: 48, filter: "invert(68%) sepia(37%) saturate(421%) hue-rotate(3deg) brightness(92%) contrast(87%)" }}
-              />
-            </div>
-            <h3 style={{ fontSize: 20, marginBottom: 10 }}>Einwegmaterialien</h3>
-            <p style={{ color: "#ccc", lineHeight: 1.6 }}>
-              Nadeln, Handschuhe und Tücher werden nur einmal verwendet
-            </p>
-          </motion.div>
-          <motion.div
-            style={{
-              background: "#1b1816",
-              padding: 30,
-              borderRadius: 12,
-              textAlign: "center",
-            }}
-            variants={staggerItem}
-          >
-            <div style={{ marginBottom: 15, display: "flex", justifyContent: "center" }}>
-              <img
-                src={badgeIcon}
-                alt="Zertifiziert"
-                style={{ width: 48, height: 48, filter: "invert(68%) sepia(37%) saturate(421%) hue-rotate(3deg) brightness(92%) contrast(87%)" }}
-              />
-            </div>
-            <h3 style={{ fontSize: 20, marginBottom: 10 }}>Zertifiziert</h3>
-            <p style={{ color: "#ccc", lineHeight: 1.6 }}>
-              Regelmäßige Schulungen und behördliche Kontrollen
-            </p>
-          </motion.div>
-          <motion.div
-            style={{
-              background: "#1b1816",
-              padding: 30,
-              borderRadius: 12,
-              textAlign: "center",
-            }}
-            variants={staggerItem}
-          >
-            <div style={{ marginBottom: 15, display: "flex", justifyContent: "center" }}>
-              <img
-                src={bandageIcon}
-                alt="Medizinischer Standard"
-                style={{ width: 48, height: 48, filter: "invert(68%) sepia(37%) saturate(421%) hue-rotate(3deg) brightness(92%) contrast(87%)" }}
-              />
-            </div>
-            <h3 style={{ fontSize: 20, marginBottom: 10 }}>
-              Medizinischer Standard
-            </h3>
-            <p style={{ color: "#ccc", lineHeight: 1.6 }}>
-              Wir arbeiten nach medizinischen Hygienerichtlinien
-            </p>
-          </motion.div>
+          {[
+            {
+              id: 0,
+              icon: glovesIcon,
+              title: "Einwegmaterialien",
+              text: "Nadeln, Handschuhe und Tücher werden nur einmal verwendet",
+              alt: "Einwegmaterialien",
+            },
+            {
+              id: 1,
+              icon: badgeIcon,
+              title: "Zertifiziert",
+              text: "Regelmäßige Schulungen und behördliche Kontrollen",
+              alt: "Zertifiziert",
+            },
+            {
+              id: 2,
+              icon: bandageIcon,
+              title: "Medizinischer Standard",
+              text: "Wir arbeiten nach medizinischen Hygienerichtlinien",
+              alt: "Medizinischer Standard",
+            },
+          ].map((card) => (
+            <motion.div
+              key={card.id}
+              className={`hygiene-card ${expandedCard === card.id ? "expanded" : ""}`}
+              style={{
+                background: "#1b1816",
+                padding: 30,
+                borderRadius: 12,
+                textAlign: "center",
+                cursor: "pointer",
+                position: "relative",
+                overflow: "hidden",
+              }}
+              variants={staggerItem}
+              onClick={() => setExpandedCard(expandedCard === card.id ? null : card.id)}
+            >
+              <div
+                className="card-icon"
+                style={{ marginBottom: 15, display: "flex", justifyContent: "center" }}
+              >
+                <img
+                  src={card.icon}
+                  alt={card.alt}
+                  style={{
+                    width: 48,
+                    height: 48,
+                    filter:
+                      "invert(68%) sepia(37%) saturate(421%) hue-rotate(3deg) brightness(92%) contrast(87%)",
+                  }}
+                />
+              </div>
+              <h3 className="card-title" style={{ fontSize: 20, marginBottom: 10 }}>
+                {card.title}
+              </h3>
+              <p className="card-text" style={{ color: "#ccc", lineHeight: 1.6 }}>
+                {card.text}
+              </p>
+            </motion.div>
+          ))}
         </motion.div>
       </div>
     </section>

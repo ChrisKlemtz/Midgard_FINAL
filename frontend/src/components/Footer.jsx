@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="container">
         <p>Midgard Tattoo Studio — nordisch. echt. hochwertig.</p>
         <p>
-          <Link to="/impressum">Impressum</Link> · <Link to="/certificates">Zertifikate & Hygiene</Link>
+          <Link to="/impressum">Impressum</Link> · <Link to="/certificates">Zertifikate</Link>
         </p>
         <small>© {new Date().getFullYear()} Midgard Tattoo</small>
       </div>

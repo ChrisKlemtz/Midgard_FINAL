@@ -66,7 +66,7 @@ export default function Header({ onOpenContact }) {
           to="/certificates"
           className={`nav-link ${location.pathname === "/certificates" ? "active" : ""}`}
         >
-          Hygiene
+          Zertifikate
         </Link>
         <button className="btn" onClick={onOpenContact}>
           Kontakt
@@ -90,7 +90,7 @@ export default function Header({ onOpenContact }) {
         <Link to="/galerie">Galerie</Link>
         <Link to="/about">About</Link>
         <Link to="/events">Events</Link>
-        <Link to="/certificates">Hygiene</Link>
+        <Link to="/certificates">Zertifikate</Link>
         <button className="btn" onClick={handleContactClick}>
           Kontakt
         </button>
