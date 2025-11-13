@@ -3,15 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 import logo from "../assets/logo/midgard_logo_main.svg";
 
 export default function Header({ onOpenContact }) {
-  const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   // Schließe Mobile-Menü bei Route-Wechsel
   useEffect(() => {
@@ -36,7 +29,7 @@ export default function Header({ onOpenContact }) {
   };
 
   return (
-    <header className={`header ${scrolled ? "scrolled" : ""}`}>
+    <header className="header">
       <div className="logo">
         <Link to="/">
           <img src={logo} alt="Midgard Tattoo" />

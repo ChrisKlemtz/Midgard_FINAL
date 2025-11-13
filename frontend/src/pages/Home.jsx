@@ -13,6 +13,53 @@ import whatsappChatIcon from "../assets/icons/whatsapp_chat_icon.svg";
 import logo from "../assets/logo/midgard_logo_main.svg";
 
 export default function Home() {
+  const [selectedStyles, setSelectedStyles] = React.useState([]);
+  const cardRefs = React.useRef({});
+
+  const styleDescriptions = {
+    "Traditional": "Klassische Tattoo-Kunst mit kräftigen Linien und lebendigen Farben. Der zeitlose Old-School-Stil mit ikonischen Motiven.",
+    "New School": "Moderne Interpretation des Traditional-Stils mit übertriebenen Proportionen, leuchtenden Farben und Comic-Elementen.",
+    "Realismus": "Fotorealistische Darstellungen mit beeindruckenden Details und naturgetreuen Schattierungen.",
+    "Cover-ups": "Professionelle Überdeckung alter Tattoos mit neuen, kunstvollen Designs, die perfekt an deine Wünsche angepasst werden.",
+    "Geometric": "Präzise geometrische Muster und Formen, die Symmetrie und mathematische Schönheit vereinen.",
+    "Mandala": "Spirituelle und meditative Designs mit komplexen, symmetrischen Mustern und detailreichen Ornamenten.",
+    "Portraits": "Lebensechte Porträts von Menschen oder Tieren mit meisterhafter Detailgenauigkeit und emotionaler Tiefe.",
+    "Fine Line": "Filigrane und minimalistische Designs mit hauchdünnen Linien für dezente und elegante Tattoos."
+  };
+
+  const toggleStyle = (style) => {
+    setSelectedStyles(prev =>
+      prev.includes(style)
+        ? prev.filter(s => s !== style)
+        : [...prev, style]
+    );
+  };
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            const style = entry.target.dataset.style;
+            if (style && selectedStyles.includes(style)) {
+              setSelectedStyles(prev => prev.filter(s => s !== style));
+            }
+          }
+        });
+      },
+      {
+        threshold: 0,
+        rootMargin: '-10px'
+      }
+    );
+
+    Object.values(cardRefs.current).forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => observer.disconnect();
+  }, [selectedStyles]);
+
   return (
     <main>
       {/* Hero Section */}
@@ -140,6 +187,83 @@ export default function Home() {
               </svg>
               Termin via WhatsApp
             </motion.a>
+          </motion.div>
+        </motion.div>
+
+        {/* Scroll Indicator */}
+        <motion.div
+          style={{
+            position: "absolute",
+            bottom: "40px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "10px",
+            zIndex: 2,
+          }}
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1, duration: 0.8 }}
+        >
+          <motion.div
+            style={{
+              fontSize: "14px",
+              fontWeight: 500,
+              background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
+              backgroundSize: "200% 200%",
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              animation: "goldShimmer 3s linear infinite",
+              letterSpacing: "0.5px",
+            }}
+          >
+            Scroll
+          </motion.div>
+          <motion.div
+            animate={{
+              y: [0, 10, 0],
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            style={{
+              width: "30px",
+              height: "50px",
+              border: "2px solid #d4af37",
+              borderRadius: "15px",
+              position: "relative",
+              boxShadow: "0 0 15px rgba(212, 175, 55, 0.3)",
+            }}
+          >
+            <motion.div
+              animate={{
+                y: [0, 15, 0],
+                opacity: [1, 0.3, 1],
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              style={{
+                position: "absolute",
+                top: "8px",
+                left: "50%",
+                transform: "translateX(-50%)",
+                width: "6px",
+                height: "10px",
+                background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
+                backgroundSize: "200% 200%",
+                borderRadius: "3px",
+                animation: "goldShimmer 3s linear infinite",
+                boxShadow: "0 0 10px rgba(212, 175, 55, 0.5)",
+              }}
+            />
           </motion.div>
         </motion.div>
       </section>
@@ -352,48 +476,93 @@ export default function Home() {
               "Traditional",
               "New School",
               "Realismus",
-              "Fine Line",
-              "Blackwork",
-              "Nordische Motive",
-              "Portraits",
               "Cover-ups",
-            ].map((style, i) => (
-              <motion.div
-                key={i}
-                style={{
-                  background: "rgb(30, 0, 7)",
-                  padding: 20,
-                  borderRadius: 10,
-                  textAlign: "center",
-                  border: "2px solid rgba(212, 175, 55, 0.3)",
-                  transition: "all 0.3s ease",
-                  cursor: "pointer",
-                }}
-                variants={staggerItem}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "rgb(43, 0, 10)";
-                  e.currentTarget.style.borderColor = "#d4af37";
-                  e.currentTarget.style.transform = "scale(1.05)";
-                  e.currentTarget.style.boxShadow = "0 8px 20px rgba(212, 175, 55, 0.3)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "rgb(30, 0, 7)";
-                  e.currentTarget.style.borderColor = "rgba(212, 175, 55, 0.3)";
-                  e.currentTarget.style.transform = "scale(1)";
-                  e.currentTarget.style.boxShadow = "none";
-                }}
-              >
-                <h3 style={{
-                  fontSize: 16,
-                  background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
-                  backgroundSize: "200% 200%",
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  animation: "goldShimmer 3s linear infinite",
-                }}>{style}</h3>
-              </motion.div>
-            ))}
+              "Geometric",
+              "Mandala",
+              "Portraits",
+              "Fine Line",
+            ].map((style, i) => {
+              const isSelected = selectedStyles.includes(style);
+              return (
+                <motion.div
+                  key={i}
+                  ref={(el) => (cardRefs.current[style] = el)}
+                  data-style={style}
+                  style={{
+                    position: "relative",
+                  }}
+                  variants={staggerItem}
+                >
+                  <motion.div
+                    style={{
+                      background: isSelected ? "rgb(43, 0, 10)" : "rgb(30, 0, 7)",
+                      padding: 20,
+                      borderRadius: isSelected ? "10px 10px 0 0" : "10px",
+                      textAlign: "center",
+                      border: "2px solid " + (isSelected ? "#d4af37" : "rgba(212, 175, 55, 0.3)"),
+                      borderBottom: isSelected ? "none" : "2px solid rgba(212, 175, 55, 0.3)",
+                      transition: "all 0.3s ease",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => toggleStyle(style)}
+                    onMouseEnter={(e) => {
+                      if (!isSelected) {
+                        e.currentTarget.style.background = "rgb(43, 0, 10)";
+                        e.currentTarget.style.borderColor = "#d4af37";
+                        e.currentTarget.style.transform = "scale(1.05)";
+                        e.currentTarget.style.boxShadow = "0 8px 20px rgba(212, 175, 55, 0.3)";
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!isSelected) {
+                        e.currentTarget.style.background = "rgb(30, 0, 7)";
+                        e.currentTarget.style.borderColor = "rgba(212, 175, 55, 0.3)";
+                        e.currentTarget.style.transform = "scale(1)";
+                        e.currentTarget.style.boxShadow = "none";
+                      }
+                    }}
+                  >
+                    <h3 style={{
+                      fontSize: 16,
+                      background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
+                      backgroundSize: "200% 200%",
+                      WebkitBackgroundClip: "text",
+                      backgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                      animation: "goldShimmer 3s linear infinite",
+                    }}>{style}</h3>
+                  </motion.div>
+
+                  <motion.div
+                    initial={false}
+                    animate={{
+                      height: isSelected ? "auto" : 0,
+                      opacity: isSelected ? 1 : 0,
+                    }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    style={{
+                      overflow: "hidden",
+                      background: "rgb(43, 0, 10)",
+                      borderRadius: "0 0 10px 10px",
+                      border: isSelected ? "2px solid #d4af37" : "none",
+                      borderTop: "none",
+                    }}
+                  >
+                    {isSelected && (
+                      <div style={{
+                        padding: "15px",
+                        color: "#ccc",
+                        fontSize: 13,
+                        lineHeight: 1.6,
+                        textAlign: "left",
+                      }}>
+                        {styleDescriptions[style]}
+                      </div>
+                    )}
+                  </motion.div>
+                </motion.div>
+              );
+            })}
           </motion.div>
         </div>
       </section>
