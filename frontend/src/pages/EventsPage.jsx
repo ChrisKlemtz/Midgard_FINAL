@@ -117,11 +117,14 @@ export default function EventsPage() {
                     style={{
                       display: "inline-block",
                       padding: "6px 12px",
-                      background: "#c8a05d",
+                      background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
+                      backgroundSize: "200% 200%",
+                      animation: "goldShimmer 3s linear infinite",
                       borderRadius: 6,
                       fontSize: 12,
                       fontWeight: 700,
                       marginBottom: 15,
+                      color: "#1a1a1a",
                     }}
                   >
                     {event.type}

@@ -70,10 +70,14 @@ export default function Gallery() {
             onClick={() => setFilter(artist)}
             className="btn"
             style={{
-              background: filter === artist ? "#c8a05d" : "#1b1816",
-              border: `2px solid ${filter === artist ? "#c8a05d" : "#555"}`,
+              background: filter === artist
+                ? "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)"
+                : "#1b1816",
+              backgroundSize: "200% 200%",
+              animation: filter === artist ? "goldShimmer 3s linear infinite" : "none",
+              border: `2px solid ${filter === artist ? "#d4af37" : "#555"}`,
               padding: "10px 24px",
-              color: "#fff",
+              color: filter === artist ? "#1a1a1a" : "#fff",
               cursor: "pointer",
               fontWeight: 600,
               transition: "all 0.3s ease",
@@ -81,7 +85,7 @@ export default function Gallery() {
             }}
             onMouseEnter={(e) => {
               if (filter !== artist) {
-                e.currentTarget.style.borderColor = "#c8a05d";
+                e.currentTarget.style.borderColor = "#d4af37";
               }
             }}
             onMouseLeave={(e) => {
@@ -250,7 +254,15 @@ export default function Gallery() {
                   </h3>
                 )}
                 {selectedImage.artist && (
-                  <p style={{ color: "#c8a05d", fontSize: 14 }}>
+                  <p style={{
+                    background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
+                    backgroundSize: "200% 200%",
+                    WebkitBackgroundClip: "text",
+                    backgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    animation: "goldShimmer 3s linear infinite",
+                    fontSize: 14,
+                  }}>
                     by {selectedImage.artist}
                   </p>
                 )}

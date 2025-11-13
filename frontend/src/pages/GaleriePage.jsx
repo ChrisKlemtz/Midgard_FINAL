@@ -44,7 +44,9 @@ export default function GaleriePage() {
       {/* CTA Section */}
       <section
         style={{
-          background: "linear-gradient(135deg, #c8a05d 0%, #8b6f3e 100%)",
+          background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
+          backgroundSize: "200% 200%",
+          animation: "goldShimmer 3s linear infinite",
           padding: "60px 20px",
           textAlign: "center",
         }}

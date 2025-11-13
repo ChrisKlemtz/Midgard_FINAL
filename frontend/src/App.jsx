@@ -11,6 +11,7 @@ import Impressum from "./pages/Impressum";
 import ContactModal from "./components/ContactModal";
 import CookieBanner from "./components/CookieBanner";
 import AdminDashboard from "./components/AdminDashboard";
+import BackToTop from "./components/BackToTop";
 import "./styles/theme.css";
 
 export default function App() {
@@ -38,6 +39,7 @@ export default function App() {
       <Footer />
       <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
       <CookieBanner />
+      <BackToTop />
     </div>
   );
 }

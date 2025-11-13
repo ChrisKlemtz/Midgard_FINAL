@@ -15,6 +15,9 @@ import logo from "../assets/logo/midgard_logo_main.svg";
 export default function Home() {
   const [selectedStyles, setSelectedStyles] = React.useState([]);
   const cardRefs = React.useRef({});
+  const [isMobile, setIsMobile] = React.useState(
+    typeof window !== 'undefined' ? window.innerWidth <= 1024 : false
+  );
 
   const styleDescriptions = {
     "Traditional": "Klassische Tattoo-Kunst mit kräftigen Linien und lebendigen Farben. Der zeitlose Old-School-Stil mit ikonischen Motiven.",
@@ -59,6 +62,15 @@ export default function Home() {
 
     return () => observer.disconnect();
   }, [selectedStyles]);
+
+  React.useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 1024);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   return (
     <main>
@@ -195,76 +207,68 @@ export default function Home() {
           style={{
             position: "absolute",
             bottom: "40px",
-            left: "50%",
+            left: "calc(50% - 15px)",
             transform: "translateX(-50%)",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: "10px",
             zIndex: 2,
           }}
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1, duration: 0.8 }}
         >
-          <motion.div
-            style={{
-              fontSize: "14px",
-              fontWeight: 500,
-              background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
-              backgroundSize: "200% 200%",
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              animation: "goldShimmer 3s linear infinite",
-              letterSpacing: "0.5px",
-            }}
-          >
-            Scroll
-          </motion.div>
-          <motion.div
+          <motion.svg
+            width="40"
+            height="40"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
             animate={{
-              y: [0, 10, 0],
+              y: [0, 15, 0],
             }}
             transition={{
-              duration: 1.5,
+              duration: 1.8,
               repeat: Infinity,
               ease: "easeInOut",
             }}
             style={{
-              width: "30px",
-              height: "50px",
-              border: "2px solid #d4af37",
-              borderRadius: "15px",
-              position: "relative",
-              boxShadow: "0 0 15px rgba(212, 175, 55, 0.3)",
+              filter: "drop-shadow(0 0 15px rgba(212, 175, 55, 0.5))",
             }}
           >
-            <motion.div
-              animate={{
-                y: [0, 15, 0],
-                opacity: [1, 0.3, 1],
-              }}
-              transition={{
-                duration: 1.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              style={{
-                position: "absolute",
-                top: "8px",
-                left: "50%",
-                transform: "translateX(-50%)",
-                width: "6px",
-                height: "10px",
-                background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
-                backgroundSize: "200% 200%",
-                borderRadius: "3px",
-                animation: "goldShimmer 3s linear infinite",
-                boxShadow: "0 0 10px rgba(212, 175, 55, 0.5)",
-              }}
+            <defs>
+              <linearGradient id="arrowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#f4e5c2">
+                  <animate
+                    attributeName="stop-color"
+                    values="#f4e5c2; #d4af37; #f4e5c2"
+                    dur="3s"
+                    repeatCount="indefinite"
+                  />
+                </stop>
+                <stop offset="50%" stopColor="#d4af37">
+                  <animate
+                    attributeName="stop-color"
+                    values="#d4af37; #f4e5c2; #d4af37"
+                    dur="3s"
+                    repeatCount="indefinite"
+                  />
+                </stop>
+                <stop offset="100%" stopColor="#f4e5c2">
+                  <animate
+                    attributeName="stop-color"
+                    values="#f4e5c2; #d4af37; #f4e5c2"
+                    dur="3s"
+                    repeatCount="indefinite"
+                  />
+                </stop>
+              </linearGradient>
+            </defs>
+            <path
+              d="M12 4L12 20M12 20L18 14M12 20L6 14"
+              stroke="url(#arrowGradient)"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
-          </motion.div>
+          </motion.svg>
         </motion.div>
       </section>
 
@@ -398,21 +402,71 @@ export default function Home() {
               color: "#ccc",
               maxWidth: 600,
               margin: "0 auto",
+              display: !isMobile ? "block" : "none",
             }}
           >
             Entdecke eine Auswahl unserer neuesten Tattoo-Kunstwerke
           </p>
         </motion.div>
-        <Gallery />
+
+        {/* Desktop: Gallery Grid */}
+        <div style={{ display: !isMobile ? "block" : "none" }}>
+          <Gallery />
+          <motion.div
+            style={{ marginTop: 40, textAlign: "center" }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
+            variants={fadeInUp}
+          >
+            <Link to="/galerie" className="btn" style={{ padding: "12px 30px" }}>
+              Komplette Galerie ansehen →
+            </Link>
+          </motion.div>
+        </div>
+
+        {/* Mobile/Tablet: Circular Button */}
         <motion.div
-          style={{ marginTop: 40, textAlign: "center" }}
+          style={{
+            display: isMobile ? "flex" : "none",
+            justifyContent: "center",
+            marginTop: 20,
+          }}
           initial="hidden"
           whileInView="visible"
           viewport={viewportConfig}
           variants={fadeInUp}
         >
-          <Link to="/galerie" className="btn" style={{ padding: "12px 30px" }}>
-            Komplette Galerie ansehen →
+          <Link
+            to="/galerie"
+            style={{
+              width: "120px",
+              height: "120px",
+              borderRadius: "50%",
+              background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
+              backgroundSize: "200% 200%",
+              animation: "goldShimmer 3s linear infinite",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              textDecoration: "none",
+              fontWeight: 700,
+              fontSize: "16px",
+              color: "#1a1a1a",
+              border: "none",
+              boxShadow: "0 8px 25px rgba(212, 175, 55, 0.4)",
+              transition: "transform 0.3s ease, box-shadow 0.3s ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "scale(1.1)";
+              e.currentTarget.style.boxShadow = "0 12px 35px rgba(212, 175, 55, 0.6)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "scale(1)";
+              e.currentTarget.style.boxShadow = "0 8px 25px rgba(212, 175, 55, 0.4)";
+            }}
+          >
+            Zur Galerie
           </Link>
         </motion.div>
       </section>

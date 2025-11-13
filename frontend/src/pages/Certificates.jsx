@@ -81,7 +81,9 @@ export default function Certificates() {
       {/* Hygiene-Info Banner */}
       <motion.div
         style={{
-          background: "linear-gradient(135deg, #c8a05d 0%, #8b6f3e 100%)",
+          background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
+          backgroundSize: "200% 200%",
+          animation: "goldShimmer 3s linear infinite",
           padding: 40,
           borderRadius: 16,
           marginBottom: 50,
@@ -137,19 +139,23 @@ export default function Certificates() {
             onClick={() => setSelectedCategory(cat)}
             style={{
               padding: "12px 24px",
-              background: selectedCategory === cat ? "#c8a05d" : "#1b1816",
+              background: selectedCategory === cat
+                ? "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)"
+                : "#1b1816",
+              backgroundSize: "200% 200%",
+              animation: selectedCategory === cat ? "goldShimmer 3s linear infinite" : "none",
               border: `2px solid ${
-                selectedCategory === cat ? "#c8a05d" : "#555"
+                selectedCategory === cat ? "#d4af37" : "#555"
               }`,
               borderRadius: 25,
-              color: "#fff",
+              color: selectedCategory === cat ? "#1a1a1a" : "#fff",
               cursor: "pointer",
               fontWeight: 600,
               transition: "all 0.3s ease",
             }}
             onMouseEnter={(e) => {
               if (selectedCategory !== cat) {
-                e.currentTarget.style.borderColor = "#c8a05d";
+                e.currentTarget.style.borderColor = "#d4af37";
               }
             }}
             onMouseLeave={(e) => {
@@ -224,11 +230,14 @@ export default function Certificates() {
                   style={{
                     display: "inline-block",
                     padding: "6px 12px",
-                    background: "#c8a05d",
+                    background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
+                    backgroundSize: "200% 200%",
+                    animation: "goldShimmer 3s linear infinite",
                     borderRadius: 6,
                     fontSize: 12,
                     fontWeight: 700,
                     marginBottom: 15,
+                    color: "#1a1a1a",
                   }}
                 >
                   {cert.category}

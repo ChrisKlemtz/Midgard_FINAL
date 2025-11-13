@@ -57,7 +57,16 @@ export default function About() {
             viewport={viewportConfig}
             variants={fadeInLeft}
           >
-            <h2 style={{ fontSize: 36, marginBottom: 20, color: "#c8a05d" }}>
+            <h2 style={{
+              fontSize: 36,
+              marginBottom: 20,
+              background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
+              backgroundSize: "200% 200%",
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              animation: "goldShimmer 3s linear infinite",
+            }}>
               Unsere Geschichte
             </h2>
             <p
@@ -87,7 +96,16 @@ export default function About() {
             viewport={viewportConfig}
             variants={fadeInRight}
           >
-            <h2 style={{ fontSize: 36, marginBottom: 20, color: "#c8a05d" }}>
+            <h2 style={{
+              fontSize: 36,
+              marginBottom: 20,
+              background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
+              backgroundSize: "200% 200%",
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              animation: "goldShimmer 3s linear infinite",
+            }}>
               Unsere Philosophie
             </h2>
             <p
@@ -165,7 +183,16 @@ export default function About() {
               }
             >
               <div style={{ fontSize: 48, marginBottom: 15 }}>{value.icon}</div>
-              <h3 style={{ fontSize: 20, marginBottom: 10, color: "#c8a05d" }}>
+              <h3 style={{
+                fontSize: 20,
+                marginBottom: 10,
+                background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
+                backgroundSize: "200% 200%",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                animation: "goldShimmer 3s linear infinite",
+              }}>
                 {value.title}
               </h3>
               <p style={{ color: "#ccc", fontSize: 14, lineHeight: 1.6 }}>
@@ -187,7 +214,9 @@ export default function About() {
       {/* CTA Section */}
       <section
         style={{
-          background: "linear-gradient(135deg, #c8a05d 0%, #8b6f3e 100%)",
+          background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
+          backgroundSize: "200% 200%",
+          animation: "goldShimmer 3s linear infinite",
           padding: "60px 20px",
           textAlign: "center",
         }}
