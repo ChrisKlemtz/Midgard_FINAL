@@ -72,6 +72,29 @@ export default function Home() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
+  // Reset card hover effects on scroll (mobile only)
+  React.useEffect(() => {
+    if (!isMobile) return;
+
+    const resetCardStyles = () => {
+      const cards = document.querySelectorAll('.feature-card');
+      cards.forEach((card) => {
+        card.style.transform = "translateY(0)";
+        card.style.boxShadow = "none";
+        card.style.background = "rgb(30, 0, 7)";
+        card.style.borderColor = "rgba(212, 175, 55, 0.2)";
+      });
+    };
+
+    window.addEventListener("scroll", resetCardStyles);
+    window.addEventListener("touchmove", resetCardStyles);
+
+    return () => {
+      window.removeEventListener("scroll", resetCardStyles);
+      window.removeEventListener("touchmove", resetCardStyles);
+    };
+  }, [isMobile]);
+
   return (
     <main className="home-page">
       {/* Hero Section */}
@@ -106,8 +129,10 @@ export default function Home() {
             variants={fadeInUp}
             style={{
               display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
               justifyContent: "center",
-              marginBottom: 50,
+              marginBottom: 80,
               marginTop: -80,
             }}
           >
@@ -118,21 +143,25 @@ export default function Home() {
                 width: "clamp(380px, 75vw, 600px)",
                 height: "auto",
                 filter: "brightness(0) invert(1) drop-shadow(2px 2px 4px rgba(0,0,0,0.5))",
+                marginBottom: 20,
               }}
             />
+            <p
+              className="subtitle"
+              style={{
+                fontSize: "clamp(16px, 2.5vw, 20px)",
+                margin: 0,
+                background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 50%, #f4e5c2 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                fontWeight: 600,
+                letterSpacing: "0.5px",
+              }}
+            >
+              Elektrische Tätowierungen seit 2008
+            </p>
           </motion.div>
-          <motion.p
-            className="subtitle"
-            style={{
-              fontSize: "clamp(18px, 3vw, 24px)",
-              marginBottom: 40,
-              color: "#c8a05d",
-              fontWeight: 600,
-            }}
-            variants={fadeInUp}
-          >
-            Nordisch. Edel. Hygienisch. — Dein Tattoo-Erlebnis.
-          </motion.p>
           <motion.div
             style={{
               display: "flex",
@@ -317,6 +346,7 @@ export default function Home() {
             ].map((feature, i) => (
               <motion.div
                 key={i}
+                className="feature-card"
                 style={{
                   background: "rgb(30, 0, 7)",
                   padding: 30,
