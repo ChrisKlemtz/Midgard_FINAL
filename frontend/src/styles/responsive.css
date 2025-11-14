@@ -271,7 +271,7 @@
 
   /* Scroll indicator nach oben verschieben auf Homepage */
   .home-page .hero > div[style*="position: absolute"][style*="bottom"] {
-    bottom: 180px !important;
+    bottom: 140px !important;
   }
 }
 
