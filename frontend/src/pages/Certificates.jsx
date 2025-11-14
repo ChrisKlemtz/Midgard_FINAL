@@ -6,6 +6,7 @@ import glovesIcon from "../assets/icons/gloves-svgrepo-com.svg";
 import badgeIcon from "../assets/icons/badge_icon.svg";
 import bandageIcon from "../assets/icons/bandage-svgrepo-com.svg";
 import cautionIcon from "../assets/icons/caution_icon.svg";
+import SkeletonLoader from "../components/SkeletonLoader";
 import "../styles/hygiene-cards.css";
 
 export default function Certificates() {
@@ -67,17 +68,6 @@ export default function Certificates() {
     selectedCategory === "Alle"
       ? certificates.filter((c) => c.active)
       : certificates.filter((c) => c.category === selectedCategory && c.active);
-
-  if (loading) {
-    return (
-      <section
-        className="container"
-        style={{ padding: "100px 20px", textAlign: "center" }}
-      >
-        <h2>Lade Zertifikate...</h2>
-      </section>
-    );
-  }
 
   return (
     <section className="container" style={{ padding: "100px 20px" }}>
@@ -198,7 +188,9 @@ export default function Certificates() {
       </div>
 
       {/* Certificates Grid */}
-      {filteredCertificates.length > 0 ? (
+      {loading ? (
+        <SkeletonLoader count={6} />
+      ) : filteredCertificates.length > 0 ? (
         <motion.div
           style={{
             display: "grid",
@@ -235,6 +227,7 @@ export default function Certificates() {
                 <img
                   src={cert.imageUrl}
                   alt={cert.title}
+                  loading="lazy"
                   style={{ width: "100%", height: 250, objectFit: "cover" }}
                 />
               ) : (

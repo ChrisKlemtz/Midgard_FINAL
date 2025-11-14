@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
 import { fadeInUp, staggerContainer, staggerItem, viewportConfig } from "../utils/animations";
+import SkeletonLoader from "../components/SkeletonLoader";
 
 export default function EventsPage() {
   const [events, setEvents] = useState([]);
@@ -29,17 +30,6 @@ export default function EventsPage() {
     (e) => new Date(e.date) < new Date() && e.active
   );
 
-  if (loading) {
-    return (
-      <section
-        className="container"
-        style={{ padding: "100px 20px", textAlign: "center" }}
-      >
-        <h2>Lade Events...</h2>
-      </section>
-    );
-  }
-
   return (
     <section className="container" style={{ padding: "100px 20px" }}>
       <motion.div
@@ -62,7 +52,20 @@ export default function EventsPage() {
         </p>
       </motion.div>
 
-      {upcomingEvents.length > 0 && (
+      {loading ? (
+        <div style={{ marginBottom: 60 }}>
+          <motion.h2
+            style={{ fontSize: 36, marginBottom: 30, textAlign: "center" }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
+            variants={fadeInUp}
+          >
+            Kommende Events
+          </motion.h2>
+          <SkeletonLoader count={3} />
+        </div>
+      ) : upcomingEvents.length > 0 && (
         <div style={{ marginBottom: 60 }}>
           <motion.h2
             style={{ fontSize: 36, marginBottom: 30, textAlign: "center" }}
@@ -109,6 +112,7 @@ export default function EventsPage() {
                   <img
                     src={event.imageUrl}
                     alt={event.title}
+                    loading="lazy"
                     style={{ width: "100%", height: 200, objectFit: "cover" }}
                   />
                 )}
@@ -162,7 +166,7 @@ export default function EventsPage() {
         </div>
       )}
 
-      {upcomingEvents.length === 0 && (
+      {!loading && upcomingEvents.length === 0 && (
         <div
           style={{
             textAlign: "center",
@@ -181,7 +185,7 @@ export default function EventsPage() {
         </div>
       )}
 
-      {pastEvents.length > 0 && (
+      {!loading && pastEvents.length > 0 && (
         <div>
           <motion.h2
             style={{
@@ -223,6 +227,7 @@ export default function EventsPage() {
                   <img
                     src={event.imageUrl}
                     alt={event.title}
+                    loading="lazy"
                     style={{
                       width: "100%",
                       height: 150,

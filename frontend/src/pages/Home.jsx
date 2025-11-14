@@ -10,7 +10,7 @@ import designIcon from "../assets/icons/design_icon.svg";
 import badgeIcon from "../assets/icons/badge_icon.svg";
 import glovesIcon from "../assets/icons/gloves-svgrepo-com.svg";
 import whatsappChatIcon from "../assets/icons/whatsapp_chat_icon.svg";
-import logo from "../assets/logo/midgard_logo_main.svg";
+import logo from "../assets/logo/midgard_single_logo_main.svg";
 
 export default function Home() {
   const [selectedStyles, setSelectedStyles] = React.useState([]);
@@ -107,16 +107,17 @@ export default function Home() {
             style={{
               display: "flex",
               justifyContent: "center",
-              marginBottom: 20,
+              marginBottom: 50,
+              marginTop: -80,
             }}
           >
             <img
               src={logo}
               alt="Midgard Tattoo Studio"
               style={{
-                width: "clamp(300px, 60vw, 600px)",
+                width: "clamp(380px, 75vw, 600px)",
                 height: "auto",
-                filter: "drop-shadow(2px 2px 4px rgba(0,0,0,0.5))",
+                filter: "brightness(0) invert(1) drop-shadow(2px 2px 4px rgba(0,0,0,0.5))",
               }}
             />
           </motion.div>

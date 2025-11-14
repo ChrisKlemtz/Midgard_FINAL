@@ -247,7 +247,12 @@
   .hero {
     min-height: 100vh !important;
     min-height: 100dvh !important;
-    padding: 60px 16px 80px !important;
+    padding: 40px 16px 80px !important;
+  }
+
+  .hero .container {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
   }
 }
 
@@ -255,7 +260,18 @@
   .hero {
     min-height: 100vh !important;
     min-height: 100dvh !important;
-    padding: 40px 12px 80px !important;
+    padding: 30px 12px 80px !important;
+  }
+
+  .hero .container {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+
+  /* Scroll indicator nach oben verschieben auf Homepage */
+  .home-page .hero > div[style*="position: absolute"][style*="bottom"] {
+    bottom: 180px !important;
   }
 }
 
@@ -326,6 +342,22 @@
   div[style*="display: flex"][style*="gap: 12px"] button {
     width: 100% !important;
     text-align: center;
+    justify-content: center !important;
+  }
+
+  /* CTA Section Buttons - WhatsApp & Mehr über uns */
+  section[style*="background: linear-gradient"] div[style*="display: flex"] a.btn,
+  section[style*="background: linear-gradient"] div[style*="display: flex"] button.btn {
+    justify-content: center !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  /* "Mehr über uns" Button - weinrot background, weiße Schrift */
+  section[style*="background: linear-gradient"] a.btn[href="/about"] {
+    background: rgb(30, 0, 7) !important;
+    color: #ffffff !important;
+    border: 2px solid #d4af37 !important;
   }
 }
 
@@ -342,6 +374,48 @@
   .hero button.btn {
     font-size: 1rem !important;
     padding: 14px 28px !important;
+  }
+
+  /* Hero buttons schmaler in mobile Ansicht */
+  .home-page .hero a.btn[href="/galerie"],
+  .home-page .hero a.btn[href*="wa.me"] {
+    width: 240px !important;
+    max-width: 85% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* Hero Button Container zentrieren */
+  .home-page .hero > div > div[style*="flexDirection: column"] {
+    align-items: center !important;
+  }
+
+  /* WhatsApp Buttons - Gold Gradient Border */
+  a.btn[href*="wa.me"],
+  a[href*="wa.me"].btn {
+    position: relative !important;
+    padding: 3px !important;
+    background: linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%) !important;
+    background-size: 300% 300% !important;
+    animation: goldShimmer 4s ease-in-out infinite !important;
+    border: none !important;
+    isolation: isolate;
+  }
+
+  a.btn[href*="wa.me"]::before,
+  a[href*="wa.me"].btn::before {
+    content: "";
+    position: absolute;
+    inset: 3px;
+    border-radius: calc(12px - 3px);
+    background: #25D366 !important;
+    z-index: -1;
+  }
+
+  a.btn[href*="wa.me"] > *,
+  a[href*="wa.me"].btn > * {
+    position: relative;
+    z-index: 1;
   }
 }
 
@@ -371,6 +445,82 @@
   div[style*="justifyContent: center"][style*="flexWrap: wrap"]:not(.category-filter) button {
     flex: 1 1 auto;
     min-width: 100px;
+  }
+
+  /* Hygiene Banner auf Zertifikate-Seite - Mobile */
+  section.container > div[style*="background: linear-gradient"][style*="goldShimmer"] {
+    position: relative !important;
+    padding: 30px 25px !important;
+    background: linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%) !important;
+    background-size: 300% 300% !important;
+    animation: goldShimmer 4s ease-in-out infinite !important;
+  }
+
+  section.container > div[style*="background: linear-gradient"][style*="goldShimmer"]::before {
+    content: "";
+    position: absolute;
+    inset: 3px;
+    border-radius: calc(16px - 3px);
+    background: rgb(30, 0, 7) !important;
+    z-index: 0;
+    padding: 30px 25px;
+  }
+
+  section.container > div[style*="background: linear-gradient"][style*="goldShimmer"] > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  section.container > div[style*="background: linear-gradient"][style*="goldShimmer"] h2,
+  section.container > div[style*="background: linear-gradient"][style*="goldShimmer"] p {
+    color: #ffffff !important;
+  }
+
+  /* Icon Container - nur ein Icon zentriert anzeigen */
+  section.container > div[style*="background: linear-gradient"][style*="goldShimmer"] > div[style*="display: flex"] {
+    flex-direction: column !important;
+    gap: 0 !important;
+    margin-bottom: 20px !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  section.container > div[style*="background: linear-gradient"][style*="goldShimmer"] > div[style*="display: flex"] img:last-of-type {
+    display: none !important;
+  }
+
+  section.container > div[style*="background: linear-gradient"][style*="goldShimmer"] > div[style*="display: flex"] img:first-of-type {
+    margin-bottom: 15px !important;
+  }
+}
+
+/* Hygiene Banner auf Zertifikate-Seite - Tablet & Desktop */
+@media (min-width: 641px) {
+  section.container > div[style*="background: linear-gradient"][style*="goldShimmer"] {
+    position: relative !important;
+    padding: 50px 45px !important;
+    background: linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%) !important;
+    background-size: 300% 300% !important;
+    animation: goldShimmer 4s ease-in-out infinite !important;
+  }
+
+  section.container > div[style*="background: linear-gradient"][style*="goldShimmer"]::before {
+    content: "";
+    position: absolute;
+    inset: 3px;
+    border-radius: calc(16px - 3px);
+    background: rgb(30, 0, 7) !important;
+    z-index: 0;
+  }
+
+  section.container > div[style*="background: linear-gradient"][style*="goldShimmer"] > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  section.container > div[style*="background: linear-gradient"][style*="goldShimmer"] h2,
+  section.container > div[style*="background: linear-gradient"][style*="goldShimmer"] p {
+    color: #ffffff !important;
   }
 }
 

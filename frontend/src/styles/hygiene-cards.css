@@ -123,6 +123,8 @@
     animation: none !important;
     flex-direction: column !important;
     background: linear-gradient(135deg, #d4af37, #f4e5c2, #d4af37, #f4e5c2) !important;
+    padding-top: 18px !important;
+    padding-bottom: 18px !important;
   }
 
   /* Goldener Border bei Expansion - transformiert sich mit */
@@ -135,11 +137,12 @@
   .hygiene-card.expanded::after {
     inset: 3px;
     border-radius: 13px;
-    padding: 30px 20px;
+    padding: 40px 20px;
   }
 
   /* Icon im expanded State */
   .hygiene-card.expanded .card-icon {
+    margin-top: 12px !important;
     margin-bottom: 15px !important;
     height: auto !important;
   }
@@ -162,6 +165,7 @@
     animation: fadeInDown 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s both;
     position: relative !important;
     z-index: 1 !important;
+    margin-bottom: 12px !important;
   }
 
   /* Wrapper für Content im expanded State */
