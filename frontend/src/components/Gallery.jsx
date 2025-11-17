@@ -10,23 +10,26 @@ export default function Gallery() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isMobile, setIsMobile] = useState(
-    typeof window !== 'undefined' ? window.innerWidth <= 1024 : false
+    typeof window !== 'undefined' ? window.innerWidth <= 768 : false
   );
 
   useEffect(() => {
     async function fetchImages() {
       try {
-        const res = await axios.get(import.meta.env.VITE_API_URL + "/gallery");
+        const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:4000/api";
+        console.log("Fetching images from:", apiUrl + "/gallery");
+        const res = await axios.get(apiUrl + "/gallery");
+        console.log("Images loaded:", res.data);
         setImages(res.data);
       } catch (e) {
-        console.error("Galerie laden:", e);
+        console.error("Galerie laden Fehler:", e);
       }
     }
     fetchImages();
 
     // Check screen size
     const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 1024);
+      setIsMobile(window.innerWidth <= 768);
     };
     checkMobile();
     window.addEventListener("resize", checkMobile);
@@ -42,7 +45,9 @@ export default function Gallery() {
     .filter((img) => (filter === "Alle" ? true : img.artist === filter))
     .slice(0, 12); // Maximal 12 Bilder (4x3)
 
-  const artists = ["Alle", "Maria", "Robert"];
+  const artists = ["Maria", "Robert", "Alle"];
+
+  console.log("Gallery render - isMobile:", isMobile, "filtered count:", filtered.length, "images count:", images.length);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % filtered.length);
@@ -101,19 +106,22 @@ export default function Gallery() {
 
       {/* Desktop: Gallery Grid */}
       {!isMobile && (
-        <motion.div
-          className="gallery-grid-4x3"
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportConfig}
-          variants={staggerContainer}
-        >
-          {filtered.map((img) => (
-            <motion.div key={img._id} variants={staggerItem}>
+        <div className="gallery-grid-4x3">
+          {filtered.map((img, index) => (
+            <motion.div
+              key={img._id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.4,
+                delay: index * 0.08,
+                ease: [0.25, 0.46, 0.45, 0.94]
+              }}
+            >
               <GalleryCard image={img} onClick={setSelectedImage} />
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       )}
 
       {/* Mobile/Tablet: Carousel */}

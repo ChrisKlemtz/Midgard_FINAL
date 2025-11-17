@@ -60,15 +60,16 @@ export default function GaleriePage() {
           viewport={viewportConfig}
           variants={fadeInUp}
         >
-          <h2 style={{ fontSize: 32, marginBottom: 15 }}>
+          <h2 style={{ fontSize: 40, marginBottom: 15, color: "#1a1a1a" }}>
             Gefällt dir, was du siehst?
           </h2>
           <p
             style={{
-              fontSize: 16,
+              fontSize: 20,
               marginBottom: 30,
               maxWidth: 600,
               margin: "0 auto 30px",
+              color: "#1a1a1a",
             }}
           >
             Lass uns gemeinsam dein individuelles Tattoo gestalten!

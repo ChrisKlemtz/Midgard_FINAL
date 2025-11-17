@@ -3,6 +3,7 @@ import React from "react";
 export default function GalleryCard({ image, onClick }) {
   return (
     <div
+      className="gallery-card"
       onClick={() => onClick && onClick(image)}
       style={{
         position: "relative",
@@ -91,11 +92,6 @@ export default function GalleryCard({ image, onClick }) {
         </div>
       </div>
 
-      <style jsx>{`
-        div:hover .gallery-card-overlay {
-          transform: translateY(0);
-        }
-      `}</style>
     </div>
   );
 }
