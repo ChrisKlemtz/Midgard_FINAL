@@ -17,9 +17,7 @@ export default function Gallery() {
     async function fetchImages() {
       try {
         const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:4000/api";
-        console.log("Fetching images from:", apiUrl + "/gallery");
         const res = await axios.get(apiUrl + "/gallery");
-        console.log("Images loaded:", res.data);
         setImages(res.data);
       } catch (e) {
         console.error("Galerie laden Fehler:", e);
@@ -46,8 +44,6 @@ export default function Gallery() {
     .slice(0, 12); // Maximal 12 Bilder (4x3)
 
   const artists = ["Maria", "Robert", "Alle"];
-
-  console.log("Gallery render - isMobile:", isMobile, "filtered count:", filtered.length, "images count:", images.length);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % filtered.length);
