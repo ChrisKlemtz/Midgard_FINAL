@@ -21,7 +21,7 @@ build
 .env.development.local
 .env.test
 .env.test.local
-# .env.production - NICHT ignorieren, wird für Vercel benötigt
+.env.production
 .env.production.local
 
 # Editor directories and files

@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Environment variables - SEHR WICHTIG!
+.env
+.env.local
+.env.production
+.env.test
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Uploads (falls lokal gespeichert)
+uploads/
+temp/
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
