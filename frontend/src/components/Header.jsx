@@ -41,30 +41,38 @@ export default function Header() {
         </Link>
         <Link
           to="/galerie"
-          className={`nav-link ${location.pathname === "/galerie" ? "active" : ""}`}
+          className={`nav-link ${
+            location.pathname === "/galerie" ? "active" : ""
+          }`}
         >
           Galerie
         </Link>
         <Link
           to="/about"
-          className={`nav-link ${location.pathname === "/about" ? "active" : ""}`}
+          className={`nav-link ${
+            location.pathname === "/about" ? "active" : ""
+          }`}
         >
           About
         </Link>
         <Link
           to="/events"
-          className={`nav-link ${location.pathname === "/events" ? "active" : ""}`}
+          className={`nav-link ${
+            location.pathname === "/events" ? "active" : ""
+          }`}
         >
           Events
         </Link>
         <Link
           to="/certificates"
-          className={`nav-link ${location.pathname === "/certificates" ? "active" : ""}`}
+          className={`nav-link ${
+            location.pathname === "/certificates" ? "active" : ""
+          }`}
         >
           Zertifikate
         </Link>
         <a
-          href="https://wa.me/4917647353933"
+          href="https://wa.me/4917624752736"
           className="btn"
           target="_blank"
           rel="noopener noreferrer"
