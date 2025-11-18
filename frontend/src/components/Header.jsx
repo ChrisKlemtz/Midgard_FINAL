@@ -114,7 +114,7 @@ export default function Header() {
         <Link to="/events">Events</Link>
         <Link to="/certificates">Zertifikate</Link>
         <a
-          href="https://wa.me/4917647353933"
+          href="https://wa.me/4917624752736"
           className="btn"
           target="_blank"
           rel="noopener noreferrer"
