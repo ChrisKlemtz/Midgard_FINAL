@@ -143,6 +143,33 @@ export default function AdminDashboard() {
     }
   }
 
+  async function moveFaq(index, direction) {
+    const newFaqs = [...faqs];
+    const targetIndex = direction === "up" ? index - 1 : index + 1;
+
+    if (targetIndex < 0 || targetIndex >= newFaqs.length) return;
+
+    // Swap positions
+    [newFaqs[index], newFaqs[targetIndex]] = [newFaqs[targetIndex], newFaqs[index]];
+
+    // Update order field for both FAQs
+    try {
+      await axios.put(`${apiUrl}/faqs/${newFaqs[index]._id}`, {
+        ...newFaqs[index],
+        order: index,
+      });
+      await axios.put(`${apiUrl}/faqs/${newFaqs[targetIndex]._id}`, {
+        ...newFaqs[targetIndex],
+        order: targetIndex,
+      });
+
+      // Update local state immediately
+      setFaqs(newFaqs);
+    } catch (error) {
+      alert("Fehler beim Verschieben: " + (error.response?.data?.error || error.message));
+    }
+  }
+
   async function addEvent(e) {
     e.preventDefault();
     try {
@@ -567,7 +594,7 @@ export default function AdminDashboard() {
             </form>
 
             <div style={{ display: "grid", gap: 20 }}>
-              {faqs.map((faq) => (
+              {faqs.map((faq, index) => (
                 <div
                   key={faq._id}
                   style={{
@@ -575,6 +602,7 @@ export default function AdminDashboard() {
                     padding: 20,
                     borderRadius: 12,
                     border: "1px solid #333",
+                    position: "relative",
                   }}
                 >
                   <div
@@ -597,20 +625,59 @@ export default function AdminDashboard() {
                     >
                       {faq.category}
                     </span>
-                    <button
-                      onClick={() => deleteFaq(faq._id)}
-                      style={{
-                        padding: "8px 18px",
-                        background: "#d32f2f",
-                        border: "none",
-                        borderRadius: 8,
-                        color: "#fff",
-                        cursor: "pointer",
-                        fontWeight: 600,
-                      }}
-                    >
-                      Löschen
-                    </button>
+                    <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+                      {/* Hoch/Runter Pfeile */}
+                      <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                        <button
+                          onClick={() => moveFaq(index, "up")}
+                          disabled={index === 0}
+                          style={{
+                            padding: "4px 8px",
+                            background: index === 0 ? "#444" : "#c8a05d",
+                            border: "none",
+                            borderRadius: 4,
+                            color: "#fff",
+                            cursor: index === 0 ? "not-allowed" : "pointer",
+                            fontSize: 14,
+                            fontWeight: 600,
+                          }}
+                          title="Nach oben"
+                        >
+                          ▲
+                        </button>
+                        <button
+                          onClick={() => moveFaq(index, "down")}
+                          disabled={index === faqs.length - 1}
+                          style={{
+                            padding: "4px 8px",
+                            background: index === faqs.length - 1 ? "#444" : "#c8a05d",
+                            border: "none",
+                            borderRadius: 4,
+                            color: "#fff",
+                            cursor: index === faqs.length - 1 ? "not-allowed" : "pointer",
+                            fontSize: 14,
+                            fontWeight: 600,
+                          }}
+                          title="Nach unten"
+                        >
+                          ▼
+                        </button>
+                      </div>
+                      <button
+                        onClick={() => deleteFaq(faq._id)}
+                        style={{
+                          padding: "8px 18px",
+                          background: "#d32f2f",
+                          border: "none",
+                          borderRadius: 8,
+                          color: "#fff",
+                          cursor: "pointer",
+                          fontWeight: 600,
+                        }}
+                      >
+                        Löschen
+                      </button>
+                    </div>
                   </div>
                   <h3 style={{ marginBottom: 12, color: "#f4e5c2" }}>
                     {faq.question}
