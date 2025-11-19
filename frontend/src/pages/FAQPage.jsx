@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import FAQAccordion from "../components/FAQAccordion";
 import { fadeInUp, viewportConfig } from "../utils/animations";
+import faqHeroBg from "../assets/images/faq_hero_bg.png";
 
 export default function FAQPage() {
   return (
@@ -10,17 +11,30 @@ export default function FAQPage() {
       <section
         className="hero-section"
         style={{
-          background: "linear-gradient(135deg, #1b1816 0%, #0d0c0a 100%)",
+          position: "relative",
+          background: `url(${faqHeroBg}) center/cover no-repeat`,
           padding: "140px 20px 50px",
           textAlign: "center",
         }}
       >
+        {/* Gradient Overlay - blends into next section */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: "200px",
+            background: "linear-gradient(to bottom, transparent 0%, #0d0c0a 100%)",
+            pointerEvents: "none",
+          }}
+        />
         <motion.div
           className="container"
           initial="hidden"
           animate="visible"
           variants={fadeInUp}
-          style={{ marginTop: "30px" }}
+          style={{ marginTop: "30px", position: "relative", zIndex: 1 }}
         >
           <h1 style={{ fontSize: 48, marginBottom: 20 }}>
             Häufig gestellte Fragen
@@ -40,7 +54,10 @@ export default function FAQPage() {
       </section>
 
       {/* FAQ Section */}
-      <section className="container" style={{ padding: "60px 20px 100px" }}>
+      <section
+        className="container"
+        style={{ padding: "60px 20px 100px", background: "#0d0c0a" }}
+      >
         <motion.div
           initial="hidden"
           whileInView="visible"
