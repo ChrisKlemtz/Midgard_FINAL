@@ -31,16 +31,6 @@ export default function FAQAccordion() {
 
   return (
     <div style={{ maxWidth: 900, margin: "0 auto" }}>
-      <div style={{ textAlign: "center", marginBottom: 40 }}>
-        <h2 style={{ fontSize: 36, marginBottom: 15 }}>
-          Häufig gestellte Fragen
-        </h2>
-        <p style={{ color: "#ccc", fontSize: 16 }}>
-          Hier findest du Antworten auf die wichtigsten Fragen rund um Tattoos,
-          Piercings und unser Studio.
-        </p>
-      </div>
-
       {/* Category Filter */}
       {categories.length > 1 && (
         <div
