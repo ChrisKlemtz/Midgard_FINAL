@@ -11,7 +11,7 @@ export default function FAQPage() {
         className="hero-section"
         style={{
           background: "linear-gradient(135deg, #1b1816 0%, #0d0c0a 100%)",
-          padding: "140px 20px 92px",
+          padding: "140px 20px 50px",
           textAlign: "center",
         }}
       >
