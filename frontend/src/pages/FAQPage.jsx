@@ -25,8 +25,8 @@ export default function FAQPage() {
             bottom: 0,
             left: 0,
             right: 0,
-            height: "200px",
-            background: "linear-gradient(to bottom, transparent 0%, #0d0c0a 100%)",
+            height: "300px",
+            background: "linear-gradient(to bottom, transparent 0%, rgba(13, 12, 10, 0.3) 30%, rgba(13, 12, 10, 0.7) 60%, #0d0c0a 100%)",
             pointerEvents: "none",
           }}
         />
