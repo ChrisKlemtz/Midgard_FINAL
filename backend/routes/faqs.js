@@ -26,8 +26,8 @@ router.get("/:id", async (req, res) => {
 // POST /api/faqs - Neue FAQ erstellen
 router.post("/", async (req, res) => {
   try {
-    const { question, answer, order } = req.body;
-    const faq = new FAQ({ question, answer, order });
+    const { question, answer, category, order } = req.body;
+    const faq = new FAQ({ question, answer, category, order });
     await faq.save();
     res.status(201).json(faq);
   } catch (error) {
@@ -38,10 +38,10 @@ router.post("/", async (req, res) => {
 // PUT /api/faqs/:id - FAQ aktualisieren
 router.put("/:id", async (req, res) => {
   try {
-    const { question, answer, order } = req.body;
+    const { question, answer, category, order } = req.body;
     const faq = await FAQ.findByIdAndUpdate(
       req.params.id,
-      { question, answer, order },
+      { question, answer, category, order },
       { new: true, runValidators: true }
     );
     if (!faq) return res.status(404).json({ message: "FAQ nicht gefunden" });
