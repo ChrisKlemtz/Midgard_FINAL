@@ -12,7 +12,8 @@ export default function FAQPage() {
         className="hero-section"
         style={{
           position: "relative",
-          background: `url(${faqHeroBg}) center/cover no-repeat`,
+          background: `url(${faqHeroBg}) center/contain no-repeat`,
+          backgroundColor: "#0d0c0a",
           padding: "140px 20px 50px",
           textAlign: "center",
         }}
