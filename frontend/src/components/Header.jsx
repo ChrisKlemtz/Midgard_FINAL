@@ -64,6 +64,14 @@ export default function Header() {
           Events
         </Link>
         <Link
+          to="/faq"
+          className={`nav-link ${
+            location.pathname === "/faq" ? "active" : ""
+          }`}
+        >
+          FAQ
+        </Link>
+        <Link
           to="/certificates"
           className={`nav-link ${
             location.pathname === "/certificates" ? "active" : ""
@@ -112,6 +120,7 @@ export default function Header() {
         <Link to="/galerie">Galerie</Link>
         <Link to="/about">About</Link>
         <Link to="/events">Events</Link>
+        <Link to="/faq">FAQ</Link>
         <Link to="/certificates">Zertifikate</Link>
         <a
           href="https://wa.me/4917624752736"

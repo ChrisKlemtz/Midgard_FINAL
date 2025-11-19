@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Gallery from "../components/Gallery";
 import Offers from "../components/Offers";
-import FAQAccordion from "../components/FAQAccordion";
 import SectionDivider from "../components/SectionDivider";
 import { fadeInUp, fadeInLeft, fadeInRight, staggerContainer, staggerItem, viewportConfig } from "../utils/animations";
 import designIcon from "../assets/icons/design_icon.svg";
@@ -658,13 +657,6 @@ export default function Home() {
 
       <SectionDivider />
 
-      {/* FAQ Section */}
-      <section className="container" style={{ padding: "0 20px" }}>
-        <FAQAccordion />
-      </section>
-
-      <SectionDivider />
-
       {/* CTA Section */}
       <section
         style={{
@@ -752,6 +744,19 @@ export default function Home() {
               }}
             >
               Mehr über uns
+            </Link>
+            <Link
+              to="/faq"
+              className="btn"
+              style={{
+                background: "transparent",
+                border: "2px solid #1b1816",
+                padding: "15px 35px",
+                fontSize: 16,
+                color: "#1b1816",
+              }}
+            >
+              Häufige Fragen
             </Link>
           </div>
         </motion.div>

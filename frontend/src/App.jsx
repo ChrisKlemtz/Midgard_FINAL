@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import GaleriePage from "./pages/GaleriePage";
 import About from "./pages/About";
 import EventsPage from "./pages/EventsPage";
+import FAQPage from "./pages/FAQPage";
 import Certificates from "./pages/Certificates";
 import Impressum from "./pages/Impressum";
 import ContactModal from "./components/ContactModal";
@@ -85,6 +86,7 @@ export default function App() {
         <Route path="/galerie" element={<GaleriePage />} />
         <Route path="/about" element={<About />} />
         <Route path="/events" element={<EventsPage />} />
+        <Route path="/faq" element={<FAQPage />} />
         <Route path="/certificates" element={<Certificates />} />
         <Route path="/impressum" element={<Impressum />} />
         <Route path="/admin" element={<AdminDashboard />} />
