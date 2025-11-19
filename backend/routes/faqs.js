@@ -23,4 +23,43 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// POST /api/faqs - Neue FAQ erstellen
+router.post("/", async (req, res) => {
+  try {
+    const { question, answer, order } = req.body;
+    const faq = new FAQ({ question, answer, order });
+    await faq.save();
+    res.status(201).json(faq);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// PUT /api/faqs/:id - FAQ aktualisieren
+router.put("/:id", async (req, res) => {
+  try {
+    const { question, answer, order } = req.body;
+    const faq = await FAQ.findByIdAndUpdate(
+      req.params.id,
+      { question, answer, order },
+      { new: true, runValidators: true }
+    );
+    if (!faq) return res.status(404).json({ message: "FAQ nicht gefunden" });
+    res.json(faq);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// DELETE /api/faqs/:id - FAQ löschen
+router.delete("/:id", async (req, res) => {
+  try {
+    const faq = await FAQ.findByIdAndDelete(req.params.id);
+    if (!faq) return res.status(404).json({ message: "FAQ nicht gefunden" });
+    res.json({ message: "FAQ gelöscht" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 module.exports = router;
