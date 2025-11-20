@@ -303,6 +303,106 @@ export default function Home() {
 
       <SectionDivider />
 
+      {/* Gallery Preview */}
+      <section className="container" style={{ padding: "0 20px" }}>
+        <motion.div
+          style={{ textAlign: "center", marginBottom: 50 }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+          variants={fadeInUp}
+        >
+          <h2 style={{
+            fontSize: 42,
+            marginBottom: 15,
+            background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
+            backgroundSize: "200% 200%",
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            animation: "goldShimmer 3s linear infinite",
+          }}>Unsere Arbeiten</h2>
+          <p
+            style={{
+              fontSize: 18,
+              color: "#ccc",
+              maxWidth: 600,
+              margin: "0 auto",
+              display: !isMobile ? "block" : "none",
+            }}
+          >
+            Entdecke eine Auswahl unserer neuesten Tattoo-Kunstwerke
+          </p>
+        </motion.div>
+
+        {/* Desktop: Gallery Grid */}
+        <div style={{ display: !isMobile ? "block" : "none" }}>
+          <Gallery />
+          <motion.div
+            style={{ marginTop: 40, textAlign: "center" }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
+            variants={fadeInUp}
+          >
+            <Link
+              to="/galerie"
+              className="btn"
+              style={{ padding: "12px 30px" }}
+            >
+              Komplette Galerie ansehen →
+            </Link>
+          </motion.div>
+        </div>
+
+        {/* Mobile/Tablet: Circular Button */}
+        <motion.div
+          style={{
+            display: isMobile ? "flex" : "none",
+            justifyContent: "center",
+            marginTop: 20,
+          }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+          variants={fadeInUp}
+        >
+          <Link
+            to="/galerie"
+            style={{
+              width: "120px",
+              height: "120px",
+              borderRadius: "50%",
+              background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
+              backgroundSize: "200% 200%",
+              animation: "goldShimmer 3s linear infinite",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              textDecoration: "none",
+              fontWeight: 700,
+              fontSize: "16px",
+              color: "#1a1a1a",
+              border: "none",
+              boxShadow: "0 8px 25px rgba(212, 175, 55, 0.4)",
+              transition: "transform 0.3s ease, box-shadow 0.3s ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "scale(1.1)";
+              e.currentTarget.style.boxShadow = "0 12px 35px rgba(212, 175, 55, 0.6)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "scale(1)";
+              e.currentTarget.style.boxShadow = "0 8px 25px rgba(212, 175, 55, 0.4)";
+            }}
+          >
+            Zur Galerie
+          </Link>
+        </motion.div>
+      </section>
+
+      <SectionDivider />
+
       {/* Features Section */}
       <section
         style={{
@@ -409,106 +509,6 @@ export default function Home() {
 
       {/* Offers Section */}
       <Offers />
-
-      <SectionDivider />
-
-      {/* Gallery Preview */}
-      <section className="container" style={{ padding: "0 20px" }}>
-        <motion.div
-          style={{ textAlign: "center", marginBottom: 50 }}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportConfig}
-          variants={fadeInUp}
-        >
-          <h2 style={{
-            fontSize: 42,
-            marginBottom: 15,
-            background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
-            backgroundSize: "200% 200%",
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            animation: "goldShimmer 3s linear infinite",
-          }}>Unsere Arbeiten</h2>
-          <p
-            style={{
-              fontSize: 18,
-              color: "#ccc",
-              maxWidth: 600,
-              margin: "0 auto",
-              display: !isMobile ? "block" : "none",
-            }}
-          >
-            Entdecke eine Auswahl unserer neuesten Tattoo-Kunstwerke
-          </p>
-        </motion.div>
-
-        {/* Desktop: Gallery Grid */}
-        <div style={{ display: !isMobile ? "block" : "none" }}>
-          <Gallery />
-          <motion.div
-            style={{ marginTop: 40, textAlign: "center" }}
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewportConfig}
-            variants={fadeInUp}
-          >
-            <Link
-              to="/galerie"
-              className="btn"
-              style={{ padding: "12px 30px" }}
-            >
-              Komplette Galerie ansehen →
-            </Link>
-          </motion.div>
-        </div>
-
-        {/* Mobile/Tablet: Circular Button */}
-        <motion.div
-          style={{
-            display: isMobile ? "flex" : "none",
-            justifyContent: "center",
-            marginTop: 20,
-          }}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportConfig}
-          variants={fadeInUp}
-        >
-          <Link
-            to="/galerie"
-            style={{
-              width: "120px",
-              height: "120px",
-              borderRadius: "50%",
-              background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
-              backgroundSize: "200% 200%",
-              animation: "goldShimmer 3s linear infinite",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              textDecoration: "none",
-              fontWeight: 700,
-              fontSize: "16px",
-              color: "#1a1a1a",
-              border: "none",
-              boxShadow: "0 8px 25px rgba(212, 175, 55, 0.4)",
-              transition: "transform 0.3s ease, box-shadow 0.3s ease",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "scale(1.1)";
-              e.currentTarget.style.boxShadow = "0 12px 35px rgba(212, 175, 55, 0.6)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = "scale(1)";
-              e.currentTarget.style.boxShadow = "0 8px 25px rgba(212, 175, 55, 0.4)";
-            }}
-          >
-            Zur Galerie
-          </Link>
-        </motion.div>
-      </section>
 
       <SectionDivider />
 
