@@ -407,6 +407,11 @@ export default function Home() {
 
       <SectionDivider />
 
+      {/* Offers Section */}
+      <Offers />
+
+      <SectionDivider />
+
       {/* Gallery Preview */}
       <section className="container" style={{ padding: "0 20px" }}>
         <motion.div
@@ -504,11 +509,6 @@ export default function Home() {
           </Link>
         </motion.div>
       </section>
-
-      <SectionDivider />
-
-      {/* Offers Section */}
-      <Offers />
 
       <SectionDivider />
 
