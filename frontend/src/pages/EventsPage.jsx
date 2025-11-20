@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import { fadeInUp, staggerContainer, staggerItem, viewportConfig } from "../utils/animations";
 import SkeletonLoader from "../components/SkeletonLoader";
+import eventsHeroBg from "../assets/images/events_hero_bg.png";
 
 export default function EventsPage() {
   const [events, setEvents] = useState([]);
@@ -31,26 +32,54 @@ export default function EventsPage() {
   );
 
   return (
-    <section className="container" style={{ padding: "100px 20px" }}>
-      <motion.div
-        style={{ textAlign: "center", marginBottom: 30, marginTop: "50px" }}
-        initial="hidden"
-        animate="visible"
-        variants={fadeInUp}
+    <main>
+      {/* Hero Section */}
+      <section
+        className="hero-section"
+        style={{
+          position: "relative",
+          background: `url(${eventsHeroBg}) center top/100% auto no-repeat`,
+          backgroundColor: "#0d0c0a",
+          padding: "140px 20px 50px",
+          textAlign: "center",
+        }}
       >
-        <h1 style={{ fontSize: 48, marginBottom: 20 }}>Events & Termine</h1>
-        <p
+        {/* Gradient Overlay - blends into next section */}
+        <div
           style={{
-            fontSize: 18,
-            color: "#ccc",
-            maxWidth: 700,
-            margin: "0 auto",
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: "300px",
+            background: "linear-gradient(to bottom, transparent 0%, rgba(13, 12, 10, 0.3) 30%, rgba(13, 12, 10, 0.7) 60%, #0d0c0a 100%)",
+            pointerEvents: "none",
           }}
+        />
+        <motion.div
+          className="container"
+          initial="hidden"
+          animate="visible"
+          variants={fadeInUp}
+          style={{ marginTop: "30px", position: "relative", zIndex: 1 }}
         >
-          Besuche uns auf Conventions, Guest Spots und besonderen Events. Hier
-          findest du alle kommenden und vergangenen Termine.
-        </p>
-      </motion.div>
+          <h1 style={{ fontSize: 48, marginBottom: 20 }}>Events & Termine</h1>
+          <p
+            style={{
+              fontSize: 18,
+              color: "#ccc",
+              maxWidth: 700,
+              margin: "0 auto",
+            }}
+          >
+            Besuche uns auf Conventions, Guest Spots und besonderen Events. Hier
+            findest du alle kommenden und vergangenen Termine.
+          </p>
+        </motion.div>
+      </section>
+
+      {/* Events Section */}
+      <section className="container" style={{ padding: "60px 20px 100px", background: "#0d0c0a" }}>
 
       {loading ? (
         <div style={{ marginBottom: 60 }}>
@@ -252,6 +281,7 @@ export default function EventsPage() {
           </motion.div>
         </div>
       )}
-    </section>
+      </section>
+    </main>
   );
 }
