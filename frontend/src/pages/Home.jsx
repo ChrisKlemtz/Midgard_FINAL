@@ -301,10 +301,12 @@ export default function Home() {
         </motion.div>
       </section>
 
-      <SectionDivider />
+      <div style={{ display: !isMobile ? "block" : "none" }}>
+        <SectionDivider />
+      </div>
 
       {/* Gallery Preview */}
-      <section className="container" style={{ padding: "0 20px" }}>
+      <section className="container" style={{ padding: "0 20px", display: !isMobile ? "block" : "none" }}>
         <motion.div
           style={{ textAlign: "center", marginBottom: 50 }}
           initial="hidden"
