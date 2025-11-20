@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import FAQAccordion from "../components/FAQAccordion";
 import { fadeInUp, viewportConfig } from "../utils/animations";
-import faqHeroBg from "../assets/images/faq_heor_bg.png";
+import faqHeroBg from "../assets/images/faq_hero_bg.png";
 
 export default function FAQPage() {
   return (
