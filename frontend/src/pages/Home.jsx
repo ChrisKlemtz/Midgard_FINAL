@@ -403,6 +403,11 @@ export default function Home() {
 
       <SectionDivider />
 
+      {/* Offers Section */}
+      <Offers />
+
+      <SectionDivider />
+
       {/* Features Section */}
       <section
         style={{
@@ -504,11 +509,6 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
-
-      <SectionDivider />
-
-      {/* Offers Section */}
-      <Offers />
 
       <SectionDivider />
 
