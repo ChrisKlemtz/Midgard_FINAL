@@ -28,13 +28,13 @@ export default function AboutTeam() {
       instagram: "@robert_midgard_ink",
     },
     {
-      name: "Luna",
+      name: "Lotti",
       role: "Studio-Hund & Maskottchen",
-      image: "/team/luna.jpg", // Platzhalter
+      image: "/team/lotti.jpg", // Platzhalter
       description:
-        "Luna ist unsere treue Begleiterin und sorgt für gute Stimmung im Studio. Sie liebt Streicheleinheiten und ist immer zur Stelle, wenn jemand Ablenkung braucht.",
+        "Lotti ist unsere treue Begleiterin und sorgt für gute Stimmung im Studio. Sie liebt Streicheleinheiten und ist immer zur Stelle, wenn jemand Ablenkung braucht.",
       specialties: ["Streicheln", "Gute Laune", "Leckerlis", "Seelentröster"],
-      instagram: "@luna_midgard_dog",
+      instagram: "@lotti_midgard_dog",
     },
   ];
 
@@ -113,7 +113,7 @@ export default function AboutTeam() {
                   overflow: "hidden",
                 }}
               >
-                {member.name === "Luna" ? "🐕" : "👤"}
+                {member.name === "Lotti" ? "🐕" : "👤"}
                 {/* Optional: Echtes Bild einbinden
                 <img 
                   src={member.image} 
