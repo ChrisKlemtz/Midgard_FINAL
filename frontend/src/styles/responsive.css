@@ -395,33 +395,7 @@
     align-items: center !important;
   }
 
-  /* WhatsApp Buttons - Gold Gradient Border */
-  a.btn[href*="wa.me"],
-  a[href*="wa.me"].btn {
-    position: relative !important;
-    padding: 3px !important;
-    background: linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%) !important;
-    background-size: 300% 300% !important;
-    animation: goldShimmer 4s ease-in-out infinite !important;
-    border: none !important;
-    isolation: isolate;
-  }
-
-  a.btn[href*="wa.me"]::before,
-  a[href*="wa.me"].btn::before {
-    content: "";
-    position: absolute;
-    inset: 3px;
-    border-radius: calc(12px - 3px);
-    background: #1a1a1a !important;
-    z-index: -1;
-  }
-
-  a.btn[href*="wa.me"] > *,
-  a[href*="wa.me"].btn > * {
-    position: relative;
-    z-index: 1;
-  }
+  /* WhatsApp Buttons - Removed specific styling to use default gold gradient */
 }
 
 /* Filter Buttons Responsive */
