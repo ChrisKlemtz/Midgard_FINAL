@@ -1,7 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import AboutTeam from "../components/AboutTeam";
-import FAQAccordion from "../components/FAQAccordion";
 import { fadeInUp, fadeInLeft, fadeInRight, staggerContainer, staggerItem, viewportConfig } from "../utils/animations";
 
 export default function About() {
@@ -207,11 +206,6 @@ export default function About() {
 
       {/* Team Section */}
       <AboutTeam />
-
-      {/* FAQ Section */}
-      <section className="container" style={{ padding: "80px 20px" }}>
-        <FAQAccordion />
-      </section>
 
       {/* CTA Section */}
       <section
