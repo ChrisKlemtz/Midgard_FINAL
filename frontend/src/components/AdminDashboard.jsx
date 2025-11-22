@@ -28,6 +28,7 @@ export default function AdminDashboard() {
     location: "",
     type: "Sonstiges",
   });
+  const [eventFile, setEventFile] = useState(null);
 
   // Certificates State
   const [certificates, setCertificates] = useState([]);
@@ -36,8 +37,9 @@ export default function AdminDashboard() {
     description: "",
     issuer: "",
     date: "",
-    category: "Tattoo",
+    category: "Hygiene",
   });
+  const [certificateFile, setCertificateFile] = useState(null);
 
   // Offers State
   const [offers, setOffers] = useState([]);
@@ -173,7 +175,23 @@ export default function AdminDashboard() {
   async function addEvent(e) {
     e.preventDefault();
     try {
-      await axios.post(`${apiUrl}/events`, newEvent);
+      const formData = new FormData();
+      formData.append("title", newEvent.title);
+      formData.append("description", newEvent.description);
+      formData.append("date", newEvent.date);
+      formData.append("location", newEvent.location);
+      formData.append("type", newEvent.type);
+
+      if (eventFile) {
+        formData.append("file", eventFile);
+      }
+
+      await axios.post(`${apiUrl}/events/upload`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
       setNewEvent({
         title: "",
         description: "",
@@ -181,6 +199,7 @@ export default function AdminDashboard() {
         location: "",
         type: "Sonstiges",
       });
+      setEventFile(null);
       alert("Event hinzugefügt!");
       loadData();
     } catch (error) {
@@ -201,14 +220,31 @@ export default function AdminDashboard() {
   async function addCertificate(e) {
     e.preventDefault();
     try {
-      await axios.post(`${apiUrl}/certificates`, newCertificate);
+      const formData = new FormData();
+      formData.append("title", newCertificate.title);
+      formData.append("description", newCertificate.description);
+      formData.append("issuer", newCertificate.issuer);
+      formData.append("date", newCertificate.date);
+      formData.append("category", newCertificate.category);
+
+      if (certificateFile) {
+        formData.append("file", certificateFile);
+      }
+
+      await axios.post(`${apiUrl}/certificates/upload`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
       setNewCertificate({
         title: "",
         description: "",
         issuer: "",
         date: "",
-        category: "Tattoo",
+        category: "Hygiene",
       });
+      setCertificateFile(null);
       alert("Zertifikat hinzugefügt!");
       loadData();
     } catch (error) {
@@ -709,6 +745,31 @@ export default function AdminDashboard() {
                 Neues Event hinzufügen
               </h3>
               <div style={{ display: "grid", gap: 20 }}>
+                <div>
+                  <label
+                    style={{
+                      display: "block",
+                      marginBottom: 8,
+                      color: "#c8a05d",
+                      fontWeight: 600,
+                    }}
+                  >
+                    Bild / Flyer hochladen (optional)
+                  </label>
+                  <input
+                    type="file"
+                    onChange={(e) => setEventFile(e.target.files[0])}
+                    accept="image/*"
+                    style={{
+                      width: "100%",
+                      padding: 12,
+                      borderRadius: 8,
+                      border: "1px solid #555",
+                      background: "#0d0c0a",
+                      color: "#fff",
+                    }}
+                  />
+                </div>
                 <input
                   placeholder="Titel"
                   value={newEvent.title}
@@ -815,59 +876,76 @@ export default function AdminDashboard() {
                     padding: 20,
                     borderRadius: 12,
                     border: "1px solid #333",
+                    display: "grid",
+                    gridTemplateColumns: event.imageUrl ? "200px 1fr" : "1fr",
+                    gap: 20,
                   }}
                 >
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      marginBottom: 15,
-                    }}
-                  >
-                    <div>
-                      <span
-                        style={{
-                          fontSize: 12,
-                          color: "#c8a05d",
-                          fontWeight: 600,
-                          background: "#0d0c0a",
-                          padding: "5px 12px",
-                          borderRadius: 6,
-                        }}
-                      >
-                        {event.type}
-                      </span>
-                      <p style={{ fontSize: 14, color: "#999", marginTop: 8 }}>
-                        {new Date(event.date).toLocaleDateString("de-DE")}
-                      </p>
-                    </div>
-                    <button
-                      onClick={() => deleteEvent(event._id)}
+                  {event.imageUrl && (
+                    <img
+                      src={event.imageUrl}
+                      alt={event.title}
                       style={{
-                        padding: "8px 18px",
-                        background: "#d32f2f",
-                        border: "none",
+                        width: "100%",
+                        height: 150,
+                        objectFit: "cover",
                         borderRadius: 8,
-                        color: "#fff",
-                        cursor: "pointer",
-                        fontWeight: 600,
-                        height: "fit-content",
+                      }}
+                    />
+                  )}
+                  <div>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        marginBottom: 15,
                       }}
                     >
-                      Löschen
-                    </button>
-                  </div>
-                  <h3 style={{ marginBottom: 12, color: "#f4e5c2" }}>
-                    {event.title}
-                  </h3>
-                  <p style={{ color: "#ccc", marginBottom: 10, lineHeight: 1.6 }}>
-                    {event.description}
-                  </p>
-                  {event.location && (
-                    <p style={{ fontSize: 14, color: "#c8a05d" }}>
-                      📍 {event.location}
+                      <div>
+                        <span
+                          style={{
+                            fontSize: 12,
+                            color: "#c8a05d",
+                            fontWeight: 600,
+                            background: "#0d0c0a",
+                            padding: "5px 12px",
+                            borderRadius: 6,
+                          }}
+                        >
+                          {event.type}
+                        </span>
+                        <p style={{ fontSize: 14, color: "#999", marginTop: 8 }}>
+                          {new Date(event.date).toLocaleDateString("de-DE")}
+                        </p>
+                      </div>
+                      <button
+                        onClick={() => deleteEvent(event._id)}
+                        style={{
+                          padding: "8px 18px",
+                          background: "#d32f2f",
+                          border: "none",
+                          borderRadius: 8,
+                          color: "#fff",
+                          cursor: "pointer",
+                          fontWeight: 600,
+                          height: "fit-content",
+                        }}
+                      >
+                        Löschen
+                      </button>
+                    </div>
+                    <h3 style={{ marginBottom: 12, color: "#f4e5c2" }}>
+                      {event.title}
+                    </h3>
+                    <p style={{ color: "#ccc", marginBottom: 10, lineHeight: 1.6 }}>
+                      {event.description}
                     </p>
-                  )}
+                    {event.location && (
+                      <p style={{ fontSize: 14, color: "#c8a05d" }}>
+                        📍 {event.location}
+                      </p>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
@@ -894,6 +972,31 @@ export default function AdminDashboard() {
                 Neues Zertifikat hinzufügen
               </h3>
               <div style={{ display: "grid", gap: 20 }}>
+                <div>
+                  <label
+                    style={{
+                      display: "block",
+                      marginBottom: 8,
+                      color: "#c8a05d",
+                      fontWeight: 600,
+                    }}
+                  >
+                    Bild / Flyer hochladen (optional)
+                  </label>
+                  <input
+                    type="file"
+                    onChange={(e) => setCertificateFile(e.target.files[0])}
+                    accept="image/*"
+                    style={{
+                      width: "100%",
+                      padding: 12,
+                      borderRadius: 8,
+                      border: "1px solid #555",
+                      background: "#0d0c0a",
+                      color: "#fff",
+                    }}
+                  />
+                </div>
                 <input
                   placeholder="Titel"
                   value={newCertificate.title}
@@ -973,9 +1076,10 @@ export default function AdminDashboard() {
                     color: "#fff",
                   }}
                 >
-                  <option value="Tattoo">Tattoo</option>
-                  <option value="Piercing">Piercing</option>
                   <option value="Hygiene">Hygiene</option>
+                  <option value="Ausbildung">Ausbildung</option>
+                  <option value="Qualifikation">Qualifikation</option>
+                  <option value="Convention Preise">Convention Preise</option>
                   <option value="Sonstiges">Sonstiges</option>
                 </select>
                 <button
@@ -1006,57 +1110,74 @@ export default function AdminDashboard() {
                     padding: 20,
                     borderRadius: 12,
                     border: "1px solid #333",
+                    display: "grid",
+                    gridTemplateColumns: cert.imageUrl ? "200px 1fr" : "1fr",
+                    gap: 20,
                   }}
                 >
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      marginBottom: 15,
-                      alignItems: "flex-start",
-                    }}
-                  >
-                    <div>
-                      <span
-                        style={{
-                          fontSize: 12,
-                          color: "#c8a05d",
-                          fontWeight: 600,
-                          background: "#0d0c0a",
-                          padding: "5px 12px",
-                          borderRadius: 6,
-                        }}
-                      >
-                        {cert.category}
-                      </span>
-                      <p style={{ fontSize: 14, color: "#999", marginTop: 8 }}>
-                        {new Date(cert.date).toLocaleDateString("de-DE")}
-                      </p>
-                    </div>
-                    <button
-                      onClick={() => deleteCertificate(cert._id)}
+                  {cert.imageUrl && (
+                    <img
+                      src={cert.imageUrl}
+                      alt={cert.title}
                       style={{
-                        padding: "8px 18px",
-                        background: "#d32f2f",
-                        border: "none",
+                        width: "100%",
+                        height: 150,
+                        objectFit: "cover",
                         borderRadius: 8,
-                        color: "#fff",
-                        cursor: "pointer",
-                        fontWeight: 600,
+                      }}
+                    />
+                  )}
+                  <div>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        marginBottom: 15,
+                        alignItems: "flex-start",
                       }}
                     >
-                      Löschen
-                    </button>
+                      <div>
+                        <span
+                          style={{
+                            fontSize: 12,
+                            color: "#c8a05d",
+                            fontWeight: 600,
+                            background: "#0d0c0a",
+                            padding: "5px 12px",
+                            borderRadius: 6,
+                          }}
+                        >
+                          {cert.category}
+                        </span>
+                        <p style={{ fontSize: 14, color: "#999", marginTop: 8 }}>
+                          {cert.issueDate ? new Date(cert.issueDate).toLocaleDateString("de-DE") : "Kein Datum"}
+                        </p>
+                      </div>
+                      <button
+                        onClick={() => deleteCertificate(cert._id)}
+                        style={{
+                          padding: "8px 18px",
+                          background: "#d32f2f",
+                          border: "none",
+                          borderRadius: 8,
+                          color: "#fff",
+                          cursor: "pointer",
+                          fontWeight: 600,
+                        }}
+                      >
+                        Löschen
+                      </button>
+                    </div>
+                    <h3 style={{ marginBottom: 8, color: "#f4e5c2" }}>
+                      {cert.title}
+                    </h3>
+                    <p style={{ fontSize: 14, color: "#c8a05d", marginBottom: 10 }}>
+                      Aussteller: {cert.issuer}
+                    </p>
+                    <p style={{ color: "#ccc", lineHeight: 1.6 }}>
+                      {cert.description}
+                    </p>
                   </div>
-                  <h3 style={{ marginBottom: 8, color: "#f4e5c2" }}>
-                    {cert.title}
-                  </h3>
-                  <p style={{ fontSize: 14, color: "#c8a05d", marginBottom: 10 }}>
-                    Aussteller: {cert.issuer}
-                  </p>
-                  <p style={{ color: "#ccc", lineHeight: 1.6 }}>
-                    {cert.description}
-                  </p>
                 </div>
               ))}
             </div>

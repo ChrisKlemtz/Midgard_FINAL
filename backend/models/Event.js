@@ -7,6 +7,7 @@ const EventSchema = new Schema({
   date: { type: Date, required: true },
   location: String,
   imageUrl: String,
+  cloudinaryId: String,
   type: {
     type: String,
     enum: [

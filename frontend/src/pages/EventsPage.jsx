@@ -137,13 +137,27 @@ export default function EventsPage() {
                   e.currentTarget.style.boxShadow = "none";
                 }}
               >
-                {event.imageUrl && (
+                {event.imageUrl ? (
                   <img
                     src={event.imageUrl}
                     alt={event.title}
                     loading="lazy"
                     style={{ width: "100%", height: 200, objectFit: "cover" }}
                   />
+                ) : (
+                  <div
+                    style={{
+                      width: "100%",
+                      height: 200,
+                      background: "linear-gradient(135deg, #2a2623 0%, #1b1816 100%)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontSize: 60,
+                    }}
+                  >
+                    📅
+                  </div>
                 )}
                 <div style={{ padding: 25 }}>
                   <div
@@ -252,7 +266,7 @@ export default function EventsPage() {
                 }}
                 variants={staggerItem}
               >
-                {event.imageUrl && (
+                {event.imageUrl ? (
                   <img
                     src={event.imageUrl}
                     alt={event.title}
@@ -264,6 +278,21 @@ export default function EventsPage() {
                       filter: "grayscale(50%)",
                     }}
                   />
+                ) : (
+                  <div
+                    style={{
+                      width: "100%",
+                      height: 150,
+                      background: "linear-gradient(135deg, #2a2623 0%, #1b1816 100%)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontSize: 50,
+                      filter: "grayscale(50%)",
+                    }}
+                  >
+                    📅
+                  </div>
                 )}
                 <div style={{ padding: 20 }}>
                   <div style={{ fontSize: 12, color: "#999", marginBottom: 8 }}>

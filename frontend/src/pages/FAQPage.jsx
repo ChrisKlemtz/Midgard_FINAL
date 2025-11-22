@@ -72,40 +72,48 @@ export default function FAQPage() {
       {/* CTA Section */}
       <section
         style={{
-          background:
-            "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
+          position: "relative",
+          padding: "5px",
+          background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
           backgroundSize: "200% 200%",
           animation: "goldShimmer 3s linear infinite",
-          padding: "60px 20px",
-          textAlign: "center",
         }}
       >
-        <motion.div
-          className="container"
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportConfig}
-          variants={fadeInUp}
+        <div
+          style={{
+            background: "rgb(30, 0, 7)",
+            padding: "60px 20px",
+            textAlign: "center",
+          }}
         >
-          <h2 style={{ fontSize: 40, marginBottom: 15, color: "#1a1a1a" }}>
-            Noch Fragen?
-          </h2>
-          <p
-            style={{
-              fontSize: 20,
-              marginBottom: 30,
-              maxWidth: 600,
-              margin: "0 auto 30px",
-              color: "#1a1a1a",
-            }}
+          <motion.div
+            className="container"
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
+            variants={fadeInUp}
           >
-            Kontaktiere uns direkt über WhatsApp!
-          </p>
-          <motion.button
-            className="btn"
-            style={{
-              background: "#25D366",
-              color: "#ffffff",
+            <h2 style={{ fontSize: 40, marginBottom: 15, color: "#f4e5c2" }}>
+              Noch Fragen?
+            </h2>
+            <p
+              style={{
+                fontSize: 20,
+                marginBottom: 30,
+                maxWidth: 600,
+                margin: "0 auto 30px",
+                color: "#ccc",
+              }}
+            >
+              Kontaktiere uns direkt über WhatsApp!
+            </p>
+            <motion.button
+              className="btn"
+              style={{
+                background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
+                backgroundSize: "200% 200%",
+                animation: "goldShimmer 3s linear infinite",
+                color: "#1a1a1a",
               padding: "15px 35px",
               fontSize: 16,
               fontWeight: 700,
@@ -118,8 +126,7 @@ export default function FAQPage() {
             }}
             whileHover={{
               scale: 1.05,
-              boxShadow: "0 8px 20px rgba(37, 211, 102, 0.4)",
-              background: "#20BA5A",
+              boxShadow: "0 8px 20px rgba(212, 175, 55, 0.6)",
             }}
             whileTap={{ scale: 0.95 }}
             transition={{ duration: 0.2 }}
@@ -142,6 +149,7 @@ export default function FAQPage() {
             Jetzt Frage stellen
           </motion.button>
         </motion.div>
+        </div>
       </section>
     </main>
   );

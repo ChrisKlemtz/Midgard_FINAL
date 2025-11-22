@@ -756,6 +756,16 @@ body {
   section.container[style*="padding: 100px"] {
     padding-top: 120px !important;
   }
+
+  /* Admin Dashboard - Prevent header overlap */
+  section[style*="padding: 120px 20px 60px"] {
+    padding-top: 140px !important;
+  }
+
+  /* CTA Section - Reduce border thickness on mobile */
+  section[style*="padding: 5px"][style*="goldShimmer"] {
+    padding: 2px !important;
+  }
 }
 
 @media (max-width: 480px) {
@@ -767,5 +777,15 @@ body {
   /* Impressum & Certificates Page - Container padding */
   section.container[style*="padding: 100px"] {
     padding-top: 110px !important;
+  }
+
+  /* Admin Dashboard - Prevent header overlap on small mobile */
+  section[style*="padding: 120px 20px 60px"] {
+    padding-top: 130px !important;
+  }
+
+  /* CTA Section - Thinner border on small mobile */
+  section[style*="padding: 5px"][style*="goldShimmer"] {
+    padding: 2px !important;
   }
 }

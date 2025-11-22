@@ -43,7 +43,7 @@ export default function Gallery() {
     .filter((img) => (filter === "Alle" ? true : img.artist === filter))
     .slice(0, 12); // Maximal 12 Bilder (4x3)
 
-  const artists = ["Maria", "Robert", "Alle"];
+  const artists = ["Alle", "Maria", "Robert"];
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % filtered.length);

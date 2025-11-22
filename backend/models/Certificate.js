@@ -7,6 +7,7 @@ const CertificateSchema = new Schema({
   issuer: String,
   issueDate: Date,
   imageUrl: String,
+  cloudinaryId: String,
   category: {
     type: String,
     enum: ["Hygiene", "Ausbildung", "Qualifikation", "Convention Preise", "Sonstiges"],

@@ -9,6 +9,7 @@ import designIcon from "../assets/icons/design_icon.svg";
 import badgeIcon from "../assets/icons/badge_icon.svg";
 import glovesIcon from "../assets/icons/gloves-svgrepo-com.svg";
 import whatsappChatIcon from "../assets/icons/whatsapp_chat_icon.svg";
+import infoCircleIcon from "../assets/icons/info-circle.svg";
 import logo from "../assets/logo/midgard_single_logo_main.svg";
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
   const [isMobile, setIsMobile] = React.useState(
     typeof window !== 'undefined' ? window.innerWidth <= 1024 : false
   );
+  const [showStylesModal, setShowStylesModal] = React.useState(false);
 
   const styleDescriptions = {
     "Traditional": "Klassische Tattoo-Kunst mit kräftigen Linien und lebendigen Farben. Der zeitlose Old-School-Stil mit ikonischen Motiven.",
@@ -30,11 +32,19 @@ export default function Home() {
   };
 
   const toggleStyle = (style) => {
-    setSelectedStyles(prev =>
-      prev.includes(style)
-        ? prev.filter(s => s !== style)
-        : [...prev, style]
-    );
+    // Im Mobile-Modal: Nur eine Stilrichtung gleichzeitig öffnen
+    if (isMobile && showStylesModal) {
+      setSelectedStyles(prev =>
+        prev.includes(style) ? [] : [style]
+      );
+    } else {
+      // Desktop: Mehrere gleichzeitig möglich
+      setSelectedStyles(prev =>
+        prev.includes(style)
+          ? prev.filter(s => s !== style)
+          : [...prev, style]
+      );
+    }
   };
 
   React.useEffect(() => {
@@ -514,19 +524,305 @@ export default function Home() {
 
       <SectionDivider />
 
-      {/* Style Section */}
-      <section style={{ padding: "0 20px" }}>
-        <div className="container">
-          <motion.div
-            style={{ textAlign: "center", marginBottom: 50 }}
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewportConfig}
-            variants={fadeInUp}
+      {/* Style Section - Desktop */}
+      {!isMobile && (
+        <section style={{ padding: "0 20px" }}>
+          <div className="container">
+            <motion.div
+              style={{ textAlign: "center", marginBottom: 50 }}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportConfig}
+              variants={fadeInUp}
+            >
+              <h2 style={{
+                fontSize: 42,
+                marginBottom: 15,
+                background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
+                backgroundSize: "200% 200%",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                animation: "goldShimmer 3s linear infinite",
+              }}>
+                Unsere Stilrichtungen
+              </h2>
+              <p
+                style={{
+                  fontSize: 18,
+                  color: "#ccc",
+                  maxWidth: 700,
+                  margin: "0 auto",
+                }}
+              >
+                Von traditionell bis modern – wir beherrschen verschiedene
+                Tattoo-Stile
+              </p>
+            </motion.div>
+
+            <motion.div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+                gap: 20,
+                maxWidth: 1000,
+                margin: "0 auto",
+              }}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportConfig}
+              variants={staggerContainer}
+            >
+              {[
+                "Traditional",
+                "New School",
+                "Realismus",
+                "Cover-ups",
+                "Geometric",
+                "Mandala",
+                "Portraits",
+                "Fine Line",
+              ].map((style, i) => {
+                const isSelected = selectedStyles.includes(style);
+                return (
+                  <motion.div
+                    key={i}
+                    ref={(el) => (cardRefs.current[style] = el)}
+                    data-style={style}
+                    style={{
+                      position: "relative",
+                    }}
+                    variants={staggerItem}
+                  >
+                    <motion.div
+                      style={{
+                        background: isSelected ? "rgb(43, 0, 10)" : "rgb(30, 0, 7)",
+                        padding: 20,
+                        borderRadius: isSelected ? "10px 10px 0 0" : "10px",
+                        textAlign: "center",
+                        border: "2px solid " + (isSelected ? "#d4af37" : "rgba(212, 175, 55, 0.3)"),
+                        borderBottom: isSelected ? "none" : "2px solid rgba(212, 175, 55, 0.3)",
+                        transition: "all 0.3s ease",
+                        cursor: "pointer",
+                      }}
+                      onClick={() => toggleStyle(style)}
+                      onMouseEnter={(e) => {
+                        if (!isSelected) {
+                          e.currentTarget.style.background = "rgb(43, 0, 10)";
+                          e.currentTarget.style.borderColor = "#d4af37";
+                          e.currentTarget.style.transform = "scale(1.05)";
+                          e.currentTarget.style.boxShadow = "0 8px 20px rgba(212, 175, 55, 0.3)";
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (!isSelected) {
+                          e.currentTarget.style.background = "rgb(30, 0, 7)";
+                          e.currentTarget.style.borderColor = "rgba(212, 175, 55, 0.3)";
+                          e.currentTarget.style.transform = "scale(1)";
+                          e.currentTarget.style.boxShadow = "none";
+                        }
+                      }}
+                    >
+                      <h3 style={{
+                        fontSize: 16,
+                        background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
+                        backgroundSize: "200% 200%",
+                        WebkitBackgroundClip: "text",
+                        backgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                        animation: "goldShimmer 3s linear infinite",
+                      }}>{style}</h3>
+                    </motion.div>
+
+                    <motion.div
+                      initial={false}
+                      animate={{
+                        height: isSelected ? "auto" : 0,
+                        opacity: isSelected ? 1 : 0,
+                      }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      style={{
+                        overflow: "hidden",
+                        background: "rgb(43, 0, 10)",
+                        borderRadius: "0 0 10px 10px",
+                        border: isSelected ? "2px solid #d4af37" : "none",
+                        borderTop: "none",
+                      }}
+                    >
+                      {isSelected && (
+                        <div style={{
+                          padding: "15px",
+                          color: "#ccc",
+                          fontSize: 13,
+                          lineHeight: 1.6,
+                          textAlign: "left",
+                        }}>
+                          {styleDescriptions[style]}
+                        </div>
+                      )}
+                    </motion.div>
+                  </motion.div>
+                );
+              })}
+            </motion.div>
+          </div>
+        </section>
+      )}
+
+      {/* Style Section - Mobile/Tablet (Button) */}
+      {isMobile && (
+        <section style={{ padding: "80px 20px", textAlign: "center" }}>
+          <div className="container">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportConfig}
+              variants={fadeInUp}
+            >
+              <h2 style={{
+                fontSize: 42,
+                marginBottom: 15,
+                background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
+                backgroundSize: "200% 200%",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                animation: "goldShimmer 3s linear infinite",
+              }}>
+                Unsere Stilrichtungen
+              </h2>
+              <p
+                style={{
+                  fontSize: 18,
+                  color: "#ccc",
+                  maxWidth: 700,
+                  margin: "0 auto 40px",
+                }}
+              >
+                Von traditionell bis modern – wir beherrschen verschiedene
+                Tattoo-Stile
+              </p>
+              <motion.button
+                onClick={() => setShowStylesModal(true)}
+                style={{
+                  width: 80,
+                  height: 80,
+                  borderRadius: "50%",
+                  background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
+                  backgroundSize: "200% 200%",
+                  animation: "goldShimmer 3s linear infinite",
+                  border: "3px solid #c9a84a",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  margin: "0 auto",
+                  padding: 0,
+                  position: "relative",
+                  boxShadow: `
+                    0 8px 16px rgba(0, 0, 0, 0.4),
+                    0 4px 8px rgba(0, 0, 0, 0.3),
+                    inset 0 -3px 8px rgba(180, 140, 50, 0.6),
+                    inset 0 3px 8px rgba(255, 240, 200, 0.6),
+                    0 0 20px rgba(212, 175, 55, 0.3)
+                  `,
+                  transform: "translateY(-2px)",
+                  transition: "all 0.2s ease",
+                }}
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow: `
+                    0 10px 20px rgba(0, 0, 0, 0.5),
+                    0 6px 10px rgba(0, 0, 0, 0.35),
+                    inset 0 -3px 10px rgba(180, 140, 50, 0.7),
+                    inset 0 3px 10px rgba(255, 240, 200, 0.7),
+                    0 0 30px rgba(212, 175, 55, 0.5)
+                  `,
+                  transform: "translateY(-4px)"
+                }}
+                whileTap={{
+                  scale: 0.98,
+                  boxShadow: `
+                    0 2px 4px rgba(0, 0, 0, 0.3),
+                    0 1px 2px rgba(0, 0, 0, 0.2),
+                    inset 0 3px 8px rgba(0, 0, 0, 0.3),
+                    inset 0 -2px 5px rgba(255, 240, 200, 0.3),
+                    0 0 10px rgba(212, 175, 55, 0.2)
+                  `,
+                  transform: "translateY(1px)"
+                }}
+              >
+                <img
+                  src={infoCircleIcon}
+                  alt="Stilrichtungen anzeigen"
+                  style={{
+                    width: 40,
+                    height: 40,
+                    filter: "brightness(0) saturate(100%) drop-shadow(0 1px 2px rgba(0,0,0,0.3))",
+                    position: "relative",
+                    zIndex: 1,
+                  }}
+                />
+              </motion.button>
+            </motion.div>
+          </div>
+        </section>
+      )}
+
+      {/* Styles Modal - Mobile/Tablet */}
+      {isMobile && showStylesModal && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: "rgba(0, 0, 0, 0.95)",
+            zIndex: 2000,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: 20,
+            overflowY: "auto",
+          }}
+          onClick={() => setShowStylesModal(false)}
+        >
+          <div
+            style={{
+              background: "#0d0c0a",
+              borderRadius: 16,
+              maxWidth: 600,
+              width: "100%",
+              maxHeight: "90vh",
+              overflowY: "auto",
+              padding: 30,
+              position: "relative",
+            }}
+            onClick={(e) => e.stopPropagation()}
           >
+            <button
+              onClick={() => setShowStylesModal(false)}
+              style={{
+                position: "absolute",
+                top: 15,
+                right: 15,
+                background: "transparent",
+                border: "none",
+                color: "#d4af37",
+                fontSize: 32,
+                cursor: "pointer",
+                padding: 5,
+                lineHeight: 1,
+              }}
+            >
+              ×
+            </button>
+
             <h2 style={{
-              fontSize: 42,
-              marginBottom: 15,
+              fontSize: 32,
+              marginBottom: 30,
+              textAlign: "center",
               background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
               backgroundSize: "200% 200%",
               WebkitBackgroundClip: "text",
@@ -536,193 +832,145 @@ export default function Home() {
             }}>
               Unsere Stilrichtungen
             </h2>
-            <p
-              style={{
-                fontSize: 18,
-                color: "#ccc",
-                maxWidth: 700,
-                margin: "0 auto",
-              }}
-            >
-              Von traditionell bis modern – wir beherrschen verschiedene
-              Tattoo-Stile
-            </p>
-          </motion.div>
 
-          <motion.div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-              gap: 20,
-              maxWidth: 1000,
-              margin: "0 auto",
-            }}
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewportConfig}
-            variants={staggerContainer}
-          >
-            {[
-              "Traditional",
-              "New School",
-              "Realismus",
-              "Cover-ups",
-              "Geometric",
-              "Mandala",
-              "Portraits",
-              "Fine Line",
-            ].map((style, i) => {
-              const isSelected = selectedStyles.includes(style);
-              return (
-                <motion.div
-                  key={i}
-                  ref={(el) => (cardRefs.current[style] = el)}
-                  data-style={style}
-                  style={{
-                    position: "relative",
-                  }}
-                  variants={staggerItem}
-                >
-                  <motion.div
+            <div style={{ display: "flex", flexDirection: "column", gap: 15 }}>
+              {[
+                "Traditional",
+                "New School",
+                "Realismus",
+                "Cover-ups",
+                "Geometric",
+                "Mandala",
+                "Portraits",
+                "Fine Line",
+              ].map((style, i) => {
+                const isSelected = selectedStyles.includes(style);
+                return (
+                  <div
+                    key={i}
                     style={{
-                      background: isSelected ? "rgb(43, 0, 10)" : "rgb(30, 0, 7)",
-                      padding: 20,
-                      borderRadius: isSelected ? "10px 10px 0 0" : "10px",
-                      textAlign: "center",
-                      border: "2px solid " + (isSelected ? "#d4af37" : "rgba(212, 175, 55, 0.3)"),
-                      borderBottom: isSelected ? "none" : "2px solid rgba(212, 175, 55, 0.3)",
-                      transition: "all 0.3s ease",
-                      cursor: "pointer",
-                    }}
-                    onClick={() => toggleStyle(style)}
-                    onMouseEnter={(e) => {
-                      if (!isSelected) {
-                        e.currentTarget.style.background = "rgb(43, 0, 10)";
-                        e.currentTarget.style.borderColor = "#d4af37";
-                        e.currentTarget.style.transform = "scale(1.05)";
-                        e.currentTarget.style.boxShadow = "0 8px 20px rgba(212, 175, 55, 0.3)";
-                      }
-                    }}
-                    onMouseLeave={(e) => {
-                      if (!isSelected) {
-                        e.currentTarget.style.background = "rgb(30, 0, 7)";
-                        e.currentTarget.style.borderColor = "rgba(212, 175, 55, 0.3)";
-                        e.currentTarget.style.transform = "scale(1)";
-                        e.currentTarget.style.boxShadow = "none";
-                      }
+                      position: "relative",
                     }}
                   >
-                    <h3 style={{
-                      fontSize: 16,
-                      background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
-                      backgroundSize: "200% 200%",
-                      WebkitBackgroundClip: "text",
-                      backgroundClip: "text",
-                      WebkitTextFillColor: "transparent",
-                      animation: "goldShimmer 3s linear infinite",
-                    }}>{style}</h3>
-                  </motion.div>
+                    <div
+                      style={{
+                        background: isSelected ? "rgb(43, 0, 10)" : "rgb(30, 0, 7)",
+                        padding: 20,
+                        borderRadius: isSelected ? "10px 10px 0 0" : "10px",
+                        textAlign: "center",
+                        border: "2px solid " + (isSelected ? "#d4af37" : "rgba(212, 175, 55, 0.3)"),
+                        borderBottom: isSelected ? "none" : "2px solid rgba(212, 175, 55, 0.3)",
+                        cursor: "pointer",
+                      }}
+                      onClick={() => toggleStyle(style)}
+                    >
+                      <h3 style={{
+                        fontSize: 18,
+                        background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
+                        backgroundSize: "200% 200%",
+                        WebkitBackgroundClip: "text",
+                        backgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                        animation: "goldShimmer 3s linear infinite",
+                      }}>{style}</h3>
+                    </div>
 
-                  <motion.div
-                    initial={false}
-                    animate={{
-                      height: isSelected ? "auto" : 0,
-                      opacity: isSelected ? 1 : 0,
-                    }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                    style={{
-                      overflow: "hidden",
-                      background: "rgb(43, 0, 10)",
-                      borderRadius: "0 0 10px 10px",
-                      border: isSelected ? "2px solid #d4af37" : "none",
-                      borderTop: "none",
-                    }}
-                  >
                     {isSelected && (
                       <div style={{
                         padding: "15px",
                         color: "#ccc",
-                        fontSize: 13,
+                        fontSize: 14,
                         lineHeight: 1.6,
-                        textAlign: "left",
+                        background: "rgb(43, 0, 10)",
+                        borderRadius: "0 0 10px 10px",
+                        border: "2px solid #d4af37",
+                        borderTop: "none",
                       }}>
                         {styleDescriptions[style]}
                       </div>
                     )}
-                  </motion.div>
-                </motion.div>
-              );
-            })}
-          </motion.div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
-      </section>
+      )}
 
       <SectionDivider />
 
       {/* CTA Section */}
       <section
         style={{
+          position: "relative",
+          padding: "5px",
           background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
           backgroundSize: "200% 200%",
           animation: "goldShimmer 3s linear infinite",
-          padding: "80px 20px",
-          textAlign: "center",
         }}
       >
-        <motion.div
-          className="container"
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportConfig}
-          variants={fadeInUp}
+        <div
+          style={{
+            background: "rgb(30, 0, 7)",
+            padding: "80px 20px",
+            textAlign: "center",
+          }}
         >
-          <h2 style={{ fontSize: 42, marginBottom: 20, color: "#1a1a1a", fontWeight: 700 }}>
-            Bereit für dein Traumtattoo?
-          </h2>
-          <p
-            style={{
-              fontSize: 18,
-              marginBottom: 35,
-              maxWidth: 700,
-              margin: "0 auto 35px",
-              lineHeight: 1.7,
-              color: "#1a1a1a",
-              fontWeight: 500,
-            }}
+          <motion.div
+            className="container"
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
+            variants={fadeInUp}
           >
-            Kontaktiere uns jetzt für ein kostenloses Beratungsgespräch. Wir
-            freuen uns darauf, deine Ideen in Kunst zu verwandeln!
-          </p>
-          <div
-            style={{
-              display: "flex",
-              gap: 15,
-              justifyContent: "center",
-              flexWrap: "wrap",
-            }}
-          >
-            <motion.a
-              className="btn"
-              href="https://wa.me/4917624752736?text=Ich%20möchte%20einen%20Beratungstermin"
-              target="_blank"
-              rel="noopener noreferrer"
+            <h2 style={{ fontSize: 42, marginBottom: 20, color: "#f4e5c2", fontWeight: 700 }}>
+              Bereit für dein Traumtattoo?
+            </h2>
+            <p
               style={{
-                background: "#25D366",
-                color: "#ffffff",
-                padding: "15px 35px",
-                fontSize: 16,
-                border: "none",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "10px",
+                fontSize: 18,
+                marginBottom: 35,
+                maxWidth: 700,
+                margin: "0 auto 35px",
+                lineHeight: 1.7,
+                color: "#ccc",
+                fontWeight: 500,
               }}
-              whileHover={{
-                scale: 1.05,
-                boxShadow: "0 8px 20px rgba(37, 211, 102, 0.4)",
-                background: "#20BA5A",
-              }}
-              whileTap={{ scale: 0.95 }}
             >
+              Kontaktiere uns jetzt für ein kostenloses Beratungsgespräch. Wir
+              freuen uns darauf, deine Ideen in Kunst zu verwandeln!
+            </p>
+            <div
+              style={{
+                display: "flex",
+                gap: 15,
+                justifyContent: "center",
+                flexWrap: "wrap",
+              }}
+            >
+              <motion.a
+                className="btn"
+                href="https://wa.me/4917624752736?text=Ich%20möchte%20einen%20Beratungstermin"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
+                  backgroundSize: "200% 200%",
+                  animation: "goldShimmer 3s linear infinite",
+                  color: "#1a1a1a",
+                  padding: "15px 35px",
+                  fontSize: 16,
+                  border: "none",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "10px",
+                }}
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow: "0 8px 20px rgba(212, 175, 55, 0.6)",
+                }}
+                whileTap={{ scale: 0.95 }}
+              >
               <svg
                 width="20"
                 height="20"
@@ -739,10 +987,10 @@ export default function Home() {
               className="btn"
               style={{
                 background: "transparent",
-                border: "2px solid #1b1816",
+                border: "2px solid #d4af37",
                 padding: "15px 35px",
                 fontSize: 16,
-                color: "#1b1816",
+                color: "#f4e5c2",
               }}
             >
               Mehr über uns
@@ -752,16 +1000,17 @@ export default function Home() {
               className="btn"
               style={{
                 background: "transparent",
-                border: "2px solid #1b1816",
+                border: "2px solid #d4af37",
                 padding: "15px 35px",
                 fontSize: 16,
-                color: "#1b1816",
+                color: "#f4e5c2",
               }}
             >
               Häufige Fragen
             </Link>
           </div>
         </motion.div>
+        </div>
       </section>
     </main>
   );
