@@ -248,12 +248,12 @@ a { color: inherit; text-decoration: none; }
 
 .carousel-dots {
   position: absolute;
-  bottom: -2rem;
+  bottom: -1rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   gap: 6px;
-  padding: 2rem;
+  padding: 0.5rem;
 }
 
 .carousel-dot {
@@ -565,6 +565,17 @@ a { color: inherit; text-decoration: none; }
 
   .carousel-dots {
     bottom: -0.5rem;
+    padding: 0.25rem;
+  }
+
+  .carousel-dot {
+    width: 4px;
+    height: 4px;
+
+    &.active {
+      width: 5px;
+      height: 5px;
+    }
   }
 
   .carousel-stack-container {

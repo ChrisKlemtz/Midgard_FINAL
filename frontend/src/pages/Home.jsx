@@ -48,6 +48,9 @@ export default function Home() {
   };
 
   React.useEffect(() => {
+    // IntersectionObserver nur im Desktop-Modus
+    if (isMobile) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -70,7 +73,7 @@ export default function Home() {
     });
 
     return () => observer.disconnect();
-  }, [selectedStyles]);
+  }, [selectedStyles, isMobile]);
 
   React.useEffect(() => {
     const checkMobile = () => {
