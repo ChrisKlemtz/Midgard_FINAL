@@ -413,7 +413,7 @@
     position: absolute;
     inset: 3px;
     border-radius: calc(12px - 3px);
-    background: #25D366 !important;
+    background: #1a1a1a !important;
     z-index: -1;
   }
 
