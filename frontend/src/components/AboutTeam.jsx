@@ -51,7 +51,7 @@ export default function AboutTeam() {
           viewport={viewportConfig}
           variants={fadeInUp}
         >
-          <h2 style={{ fontSize: 42, marginBottom: 20 }}>Unser Team</h2>
+          <h2 style={{ fontSize: 52, marginBottom: 20 }}>Unser Team</h2>
           <p
             style={{
               fontSize: 18,
@@ -222,10 +222,11 @@ export default function AboutTeam() {
         <motion.div
           style={{
             marginTop: 60,
-            padding: 40,
-            background: "#1b1816",
+            padding: 5,
+            background: "linear-gradient(135deg, #4a90e2 0%, #1e3a8a 25%, #60a5fa 50%, #1e3a8a 75%, #4a90e2 100%)",
+            backgroundSize: "200% 200%",
+            animation: "goldShimmer 3s linear infinite",
             borderRadius: 16,
-            textAlign: "center",
             maxWidth: 800,
             margin: "60px auto 0",
           }}
@@ -234,14 +235,137 @@ export default function AboutTeam() {
           viewport={viewportConfig}
           variants={fadeInUp}
         >
-          <h3 style={{ fontSize: 24, marginBottom: 15 }}>
-            💎 Piercing-Service
-          </h3>
-          <p style={{ color: "#ccc", lineHeight: 1.7, fontSize: 15 }}>
-            Professionelles Piercing auf Anfrage! Wir arbeiten mit erfahrenen
-            Piercern zusammen, die höchste Hygienestandards einhalten.
-            Kontaktiere uns für einen individuellen Termin.
-          </p>
+          <div
+            style={{
+              background: "#1b1816",
+              padding: 40,
+              borderRadius: 12,
+              textAlign: "center",
+            }}
+          >
+            <h3 style={{ fontSize: 24, marginBottom: 15 }}>
+              💎 Piercing-Service
+            </h3>
+            <p style={{ color: "#ccc", lineHeight: 1.7, fontSize: 15 }}>
+              Professionelles Piercing auf Anfrage! Wir arbeiten mit erfahrenen
+              Piercern zusammen, die höchste Hygienestandards einhalten.
+              Kontaktiere uns für einen individuellen Termin.
+            </p>
+          </div>
+        </motion.div>
+
+        {/* Piercer Olli Card */}
+        <motion.div
+          style={{
+            marginTop: 40,
+            maxWidth: 500,
+            margin: "40px auto 0",
+          }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+          variants={fadeInUp}
+        >
+          <div
+            style={{
+              background: "#1b1816",
+              borderRadius: 16,
+              overflow: "hidden",
+              border: "1px solid #333",
+            }}
+          >
+            {/* Platzhalter für Olli's Bild */}
+            <div
+              style={{
+                width: "100%",
+                height: 350,
+                background: "linear-gradient(135deg, #4a90e2 20%, #1e3a8a 80%)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: 80,
+              }}
+            >
+              👤
+            </div>
+
+            <div style={{ padding: 30 }}>
+              <div style={{ marginBottom: 20 }}>
+                <h3 style={{ fontSize: 28, marginBottom: 5 }}>Olli</h3>
+                <p
+                  style={{
+                    color: "#4a90e2",
+                    fontWeight: 700,
+                    fontSize: 14,
+                    textTransform: "uppercase",
+                    letterSpacing: 1,
+                  }}
+                >
+                  Piercer
+                </p>
+              </div>
+
+              <p
+                style={{
+                  color: "#ccc",
+                  lineHeight: 1.7,
+                  marginBottom: 20,
+                  fontSize: 15,
+                }}
+              >
+                Olli ist unser Experte für professionelles Piercing. Mit jahrelanger
+                Erfahrung und höchsten Hygienestandards sorgt er dafür, dass dein
+                Piercing perfekt sitzt und sicher verheilt.
+              </p>
+
+              <div style={{ marginBottom: 20 }}>
+                <h4
+                  style={{
+                    fontSize: 14,
+                    fontWeight: 700,
+                    marginBottom: 10,
+                    color: "#4a90e2",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  Spezialgebiete
+                </h4>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                  <span
+                    style={{
+                      background: "#2a2623",
+                      padding: "6px 12px",
+                      borderRadius: 20,
+                      fontSize: 13,
+                      color: "#ddd",
+                    }}
+                  >
+                    Piercings ;)
+                  </span>
+                </div>
+              </div>
+
+              <div
+                style={{
+                  padding: 12,
+                  background: "#2a2623",
+                  borderRadius: 8,
+                  textAlign: "center",
+                }}
+              >
+                <span style={{ fontSize: 13, color: "#999" }}>📸 Instagram: </span>
+                <span
+                  style={{
+                    color: "#4a90e2",
+                    fontWeight: 600,
+                    fontSize: 13,
+                  }}
+                >
+                  @olli_piercing
+                </span>
+              </div>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>
