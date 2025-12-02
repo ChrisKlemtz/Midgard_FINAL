@@ -6,6 +6,16 @@ import robertPortrait from "../assets/images/team/robert_portrait_small.png";
 import lottiPortrait from "../assets/images/team/lotti_portrait_small.png";
 
 export default function AboutTeam() {
+  const [expandedCards, setExpandedCards] = React.useState({});
+  const [expandedOlli, setExpandedOlli] = React.useState(false);
+
+  const toggleCard = (index) => {
+    setExpandedCards(prev => ({
+      ...prev,
+      [index]: !prev[index]
+    }));
+  };
+
   const team = [
     {
       name: "Lotti",
@@ -134,61 +144,91 @@ export default function AboutTeam() {
               </div>
 
               <div style={{ padding: 30 }}>
-                <div style={{ marginBottom: 20 }}>
-                  <h3 style={{ fontSize: 28, marginBottom: 5 }}>
-                    {member.name}
-                  </h3>
-                  <p
+                <div
+                  style={{
+                    marginBottom: expandedCards[index] ? 20 : 0,
+                    cursor: "pointer",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center"
+                  }}
+                  onClick={() => toggleCard(index)}
+                >
+                  <div>
+                    <h3 style={{ fontSize: 28, marginBottom: 5 }}>
+                      {member.name}
+                    </h3>
+                    <p
+                      style={{
+                        color: "#c8a05d",
+                        fontWeight: 700,
+                        fontSize: 14,
+                        textTransform: "uppercase",
+                        letterSpacing: 1,
+                      }}
+                    >
+                      {member.role}
+                    </p>
+                  </div>
+                  <div
                     style={{
+                      fontSize: 24,
                       color: "#c8a05d",
-                      fontWeight: 700,
-                      fontSize: 14,
-                      textTransform: "uppercase",
-                      letterSpacing: 1,
+                      transform: expandedCards[index] ? "rotate(180deg)" : "rotate(0deg)",
+                      transition: "transform 0.3s ease",
                     }}
                   >
-                    {member.role}
-                  </p>
+                    ▼
+                  </div>
                 </div>
 
-                <p
+                <div
                   style={{
-                    color: "#ccc",
-                    lineHeight: 1.7,
-                    marginBottom: 20,
-                    fontSize: 15,
+                    maxHeight: expandedCards[index] ? "1000px" : "0",
+                    overflow: "hidden",
+                    transition: "max-height 0.3s ease",
                   }}
                 >
-                  {member.description}
-                </p>
-
-                <div style={{ marginBottom: 20 }}>
-                  <h4
+                  <p
                     style={{
-                      fontSize: 14,
-                      fontWeight: 700,
-                      marginBottom: 10,
-                      color: "#c8a05d",
-                      textTransform: "uppercase",
+                      color: "#ccc",
+                      lineHeight: 1.7,
+                      marginBottom: 20,
+                      marginTop: 20,
+                      fontSize: 15,
                     }}
                   >
-                    Spezialgebiete
-                  </h4>
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-                    {member.specialties.map((specialty, i) => (
-                      <span
-                        key={i}
-                        style={{
-                          background: "#2a2623",
-                          padding: "6px 12px",
-                          borderRadius: 20,
-                          fontSize: 13,
-                          color: "#ddd",
-                        }}
-                      >
-                        {specialty}
-                      </span>
-                    ))}
+                    {member.description}
+                  </p>
+
+                  <div style={{ marginBottom: 20 }}>
+                    <h4
+                      style={{
+                        fontSize: 14,
+                        fontWeight: 700,
+                        marginBottom: 10,
+                        color: "#c8a05d",
+                        textTransform: "uppercase",
+                      }}
+                    >
+                      Spezialgebiete
+                    </h4>
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                      {member.specialties.map((specialty, i) => (
+                        <span
+                          key={i}
+                          style={{
+                            background: "#2a2623",
+                            padding: "6px 12px",
+                            borderRadius: 20,
+                            fontSize: 13,
+                            color: "#ddd",
+                          }}
+                        >
+                          {specialty}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
 
@@ -198,6 +238,7 @@ export default function AboutTeam() {
                     background: "#2a2623",
                     borderRadius: 8,
                     textAlign: "center",
+                    marginTop: expandedCards[index] ? 0 : 20,
                   }}
                 >
                   <span style={{ fontSize: 13, color: "#999" }}>
@@ -290,58 +331,88 @@ export default function AboutTeam() {
             </div>
 
             <div style={{ padding: 30 }}>
-              <div style={{ marginBottom: 20 }}>
-                <h3 style={{ fontSize: 28, marginBottom: 5 }}>Olli</h3>
-                <p
-                  style={{
-                    color: "#4a90e2",
-                    fontWeight: 700,
-                    fontSize: 14,
-                    textTransform: "uppercase",
-                    letterSpacing: 1,
-                  }}
-                >
-                  Piercer
-                </p>
-              </div>
-
-              <p
+              <div
                 style={{
-                  color: "#ccc",
-                  lineHeight: 1.7,
-                  marginBottom: 20,
-                  fontSize: 15,
+                  marginBottom: expandedOlli ? 20 : 0,
+                  cursor: "pointer",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center"
                 }}
+                onClick={() => setExpandedOlli(!expandedOlli)}
               >
-                Olli ist unser Experte für professionelles Piercing. Mit jahrelanger
-                Erfahrung und höchsten Hygienestandards sorgt er dafür, dass dein
-                Piercing perfekt sitzt und sicher verheilt.
-              </p>
-
-              <div style={{ marginBottom: 20 }}>
-                <h4
-                  style={{
-                    fontSize: 14,
-                    fontWeight: 700,
-                    marginBottom: 10,
-                    color: "#4a90e2",
-                    textTransform: "uppercase",
-                  }}
-                >
-                  Spezialgebiete
-                </h4>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-                  <span
+                <div>
+                  <h3 style={{ fontSize: 28, marginBottom: 5 }}>Olli</h3>
+                  <p
                     style={{
-                      background: "#2a2623",
-                      padding: "6px 12px",
-                      borderRadius: 20,
-                      fontSize: 13,
-                      color: "#ddd",
+                      color: "#4a90e2",
+                      fontWeight: 700,
+                      fontSize: 14,
+                      textTransform: "uppercase",
+                      letterSpacing: 1,
                     }}
                   >
-                    Piercings ;)
-                  </span>
+                    Piercer
+                  </p>
+                </div>
+                <div
+                  style={{
+                    fontSize: 24,
+                    color: "#4a90e2",
+                    transform: expandedOlli ? "rotate(180deg)" : "rotate(0deg)",
+                    transition: "transform 0.3s ease",
+                  }}
+                >
+                  ▼
+                </div>
+              </div>
+
+              <div
+                style={{
+                  maxHeight: expandedOlli ? "1000px" : "0",
+                  overflow: "hidden",
+                  transition: "max-height 0.3s ease",
+                }}
+              >
+                <p
+                  style={{
+                    color: "#ccc",
+                    lineHeight: 1.7,
+                    marginBottom: 20,
+                    marginTop: 20,
+                    fontSize: 15,
+                  }}
+                >
+                  Olli ist unser Experte für professionelles Piercing. Mit jahrelanger
+                  Erfahrung und höchsten Hygienestandards sorgt er dafür, dass dein
+                  Piercing perfekt sitzt und sicher verheilt.
+                </p>
+
+                <div style={{ marginBottom: 20 }}>
+                  <h4
+                    style={{
+                      fontSize: 14,
+                      fontWeight: 700,
+                      marginBottom: 10,
+                      color: "#4a90e2",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    Spezialgebiete
+                  </h4>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                    <span
+                      style={{
+                        background: "#2a2623",
+                        padding: "6px 12px",
+                        borderRadius: 20,
+                        fontSize: 13,
+                        color: "#ddd",
+                      }}
+                    >
+                      Piercings ;)
+                    </span>
+                  </div>
                 </div>
               </div>
 
@@ -351,6 +422,7 @@ export default function AboutTeam() {
                   background: "#2a2623",
                   borderRadius: 8,
                   textAlign: "center",
+                  marginTop: expandedOlli ? 0 : 20,
                 }}
               >
                 <span style={{ fontSize: 13, color: "#999" }}>📸 Instagram: </span>
