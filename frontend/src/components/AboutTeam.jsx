@@ -3,9 +3,19 @@ import { motion } from "framer-motion";
 import { fadeInUp, staggerContainer, staggerItem, viewportConfig } from "../utils/animations";
 import mariaPortrait from "../assets/images/team/maria_portrait_small.png";
 import robertPortrait from "../assets/images/team/robert_portrait_small.png";
+import lottiPortrait from "../assets/images/team/lotti_portrait_small.png";
 
 export default function AboutTeam() {
   const team = [
+    {
+      name: "Lotti",
+      role: "Die Chefin",
+      image: lottiPortrait,
+      description:
+        "Lotti ist unsere treue Begleiterin und sorgt für gute Stimmung im Studio. Sie liebt Streicheleinheiten und ist immer zur Stelle, wenn jemand Ablenkung braucht.",
+      specialties: ["Streicheln", "Gute Laune", "Leckerlis", "Seelentröster"],
+      instagram: "@lotti_midgard_dog",
+    },
     {
       name: "Robert",
       role: "Tattoo Artist",
@@ -28,15 +38,6 @@ export default function AboutTeam() {
         "Maria ist spezialisiert auf filigrane Fine-Line Tattoos und realistische Porträts. Mit über 10 Jahren Erfahrung bringt sie deine Vision mit höchster Präzision auf die Haut.",
       specialties: ["Fine Line", "Realismus", "Portraits", "Blumen"],
       instagram: "@maria_midgard_tattoo",
-    },
-    {
-      name: "Lotti",
-      role: "Studio-Hund & Maskottchen",
-      image: null,
-      description:
-        "Lotti ist unsere treue Begleiterin und sorgt für gute Stimmung im Studio. Sie liebt Streicheleinheiten und ist immer zur Stelle, wenn jemand Ablenkung braucht.",
-      specialties: ["Streicheln", "Gute Laune", "Leckerlis", "Seelentröster"],
-      instagram: "@lotti_midgard_dog",
     },
   ];
 
