@@ -25,90 +25,19 @@ export default function About() {
           <h1 style={{ fontSize: 52, marginBottom: 20 }}>
             Über Midgard Tattoo
           </h1>
-          <p
-            style={{
-              fontSize: 20,
-              color: "#ccc",
-              maxWidth: 800,
-              margin: "0 auto",
-              lineHeight: 1.8,
-            }}
-          >
-            Willkommen bei Midgard Tattoo – wo nordische Kunst auf moderne
-            Tattoo-Kultur trifft. Unser Studio steht für höchste Qualität,
-            Kreativität und Hygiene.
-          </p>
-        </motion.div>
-      </section>
-
-      {/* Story Section */}
-      <section className="container" style={{ padding: "80px 20px" }}>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-            gap: 40,
-            maxWidth: 1000,
-            margin: "0 auto",
-          }}
-        >
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewportConfig}
-            variants={fadeInLeft}
-          >
-            <h2 style={{
-              fontSize: 36,
-              marginBottom: 20,
-              background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
-              backgroundSize: "200% 200%",
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              animation: "goldShimmer 3s linear infinite",
-            }}>
-              Unsere Geschichte
-            </h2>
-            <p
-              style={{
-                color: "#ccc",
-                lineHeight: 1.8,
-                fontSize: 16,
-                marginBottom: 15,
-              }}
-            >
-              Midgard Tattoo wurde 2015 aus der Leidenschaft für Kunst und
-              nordische Mythologie geboren. Was als kleines Studio begann, ist
-              heute eine etablierte Adresse für hochwertige Tattoos und
-              individuelle Designs.
-            </p>
-            <p style={{ color: "#ccc", lineHeight: 1.8, fontSize: 16 }}>
-              Der Name "Midgard" stammt aus der nordischen Mythologie und
-              bezeichnet die Welt der Menschen – ein Ort der Verbindung zwischen
-              verschiedenen Welten. Genau diese Verbindung schaffen wir:
-              zwischen deiner Vision und ihrer perfekten Umsetzung auf der Haut.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewportConfig}
-            variants={fadeInRight}
-          >
-            <h2 style={{
-              fontSize: 36,
-              marginBottom: 20,
-              background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
-              backgroundSize: "200% 200%",
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              animation: "goldShimmer 3s linear infinite",
-            }}>
-              Unsere Philosophie
-            </h2>
+          <h2 style={{
+            fontSize: 36,
+            marginBottom: 20,
+            background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
+            backgroundSize: "200% 200%",
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            animation: "goldShimmer 3s linear infinite",
+          }}>
+            Unsere Philosophie
+          </h2>
+          <div style={{ maxWidth: 800, margin: "0 auto" }}>
             <p
               style={{
                 color: "#ccc",
@@ -128,12 +57,59 @@ export default function About() {
               zertifiziert. Deine Gesundheit ist uns genauso wichtig wie deine
               Zufriedenheit.
             </p>
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
       </section>
 
       {/* Team Section */}
       <AboutTeam />
+
+      {/* Story Section */}
+      <section className="container" style={{ padding: "80px 20px" }}>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+          variants={fadeInUp}
+          style={{
+            maxWidth: 1000,
+            margin: "0 auto",
+            textAlign: "center",
+          }}
+        >
+          <h2 style={{
+            fontSize: 36,
+            marginBottom: 20,
+            background: "linear-gradient(135deg, #f4e5c2 0%, #d4af37 25%, #f4e5c2 50%, #d4af37 75%, #f4e5c2 100%)",
+            backgroundSize: "200% 200%",
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            animation: "goldShimmer 3s linear infinite",
+          }}>
+            Unsere Geschichte
+          </h2>
+          <p
+            style={{
+              color: "#ccc",
+              lineHeight: 1.8,
+              fontSize: 16,
+              marginBottom: 15,
+            }}
+          >
+            Midgard Tattoo wurde 2015 aus der Leidenschaft für Kunst und
+            nordische Mythologie geboren. Was als kleines Studio begann, ist
+            heute eine etablierte Adresse für hochwertige Tattoos und
+            individuelle Designs.
+          </p>
+          <p style={{ color: "#ccc", lineHeight: 1.8, fontSize: 16 }}>
+            Der Name "Midgard" stammt aus der nordischen Mythologie und
+            bezeichnet die Welt der Menschen – ein Ort der Verbindung zwischen
+            verschiedenen Welten. Genau diese Verbindung schaffen wir:
+            zwischen deiner Vision und ihrer perfekten Umsetzung auf der Haut.
+          </p>
+        </motion.div>
+      </section>
 
       {/* CTA Section */}
       <section

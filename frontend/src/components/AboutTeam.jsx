@@ -4,6 +4,7 @@ import { fadeInUp, staggerContainer, staggerItem, viewportConfig } from "../util
 import mariaPortrait from "../assets/images/team/maria_portrait_small.png";
 import robertPortrait from "../assets/images/team/robert_portrait_small.png";
 import lottiPortrait from "../assets/images/team/lotti_portrait_small.png";
+import olliPortrait from "../assets/images/team/olli_portrait_small.png";
 
 export default function AboutTeam() {
   const [expandedCards, setExpandedCards] = React.useState({});
@@ -24,7 +25,8 @@ export default function AboutTeam() {
       description:
         "Lotti ist unsere treue Begleiterin und sorgt für gute Stimmung im Studio. Sie liebt Streicheleinheiten und ist immer zur Stelle, wenn jemand Ablenkung braucht.",
       specialties: ["Streicheln", "Gute Laune", "Leckerlis", "Seelentröster"],
-      instagram: "@lotti_midgard_dog",
+      instagram: "@little_lotti_dachshund",
+      instagramUrl: "https://www.instagram.com/little_lotti_dachshund/",
     },
     {
       name: "Robert",
@@ -38,7 +40,8 @@ export default function AboutTeam() {
         "Nordische Motive",
         "Cover-ups",
       ],
-      instagram: "@robert_midgard_ink",
+      instagram: "@midgard_tattoo_stralsund",
+      instagramUrl: "https://www.instagram.com/midgard_tattoo_stralsund/",
     },
     {
       name: "Maria",
@@ -47,7 +50,8 @@ export default function AboutTeam() {
       description:
         "Maria ist spezialisiert auf filigrane Fine-Line Tattoos und realistische Porträts. Mit über 10 Jahren Erfahrung bringt sie deine Vision mit höchster Präzision auf die Haut.",
       specialties: ["Fine Line", "Realismus", "Portraits", "Blumen"],
-      instagram: "@maria_midgard_tattoo",
+      instagram: "@maria_post_tattoo",
+      instagramUrl: "https://www.instagram.com/maria_post_tattoo/",
     },
   ];
 
@@ -61,7 +65,7 @@ export default function AboutTeam() {
           viewport={viewportConfig}
           variants={fadeInUp}
         >
-          <h2 style={{ fontSize: 52, marginBottom: 20 }}>Unser Team</h2>
+          <h2 style={{ fontSize: 72, marginBottom: 20 }}>Das sind wir!</h2>
           <p
             style={{
               fontSize: 18,
@@ -232,13 +236,25 @@ export default function AboutTeam() {
                   </div>
                 </div>
 
-                <div
+                <a
+                  href={member.instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   style={{
+                    display: "block",
                     padding: 12,
                     background: "#2a2623",
                     borderRadius: 8,
                     textAlign: "center",
                     marginTop: expandedCards[index] ? 0 : 20,
+                    textDecoration: "none",
+                    transition: "background 0.3s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = "#3a3633";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "#2a2623";
                   }}
                 >
                   <span style={{ fontSize: 13, color: "#999" }}>
@@ -253,7 +269,7 @@ export default function AboutTeam() {
                   >
                     {member.instagram}
                   </span>
-                </div>
+                </a>
               </div>
             </motion.div>
           ))}
@@ -315,19 +331,27 @@ export default function AboutTeam() {
               border: "1px solid #333",
             }}
           >
-            {/* Platzhalter für Olli's Bild */}
+            {/* Olli's Bild */}
             <div
               style={{
                 width: "100%",
                 height: 350,
-                background: "linear-gradient(135deg, #4a90e2 20%, #1e3a8a 80%)",
+                background: "#1b1816",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                fontSize: 80,
+                overflow: "hidden",
               }}
             >
-              👤
+              <img
+                src={olliPortrait}
+                alt="Olli"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                }}
+              />
             </div>
 
             <div style={{ padding: 30 }}>
@@ -416,13 +440,25 @@ export default function AboutTeam() {
                 </div>
               </div>
 
-              <div
+              <a
+                href="https://www.instagram.com/piercbar/"
+                target="_blank"
+                rel="noopener noreferrer"
                 style={{
+                  display: "block",
                   padding: 12,
                   background: "#2a2623",
                   borderRadius: 8,
                   textAlign: "center",
                   marginTop: expandedOlli ? 0 : 20,
+                  textDecoration: "none",
+                  transition: "background 0.3s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "#3a3633";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "#2a2623";
                 }}
               >
                 <span style={{ fontSize: 13, color: "#999" }}>📸 Instagram: </span>
@@ -433,9 +469,9 @@ export default function AboutTeam() {
                     fontSize: 13,
                   }}
                 >
-                  @olli_piercing
+                  @piercbar
                 </span>
-              </div>
+              </a>
             </div>
           </div>
         </motion.div>
