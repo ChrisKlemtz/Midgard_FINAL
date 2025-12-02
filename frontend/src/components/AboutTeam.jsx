@@ -1,22 +1,15 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { fadeInUp, staggerContainer, staggerItem, viewportConfig } from "../utils/animations";
+import mariaPortrait from "../assets/images/team/maria_portrait_small.png";
+import robertPortrait from "../assets/images/team/robert_portrait_small.png";
 
 export default function AboutTeam() {
   const team = [
     {
-      name: "Maria",
-      role: "Tattoo Artist",
-      image: "/team/maria.jpg", // Platzhalter - kann später ersetzt werden
-      description:
-        "Maria ist spezialisiert auf filigrane Fine-Line Tattoos und realistische Porträts. Mit über 10 Jahren Erfahrung bringt sie deine Vision mit höchster Präzision auf die Haut.",
-      specialties: ["Fine Line", "Realismus", "Portraits", "Blumen"],
-      instagram: "@maria_midgard_tattoo",
-    },
-    {
       name: "Robert",
       role: "Tattoo Artist",
-      image: "/team/robert.jpg", // Platzhalter
+      image: robertPortrait,
       description:
         "Robert ist Experte für nordische Motive, Traditional und New School. Seine kraftvollen Designs und satten Farben machen jedes Tattoo zu einem Kunstwerk.",
       specialties: [
@@ -28,9 +21,18 @@ export default function AboutTeam() {
       instagram: "@robert_midgard_ink",
     },
     {
+      name: "Maria",
+      role: "Tattoo Artist",
+      image: mariaPortrait,
+      description:
+        "Maria ist spezialisiert auf filigrane Fine-Line Tattoos und realistische Porträts. Mit über 10 Jahren Erfahrung bringt sie deine Vision mit höchster Präzision auf die Haut.",
+      specialties: ["Fine Line", "Realismus", "Portraits", "Blumen"],
+      instagram: "@maria_midgard_tattoo",
+    },
+    {
       name: "Lotti",
       role: "Studio-Hund & Maskottchen",
-      image: "/team/lotti.jpg", // Platzhalter
+      image: null,
       description:
         "Lotti ist unsere treue Begleiterin und sorgt für gute Stimmung im Studio. Sie liebt Streicheleinheiten und ist immer zur Stelle, wenn jemand Ablenkung braucht.",
       specialties: ["Streicheln", "Gute Laune", "Leckerlis", "Seelentröster"],
@@ -97,14 +99,16 @@ export default function AboutTeam() {
                 e.currentTarget.style.boxShadow = "none";
               }}
             >
-              {/* Platzhalter-Bild mit Gradient */}
+              {/* Team-Bild */}
               <div
                 style={{
                   width: "100%",
                   height: 350,
-                  background: `linear-gradient(135deg, #c8a05d ${
-                    index * 20
-                  }%, #8b6f3e ${100 - index * 20}%)`,
+                  background: member.image
+                    ? "#1b1816"
+                    : `linear-gradient(135deg, #c8a05d ${
+                        index * 20
+                      }%, #8b6f3e ${100 - index * 20}%)`,
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -113,15 +117,19 @@ export default function AboutTeam() {
                   overflow: "hidden",
                 }}
               >
-                {member.name === "Lotti" ? "🐕" : "👤"}
-                {/* Optional: Echtes Bild einbinden
-                <img 
-                  src={member.image} 
-                  alt={member.name}
-                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                  onError={(e) => e.target.style.display = "none"}
-                />
-                */}
+                {member.image ? (
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />
+                ) : (
+                  <span>{member.name === "Lotti" ? "🐕" : "👤"}</span>
+                )}
               </div>
 
               <div style={{ padding: 30 }}>

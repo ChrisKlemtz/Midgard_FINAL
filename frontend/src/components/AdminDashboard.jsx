@@ -10,6 +10,7 @@ export default function AdminDashboard() {
   const [uploadTitle, setUploadTitle] = useState("");
   const [uploadArtist, setUploadArtist] = useState("Maria");
   const [uploading, setUploading] = useState(false);
+  const [isDraggingGallery, setIsDraggingGallery] = useState(false);
 
   // FAQ State
   const [faqs, setFaqs] = useState([]);
@@ -29,6 +30,7 @@ export default function AdminDashboard() {
     type: "Sonstiges",
   });
   const [eventFile, setEventFile] = useState(null);
+  const [isDraggingEvent, setIsDraggingEvent] = useState(false);
 
   // Certificates State
   const [certificates, setCertificates] = useState([]);
@@ -40,6 +42,7 @@ export default function AdminDashboard() {
     category: "Hygiene",
   });
   const [certificateFile, setCertificateFile] = useState(null);
+  const [isDraggingCertificate, setIsDraggingCertificate] = useState(false);
 
   // Offers State
   const [offers, setOffers] = useState([]);
@@ -102,7 +105,8 @@ export default function AdminDashboard() {
       setUploadFile(null);
       setUploadTitle("");
       setUploadArtist("Maria");
-      document.querySelector('input[type="file"]').value = "";
+      const fileInput = document.getElementById("galleryFileInput");
+      if (fileInput) fileInput.value = "";
       loadData();
     } catch (error) {
       console.error(error);
@@ -200,6 +204,8 @@ export default function AdminDashboard() {
         type: "Sonstiges",
       });
       setEventFile(null);
+      const eventInput = document.getElementById("eventFileInput");
+      if (eventInput) eventInput.value = "";
       alert("Event hinzugefügt!");
       loadData();
     } catch (error) {
@@ -245,6 +251,8 @@ export default function AdminDashboard() {
         category: "Hygiene",
       });
       setCertificateFile(null);
+      const certInput = document.getElementById("certificateFileInput");
+      if (certInput) certInput.value = "";
       alert("Zertifikat hinzugefügt!");
       loadData();
     } catch (error) {
@@ -287,6 +295,90 @@ export default function AdminDashboard() {
       loadData();
     } catch (error) {
       alert("Löschen fehlgeschlagen");
+    }
+  }
+
+  // Drag & Drop Handlers für Gallery
+  function handleGalleryDragOver(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDraggingGallery(true);
+  }
+
+  function handleGalleryDragLeave(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDraggingGallery(false);
+  }
+
+  function handleGalleryDrop(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDraggingGallery(false);
+
+    const files = e.dataTransfer.files;
+    if (files && files[0]) {
+      if (files[0].type.startsWith("image/")) {
+        setUploadFile(files[0]);
+      } else {
+        alert("Bitte nur Bilddateien hochladen");
+      }
+    }
+  }
+
+  // Drag & Drop Handlers für Events
+  function handleEventDragOver(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDraggingEvent(true);
+  }
+
+  function handleEventDragLeave(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDraggingEvent(false);
+  }
+
+  function handleEventDrop(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDraggingEvent(false);
+
+    const files = e.dataTransfer.files;
+    if (files && files[0]) {
+      if (files[0].type.startsWith("image/")) {
+        setEventFile(files[0]);
+      } else {
+        alert("Bitte nur Bilddateien hochladen");
+      }
+    }
+  }
+
+  // Drag & Drop Handlers für Certificates
+  function handleCertificateDragOver(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDraggingCertificate(true);
+  }
+
+  function handleCertificateDragLeave(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDraggingCertificate(false);
+  }
+
+  function handleCertificateDrop(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDraggingCertificate(false);
+
+    const files = e.dataTransfer.files;
+    if (files && files[0]) {
+      if (files[0].type.startsWith("image/")) {
+        setCertificateFile(files[0]);
+      } else {
+        alert("Bitte nur Bilddateien hochladen");
+      }
     }
   }
 
@@ -388,19 +480,53 @@ export default function AdminDashboard() {
                   >
                     Bild auswählen *
                   </label>
+                  <div
+                    onDragOver={handleGalleryDragOver}
+                    onDragLeave={handleGalleryDragLeave}
+                    onDrop={handleGalleryDrop}
+                    style={{
+                      width: "100%",
+                      padding: 40,
+                      borderRadius: 8,
+                      border: isDraggingGallery
+                        ? "2px dashed #d4af37"
+                        : "2px dashed #555",
+                      background: isDraggingGallery ? "#1f1d1a" : "#0d0c0a",
+                      color: "#fff",
+                      textAlign: "center",
+                      cursor: "pointer",
+                      transition: "all 0.3s ease",
+                    }}
+                    onClick={() => document.getElementById("galleryFileInput").click()}
+                  >
+                    {uploadFile ? (
+                      <div>
+                        <p style={{ color: "#d4af37", fontWeight: 600, marginBottom: 8 }}>
+                          ✓ {uploadFile.name}
+                        </p>
+                        <p style={{ fontSize: 14, color: "#999" }}>
+                          Klicken oder neue Datei hierher ziehen zum Ändern
+                        </p>
+                      </div>
+                    ) : (
+                      <div>
+                        <p style={{ fontSize: 24, marginBottom: 8 }}>📁</p>
+                        <p style={{ color: "#c8a05d", fontWeight: 600, marginBottom: 4 }}>
+                          Datei hierher ziehen oder klicken
+                        </p>
+                        <p style={{ fontSize: 14, color: "#999" }}>
+                          Unterstützte Formate: JPG, PNG, GIF, WebP
+                        </p>
+                      </div>
+                    )}
+                  </div>
                   <input
+                    id="galleryFileInput"
                     type="file"
                     onChange={(e) => setUploadFile(e.target.files[0])}
                     accept="image/*"
                     required
-                    style={{
-                      width: "100%",
-                      padding: 12,
-                      borderRadius: 8,
-                      border: "1px solid #555",
-                      background: "#0d0c0a",
-                      color: "#fff",
-                    }}
+                    style={{ display: "none" }}
                   />
                 </div>
                 <div>
@@ -756,18 +882,52 @@ export default function AdminDashboard() {
                   >
                     Bild / Flyer hochladen (optional)
                   </label>
+                  <div
+                    onDragOver={handleEventDragOver}
+                    onDragLeave={handleEventDragLeave}
+                    onDrop={handleEventDrop}
+                    style={{
+                      width: "100%",
+                      padding: 40,
+                      borderRadius: 8,
+                      border: isDraggingEvent
+                        ? "2px dashed #d4af37"
+                        : "2px dashed #555",
+                      background: isDraggingEvent ? "#1f1d1a" : "#0d0c0a",
+                      color: "#fff",
+                      textAlign: "center",
+                      cursor: "pointer",
+                      transition: "all 0.3s ease",
+                    }}
+                    onClick={() => document.getElementById("eventFileInput").click()}
+                  >
+                    {eventFile ? (
+                      <div>
+                        <p style={{ color: "#d4af37", fontWeight: 600, marginBottom: 8 }}>
+                          ✓ {eventFile.name}
+                        </p>
+                        <p style={{ fontSize: 14, color: "#999" }}>
+                          Klicken oder neue Datei hierher ziehen zum Ändern
+                        </p>
+                      </div>
+                    ) : (
+                      <div>
+                        <p style={{ fontSize: 24, marginBottom: 8 }}>📁</p>
+                        <p style={{ color: "#c8a05d", fontWeight: 600, marginBottom: 4 }}>
+                          Datei hierher ziehen oder klicken
+                        </p>
+                        <p style={{ fontSize: 14, color: "#999" }}>
+                          Unterstützte Formate: JPG, PNG, GIF, WebP
+                        </p>
+                      </div>
+                    )}
+                  </div>
                   <input
+                    id="eventFileInput"
                     type="file"
                     onChange={(e) => setEventFile(e.target.files[0])}
                     accept="image/*"
-                    style={{
-                      width: "100%",
-                      padding: 12,
-                      borderRadius: 8,
-                      border: "1px solid #555",
-                      background: "#0d0c0a",
-                      color: "#fff",
-                    }}
+                    style={{ display: "none" }}
                   />
                 </div>
                 <input
@@ -983,18 +1143,52 @@ export default function AdminDashboard() {
                   >
                     Bild / Flyer hochladen (optional)
                   </label>
+                  <div
+                    onDragOver={handleCertificateDragOver}
+                    onDragLeave={handleCertificateDragLeave}
+                    onDrop={handleCertificateDrop}
+                    style={{
+                      width: "100%",
+                      padding: 40,
+                      borderRadius: 8,
+                      border: isDraggingCertificate
+                        ? "2px dashed #d4af37"
+                        : "2px dashed #555",
+                      background: isDraggingCertificate ? "#1f1d1a" : "#0d0c0a",
+                      color: "#fff",
+                      textAlign: "center",
+                      cursor: "pointer",
+                      transition: "all 0.3s ease",
+                    }}
+                    onClick={() => document.getElementById("certificateFileInput").click()}
+                  >
+                    {certificateFile ? (
+                      <div>
+                        <p style={{ color: "#d4af37", fontWeight: 600, marginBottom: 8 }}>
+                          ✓ {certificateFile.name}
+                        </p>
+                        <p style={{ fontSize: 14, color: "#999" }}>
+                          Klicken oder neue Datei hierher ziehen zum Ändern
+                        </p>
+                      </div>
+                    ) : (
+                      <div>
+                        <p style={{ fontSize: 24, marginBottom: 8 }}>📁</p>
+                        <p style={{ color: "#c8a05d", fontWeight: 600, marginBottom: 4 }}>
+                          Datei hierher ziehen oder klicken
+                        </p>
+                        <p style={{ fontSize: 14, color: "#999" }}>
+                          Unterstützte Formate: JPG, PNG, GIF, WebP
+                        </p>
+                      </div>
+                    )}
+                  </div>
                   <input
+                    id="certificateFileInput"
                     type="file"
                     onChange={(e) => setCertificateFile(e.target.files[0])}
                     accept="image/*"
-                    style={{
-                      width: "100%",
-                      padding: 12,
-                      borderRadius: 8,
-                      border: "1px solid #555",
-                      background: "#0d0c0a",
-                      color: "#fff",
-                    }}
+                    style={{ display: "none" }}
                   />
                 </div>
                 <input
