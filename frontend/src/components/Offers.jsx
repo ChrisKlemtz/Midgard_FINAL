@@ -49,6 +49,14 @@ export default function Offers() {
   // Fallback-Angebote falls keine aus der DB geladen wurden
   const defaultOffers = [
     {
+      _id: "6",
+      title: "Piercing Service",
+      description:
+        "Professionelles Piercing auf Anfrage mit höchsten Hygienestandards.",
+      category: "Piercing",
+      icon: "💎",
+    },
+    {
       _id: "4",
       title: "Beratungsgespräch",
       description:
@@ -87,14 +95,6 @@ export default function Offers() {
         "Vorgezeichnete Designs zu speziellen Preisen. Perfekt für spontane Entscheidungen!",
       category: "Tattoo",
       icon: "⚡",
-    },
-    {
-      _id: "6",
-      title: "Piercing Service",
-      description:
-        "Professionelles Piercing auf Anfrage mit höchsten Hygienestandards.",
-      category: "Piercing",
-      icon: "💎",
     },
   ];
 
@@ -474,19 +474,6 @@ export default function Offers() {
               ›
             </button>
 
-            {/* Dots Indicator */}
-            <div className="carousel-dots">
-              {displayOffers.map((_, index) => (
-                <button
-                  key={index}
-                  className={`carousel-dot ${
-                    index === currentSlide ? "active" : ""
-                  }`}
-                  onClick={() => setCurrentSlide(index)}
-                  aria-label={`Go to slide ${index + 1}`}
-                />
-              ))}
-            </div>
           </div>
         )}
 
