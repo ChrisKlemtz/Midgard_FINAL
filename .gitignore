@@ -115,3 +115,47 @@ config.local.json
 desktop.ini
 ehthumbs.db
 $RECYCLE.BIN/
+
+# Vite/React Build Files
+.vite/
+*.tsbuildinfo
+
+# TypeScript
+*.tsbuildinfo
+*.map
+
+# Frontend specific
+frontend/dist/
+frontend/build/
+frontend/.cache/
+frontend/.vite/
+frontend/vite.config.js.timestamp-*
+
+# Backend specific
+backend/uploads/
+backend/temp/
+
+# AI/Claude Code
+.claude/
+.cursor/
+.aider*
+
+# Local Development
+.vercel
+.netlify
+.firebase/
+firebase-debug.log
+
+# Python (falls Backend Python nutzt)
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+ENV/
+env/
+
+# Scripts & Tools
+optimize-images.sh
+*.sh.backup
