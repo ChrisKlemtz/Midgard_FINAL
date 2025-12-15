@@ -136,6 +136,7 @@ export default function AboutTeam() {
                   <img
                     src={member.image}
                     alt={member.name}
+                    loading="lazy"
                     style={{
                       width: "100%",
                       height: "100%",
@@ -346,6 +347,7 @@ export default function AboutTeam() {
               <img
                 src={olliPortrait}
                 alt="Olli"
+                loading="lazy"
                 style={{
                   width: "100%",
                   height: "100%",
